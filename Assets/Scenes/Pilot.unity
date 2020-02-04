@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 252334179}
   - component: {fileID: 252334178}
   - component: {fileID: 252334177}
+  - component: {fileID: 252334180}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,6 +205,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &252334180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252334176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f900d51e104435242ba606bff36eb3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interpolant: 0.706
 --- !u!1 &1205069542
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +321,10 @@ PrefabInstance:
     - target: {fileID: 1762146786600250, guid: 077155289d2e14247bd0864b560f74ac, type: 3}
       propertyPath: m_Name
       value: MediumMechStrikerMasterPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762146786600250, guid: 077155289d2e14247bd0864b560f74ac, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4587756876036610, guid: 077155289d2e14247bd0864b560f74ac, type: 3}
       propertyPath: m_LocalPosition.x

@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\OnClickFunctions.cs" />
+    <Compile Include="Assets\Scripts\Pilot\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Pilot\PlayerController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/barnwal/Desktop/Work/Mobile and Console Games/Mini-Capstone/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
