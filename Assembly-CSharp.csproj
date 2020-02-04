@@ -72,8 +72,9 @@
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\PlayerBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\SentryDroneBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\SentryDroneComponentBehaviour.cs" />
+    <Compile Include="Assets\Game\ImageMatch\Scripts\ImageMatchGameController.cs" />
     <Compile Include="Assets\HealthBarBehaviour.cs" />
-    <Compile Include="Assets\ImageMatchGameController.cs" />
+    <Compile Include="Assets\IconBehaviour.cs" />
     <Compile Include="Assets\Scenes\Scripts\OnClickFunctions.cs" />
     <Compile Include="Assets\SpawnerBehaviour.cs" />
     <Reference Include="Unity.Timeline.Editor">
@@ -96,6 +97,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:/Users/browkeel/Desktop/dev/PROG56048-prog/Project/repo/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>C:/Users/browkeel/Desktop/dev/PROG56048-prog/Project/repo/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/browkeel/Desktop/dev/PROG56048-prog/Project/repo/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
