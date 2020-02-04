@@ -73,6 +73,7 @@
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\SentryDroneBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\SentryDroneComponentBehaviour.cs" />
     <Compile Include="Assets\HealthBarBehaviour.cs" />
+    <Compile Include="Assets\ImageMatchGameController.cs" />
     <Compile Include="Assets\Scenes\Scripts\OnClickFunctions.cs" />
     <Compile Include="Assets\SpawnerBehaviour.cs" />
     <Reference Include="Unity.Timeline.Editor">
