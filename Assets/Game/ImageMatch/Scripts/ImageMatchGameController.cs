@@ -14,7 +14,7 @@ public class ImageMatchGameController : MonoBehaviour
     private List<string> usedIcons;
 
     public List<IconBehaviour> IconGrid;
-    
+    public IconBehaviour IconToMatch;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,7 @@ public class ImageMatchGameController : MonoBehaviour
         fgImages = getIconImages("Foreground");
 
         startNewGrid();
+        selectIconToMatch();
     }
 
     Dictionary<ImageColour, List<Sprite>> getIconImages(string folderName)
@@ -55,7 +56,32 @@ public class ImageMatchGameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        IconBehaviour selectedIcon;
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                var temp = Input.mousePosition;
+                temp.z = 10;
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(temp);
+                Vector2 mousePos2D = new Vector2(temp.x, temp.y);
+
+                RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+                if (hit.collider != null)
+                {
+                    selectedIcon = hit.transform.gameObject.GetComponent<IconBehaviour>();
+                    if (selectedIcon)
+                    {
+                        if (selectedIcon.ToString() == IconToMatch.ToString())
+                        {
+                            startNewGrid();
+                            selectIconToMatch();
+                        }
+                    }
+                }
+            }
+
+        }
     }
 
     void startNewGrid()
@@ -66,13 +92,13 @@ public class ImageMatchGameController : MonoBehaviour
 
         ImageColour tempColour;
         Sprite tempSprite;
-        float tempOrientation;
 
         //Create a randomized and unique set of icons
         foreach(IconBehaviour icon in IconGrid)
         {
             validIconFound = false;
-            
+            icon.MidgroundImage.transform.rotation = Quaternion.identity;
+            icon.ForegroundImage.transform.rotation = Quaternion.identity;
             while (!validIconFound)
             {
                 currentlyAvailableColours = new List<ImageColour>() { ImageColour.red, ImageColour.orange, ImageColour.green, ImageColour.blue };
@@ -82,9 +108,6 @@ public class ImageMatchGameController : MonoBehaviour
 
                 tempSprite = bgImages[icon.BGColour][Random.Range(0, bgImages[icon.BGColour].Count())];
                 icon.BackgroundImage.sprite = tempSprite;
-                tempOrientation = imageOrientations[Random.Range(0, imageOrientations.Count())];
-                icon.BackgroundOrientation = tempOrientation;
-
                 currentlyAvailableColours.Remove(icon.BGColour);
 
                 icon.MGColour = currentlyAvailableColours[Random.Range(0, currentlyAvailableColours.Count())];
@@ -101,7 +124,6 @@ public class ImageMatchGameController : MonoBehaviour
                 {
                     usedIcons.Add(icon.ToString());
                     validIconFound = true;
-                    icon.BackgroundImage.transform.Rotate(0, 0, icon.BackgroundOrientation);
                     icon.MidgroundImage.transform.Rotate(0, 0, icon.MidgroundOrientation);
                     icon.ForegroundImage.transform.Rotate(0, 0, icon.ForegroundOrientation);
                 }
@@ -109,5 +131,25 @@ public class ImageMatchGameController : MonoBehaviour
         }
     }
 
+    void selectIconToMatch()
+    {
+        IconBehaviour randomIcon = IconGrid[Random.Range(0, IconGrid.Count())];
+        IconToMatch.BackgroundImage.sprite = randomIcon.BackgroundImage.sprite;
+        IconToMatch.BGColour = randomIcon.BGColour;
+
+        IconToMatch.MidgroundImage.sprite = randomIcon.MidgroundImage.sprite;
+        IconToMatch.MidgroundOrientation = randomIcon.MidgroundOrientation;
+        IconToMatch.MGColour = randomIcon.MGColour;
+
+        IconToMatch.ForegroundImage.sprite = randomIcon.ForegroundImage.sprite;
+        IconToMatch.ForegroundOrientation = randomIcon.ForegroundOrientation;
+        IconToMatch.FGColour = randomIcon.FGColour;
+
+        IconToMatch.MidgroundImage.transform.rotation = Quaternion.identity;
+        IconToMatch.ForegroundImage.transform.rotation = Quaternion.identity;
+
+        IconToMatch.MidgroundImage.transform.Rotate(0, 0, IconToMatch.MidgroundOrientation);
+        IconToMatch.ForegroundImage.transform.Rotate(0, 0, IconToMatch.ForegroundOrientation);
+    }
     
 }

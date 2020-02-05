@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class IconBehaviour : MonoBehaviour
 {
     public Image BackgroundImage, MidgroundImage, ForegroundImage;
+    public string BGName, MGName, FGName;
     public ImageMatchGameController.ImageColour BGColour, MGColour, FGColour;
-    public float BackgroundOrientation, MidgroundOrientation, ForegroundOrientation;
+    public float MidgroundOrientation, ForegroundOrientation;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,6 @@ public class IconBehaviour : MonoBehaviour
 
     public override string ToString()
     {
-        return BackgroundImage.name + BackgroundOrientation +  ":" + MidgroundImage.name + MidgroundOrientation + ":" + ForegroundImage.name + ForegroundOrientation;
+        return BackgroundImage.sprite.name + ":" + MidgroundImage.sprite.name + MidgroundOrientation + ":" + ForegroundImage.sprite.name + ForegroundOrientation;
     }
 }
