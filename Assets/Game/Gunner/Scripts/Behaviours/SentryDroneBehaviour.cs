@@ -37,7 +37,7 @@ public class SentryDroneBehaviour : MonoBehaviour
     private float totalRechargeTime = 0.0f;
     private float totalFiringTime = 0.0f;
     private float strafeRate = 0.0f;
-    private SentryDroneComponentBehaviour selectedDrone;
+    private ComponentBehaviour selectedDrone;
     private LineRenderer laser;
 
     // Start is called before the first frame update
@@ -47,7 +47,7 @@ public class SentryDroneBehaviour : MonoBehaviour
         pTransform = pBehaviour.gameObject.transform;
         
         int droneSelectionIndex = Random.Range(0, DroneComponents.Count - 1);
-        selectedDrone = DroneComponents[droneSelectionIndex].GetComponent<SentryDroneComponentBehaviour>();
+        selectedDrone = DroneComponents[droneSelectionIndex].GetComponent<ComponentBehaviour>();
 
         if (selectedDrone)
         {

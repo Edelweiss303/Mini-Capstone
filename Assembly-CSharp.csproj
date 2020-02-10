@@ -63,15 +63,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BossCoreBehaviour.cs" />
+    <Compile Include="Assets\BossDroneBehaviour.cs" />
+    <Compile Include="Assets\BossWallBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\AmmoBarBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\AmmoSlotBehaviour.cs" />
+    <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\BossBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\CleanupBehaviour.cs" />
+    <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\ComponentBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\EffectsContainerBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\EnemyBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\GruntBotBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\PlayerBehaviour.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\SentryDroneBehaviour.cs" />
-    <Compile Include="Assets\Game\Gunner\Scripts\Behaviours\SentryDroneComponentBehaviour.cs" />
     <Compile Include="Assets\HealthBarBehaviour.cs" />
     <Compile Include="Assets\Scenes\Scripts\OnClickFunctions.cs" />
     <Compile Include="Assets\SpawnerBehaviour.cs" />

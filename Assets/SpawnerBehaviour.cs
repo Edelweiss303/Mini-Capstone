@@ -6,6 +6,7 @@ public class SpawnerBehaviour : MonoBehaviour
 {
     public List<GameObject> SpawnPrefabs;
     public float SpawnRate = 0.5f;
+    public Transform SpawnContainer;
 
     private BoxCollider spawnContainer;
     private float timeSinceLastSpawn = 0.0f;
@@ -34,7 +35,7 @@ public class SpawnerBehaviour : MonoBehaviour
                     Random.Range(spawnContainer.bounds.min.z, spawnContainer.bounds.max.z)
                 );
                 int spawnIndex = Random.Range(0, SpawnPrefabs.Count);
-                Instantiate(SpawnPrefabs[spawnIndex], spawnPoint, Quaternion.identity, transform.parent);
+                Instantiate(SpawnPrefabs[spawnIndex], spawnPoint, Quaternion.identity, SpawnContainer);
                 timeSinceLastSpawn = 0.0f;
             }
 
