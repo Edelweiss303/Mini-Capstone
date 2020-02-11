@@ -56,10 +56,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (Crosshairs)
         {
-            Crosshairs.transform.position = Input.mousePosition;
+            Crosshairs.transform.position = InputManager.Instance.CursorLocation;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (InputManager.Instance.FireInput)
         {
             if(currentAmmo > 0)
             {
@@ -70,7 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
                 }
                 
                 RaycastHit hit;
-                Ray rayFromCursor = GameCamera.ScreenPointToRay(Input.mousePosition);
+                Ray rayFromCursor = GameCamera.ScreenPointToRay(InputManager.Instance.CursorLocation);
                 EnemyBehaviour hitEnemy;
                 if (Physics.Raycast(rayFromCursor, out hit, Range))
                 {

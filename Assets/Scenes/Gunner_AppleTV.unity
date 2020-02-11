@@ -1344,7 +1344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnPrefabs:
   - {fileID: 4320029912051234385, guid: 067825e623b8bc649a6385233d665f8d, type: 3}
-  SpawnRate: 1.6
+  SpawnRate: 3.2
   SpawnContainer: {fileID: 1968767146}
 --- !u!65 &624897426
 BoxCollider:
@@ -4276,7 +4276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e59aeef52ac1fd342a9fd60f726bd1b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 15
+  Health: 12
   bBehaviour: {fileID: 759968397}
 --- !u!4 &2066170485 stripped
 Transform:
