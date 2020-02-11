@@ -30,12 +30,18 @@ class InputManager : Singleton<InputManager>
     {
         if(inputMode == InputMode.Mouse)
         {
+            
             CursorLocation = Input.mousePosition;
             FireInput = Input.GetMouseButtonDown(0);
         }
         else if(inputMode == InputMode.AppleTV)
         {
-            CursorLocation += Input.acceleration;
+            if(Input.touches.Count() > 0)
+            {
+                CursorLocation.x += Input.touches[0].deltaPosition.x;
+                CursorLocation.y += Input.touches[0].deltaPosition.y;
+            }
+            
             FireInput = Input.GetButtonDown("A");
         }
 

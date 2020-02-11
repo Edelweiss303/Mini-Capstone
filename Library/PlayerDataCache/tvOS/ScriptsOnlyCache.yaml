@@ -70,39 +70,39 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11150}
+      Script: {instanceID: 11202}
     - Class: 114
-      Script: {instanceID: 11158}
+      Script: {instanceID: 11210}
     - Class: 114
-      Script: {instanceID: 11350}
-    - Class: 114
-      Script: {instanceID: 11446}
+      Script: {instanceID: 11402}
     - Class: 114
       Script: {instanceID: 11498}
     - Class: 114
-      Script: {instanceID: 11654}
+      Script: {instanceID: 11550}
     - Class: 114
-      Script: {instanceID: 11676}
+      Script: {instanceID: 11706}
     - Class: 114
-      Script: {instanceID: 11704}
+      Script: {instanceID: 11728}
     - Class: 114
-      Script: {instanceID: 11744}
+      Script: {instanceID: 11756}
     - Class: 114
-      Script: {instanceID: 11870}
+      Script: {instanceID: 11796}
     - Class: 114
-      Script: {instanceID: 12602}
+      Script: {instanceID: 11922}
     - Class: 114
-      Script: {instanceID: 12728}
+      Script: {instanceID: 12654}
     - Class: 114
-      Script: {instanceID: 12872}
+      Script: {instanceID: 12780}
     - Class: 114
-      Script: {instanceID: 12910}
+      Script: {instanceID: 12924}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12962}
     - Class: 114
-      Script: {instanceID: 12960}
+      Script: {instanceID: 12982}
     - Class: 114
-      Script: {instanceID: 13002}
+      Script: {instanceID: 13012}
+    - Class: 114
+      Script: {instanceID: 13054}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -645,4 +645,4 @@ ScriptsOnlyBuild:
   platform: 37
   scenePathNames:
   - Assets/Scenes/Gunner_AppleTV.unity
-  playerPath: C:/Users/browkeel/Desktop/dev/PROG56048-prog/Project/apple_builds/2020_02_11
+  playerPath: C:/Users/keely/Desktop/Directories/scl/sdev/mini-capstone/cursor-test
