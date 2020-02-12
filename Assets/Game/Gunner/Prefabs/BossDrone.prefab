@@ -104,7 +104,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4320029912051234385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 430b75bf729d5ee43afda366a1099f27, type: 3}
+  m_Script: {fileID: 11500000, guid: 7209cd9721200594cbbb1e961ae9df4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
@@ -112,8 +112,7 @@ MonoBehaviour:
   Damage: 1
   DeathTime: 4
   Alive: 1
-  ExplosionPrefab: {fileID: 7558208222552816495, guid: 9c9cabe2883573c4d9466ebdbb5774ce,
-    type: 3}
+  ExplosionPrefab: {fileID: 0}
   DeathAudioSource: {fileID: 0}
 --- !u!54 &4320029912051234395
 Rigidbody:

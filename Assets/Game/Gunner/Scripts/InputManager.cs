@@ -13,7 +13,7 @@ class InputManager : Singleton<InputManager>
     {
         Mouse, AppleTV
     }
-    public InputMode inputMode = InputMode.AppleTV;
+    public InputMode inputMode = InputMode.Mouse;
 
     public Vector3 CursorLocation = Vector3.zero;
     public bool FireInput = false;

@@ -20,6 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioSource TakeDamageAudioSource;
     public AudioSource ReloadAudioSource;
     public Camera GameCamera;
+    public WaveManager WManager;
 
     private GameObject effectsContainer;
     public HealthBarBehaviour healthBarBehaviour;
@@ -36,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
         effectsContainer = FindObjectOfType<EffectsContainerBehaviour>().gameObject;
         healthBarBehaviour = FindObjectOfType<HealthBarBehaviour>();
         ammoBarBehaviour = FindObjectOfType<AmmoBarBehaviour>();
+        WManager = FindObjectOfType<WaveManager>();
         currentHealth = MaxHealth;
         currentAmmo = MaxAmmo;
         currentRotation = new Vector3(0, 0, 0);

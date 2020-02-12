@@ -60,8 +60,6 @@ public class SentryDroneBehaviour : MonoBehaviour
     void Update()
     {
         SentryUpdate();
-       
-
     }
 
     private void SentryUpdate()
@@ -90,6 +88,7 @@ public class SentryDroneBehaviour : MonoBehaviour
             if (totalDyingTime > DeathTime)
             {
                 Destroy(this.gameObject);
+                WaveManager.Instance.EnemyWasKilled();
             }
         }
     }

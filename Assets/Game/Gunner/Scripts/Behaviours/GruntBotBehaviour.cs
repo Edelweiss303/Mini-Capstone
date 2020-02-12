@@ -63,6 +63,7 @@ public class GruntBotBehaviour : EnemyBehaviour
         if(Health <= 0)
         {
             Die();
+            WaveManager.Instance.EnemyWasKilled();
         }
     }
 
