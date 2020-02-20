@@ -88,7 +88,7 @@ public class SentryDroneBehaviour : MonoBehaviour
             if (totalDyingTime > DeathTime)
             {
                 Destroy(this.gameObject);
-                WaveManager.Instance.EnemyWasKilled();
+                //WaveManager.Instance.EnemyWasKilled();
             }
         }
     }
@@ -194,8 +194,9 @@ public class SentryDroneBehaviour : MonoBehaviour
     public void Die()
     {
         Alive = false;
+        WaveManager.Instance.EnemyWasKilled();
 
-        foreach(GameObject component in DroneComponents)
+        foreach (GameObject component in DroneComponents)
         {
             component.SetActive(false);
         }

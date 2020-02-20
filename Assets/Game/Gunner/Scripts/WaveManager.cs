@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WaveManager : Singleton<WaveManager>
@@ -29,6 +30,7 @@ public class WaveManager : Singleton<WaveManager>
         if (gameIsOver)
         {
             WaveNotification.text = "You win!!!!";
+            SceneManager.LoadScene(0);
             return;
         }
         if (ActiveWave)

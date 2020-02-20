@@ -7,15 +7,11 @@ public class SpawnerBehaviour : MonoBehaviour
     public List<GameObject> SpawnPrefabs;
     public float SpawnRate = 0.5f;
     public Transform SpawnContainer;
+    public float SpawnHeightOffsetRange, SpawnWidthOffsetRange, SpawnDepthOffsetRange;
+    public float SpawnLimit = 10.0f;
 
-    private BoxCollider spawnContainer;
     private float timeSinceLastSpawn = 0.0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        spawnContainer = GetComponent<BoxCollider>();
-    }
+    private List<GameObject> spawns = new List<GameObject>();
 
     // Update is called once per frame
     void Update()
@@ -25,23 +21,32 @@ public class SpawnerBehaviour : MonoBehaviour
 
     private void SpawningUpdate()
     {
-        if (spawnContainer && SpawnPrefabs.Count > 0)
+        if (SpawnPrefabs.Count > 0)
         {
-            if(timeSinceLastSpawn > SpawnRate)
+            if(timeSinceLastSpawn > SpawnRate && spawns.Count < SpawnLimit)
             {
                 Vector3 spawnPoint = new Vector3(
-                    Random.Range(spawnContainer.bounds.min.x, spawnContainer.bounds.max.x), 
-                    Random.Range(spawnContainer.bounds.min.y, spawnContainer.bounds.max.y), 
-                    Random.Range(spawnContainer.bounds.min.z, spawnContainer.bounds.max.z)
+                    Random.Range(-SpawnWidthOffsetRange, SpawnWidthOffsetRange), 
+                    Random.Range(-SpawnHeightOffsetRange, SpawnHeightOffsetRange), 
+                    Random.Range(-SpawnDepthOffsetRange, SpawnDepthOffsetRange)
                 );
                 int spawnIndex = Random.Range(0, SpawnPrefabs.Count);
-                Instantiate(SpawnPrefabs[spawnIndex], spawnPoint, Quaternion.identity, EnemiesManager.Instance.transform);
+                GameObject newSpawn = Instantiate(SpawnPrefabs[spawnIndex], spawnPoint + transform.position, Quaternion.identity);
+                EnemiesManager.Instance.addEnemy(newSpawn);
+                spawns.Add(newSpawn);
                 
                 timeSinceLastSpawn = 0.0f;
             }
 
             timeSinceLastSpawn += Time.deltaTime;
-            
+        }
+
+        for(int i = spawns.Count - 1; i >=0; i--)
+        {
+            if (!spawns[i])
+            {
+                spawns.RemoveAt(i);
+            }
         }
         
     }

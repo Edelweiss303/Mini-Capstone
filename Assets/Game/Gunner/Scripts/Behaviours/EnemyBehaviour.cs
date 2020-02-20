@@ -9,6 +9,6 @@ public abstract class EnemyBehaviour : MonoBehaviour
 {
     abstract public void TakeDamage(float damage);
     abstract public bool IsAlive();
-
+    public bool AutoAimable = true;
 }
 

@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - AmmoBarBehaviour
+    - AmmoRowBehaviour
     - AmmoSlotBehaviour
     - BossBehaviour
     - BossCoreBehaviour
@@ -10,9 +11,18 @@ ScriptsOnlyBuild:
     - CleanupBehaviour
     - ComponentBehaviour
     - EffectsContainerBehaviour
+    - EnemiesManager
+    - GruntBotBehaviour
     - HealthBarBehaviour
+    - InputManager
+    - MenuNavigationController
     - PlayerBehaviour
+    - PlayerShootingBehaviour
+    - SentryDroneBehaviour
     - SpawnerBehaviour
+    - StartBtnBehaviour
+    - Wave
+    - WaveManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.Graphs.dll:
@@ -28,9 +38,11 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/Gunner_AppleTV.unity:
     - Class: 1
@@ -70,40 +82,60 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11202}
+      Script: {instanceID: 11168}
     - Class: 114
-      Script: {instanceID: 11210}
+      Script: {instanceID: 11234}
     - Class: 114
-      Script: {instanceID: 11402}
+      Script: {instanceID: 11236}
     - Class: 114
-      Script: {instanceID: 11498}
+      Script: {instanceID: 11264}
     - Class: 114
-      Script: {instanceID: 11550}
+      Script: {instanceID: 11330}
     - Class: 114
-      Script: {instanceID: 11706}
+      Script: {instanceID: 11370}
     - Class: 114
-      Script: {instanceID: 11728}
+      Script: {instanceID: 11466}
     - Class: 114
-      Script: {instanceID: 11756}
+      Script: {instanceID: 11518}
     - Class: 114
-      Script: {instanceID: 11796}
+      Script: {instanceID: 11694}
     - Class: 114
-      Script: {instanceID: 11922}
+      Script: {instanceID: 11722}
     - Class: 114
-      Script: {instanceID: 12654}
+      Script: {instanceID: 11762}
     - Class: 114
-      Script: {instanceID: 12780}
+      Script: {instanceID: 11774}
     - Class: 114
-      Script: {instanceID: 12924}
+      Script: {instanceID: 11986}
     - Class: 114
-      Script: {instanceID: 12962}
+      Script: {instanceID: 12006}
     - Class: 114
-      Script: {instanceID: 12982}
+      Script: {instanceID: 12030}
     - Class: 114
-      Script: {instanceID: 13012}
+      Script: {instanceID: 12230}
     - Class: 114
-      Script: {instanceID: 13054}
+      Script: {instanceID: 12262}
+    - Class: 114
+      Script: {instanceID: 12626}
+    - Class: 114
+      Script: {instanceID: 12664}
+    - Class: 114
+      Script: {instanceID: 12896}
+    - Class: 114
+      Script: {instanceID: 12934}
+    - Class: 114
+      Script: {instanceID: 12954}
+    - Class: 114
+      Script: {instanceID: 12984}
+    - Class: 114
+      Script: {instanceID: 13026}
+    - Class: 114
+      Script: {instanceID: 17670}
+    - Class: 114
+      Script: {instanceID: 272108}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 135
       Script: {instanceID: 0}
@@ -125,6 +157,61 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 258
       Script: {instanceID: 0}
+    Assets/Scenes/Gunner_MainMenu.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11168}
+    - Class: 114
+      Script: {instanceID: 11234}
+    - Class: 114
+      Script: {instanceID: 11330}
+    - Class: 114
+      Script: {instanceID: 11370}
+    - Class: 114
+      Script: {instanceID: 11762}
+    - Class: 114
+      Script: {instanceID: 12148}
+    - Class: 114
+      Script: {instanceID: 12626}
+    - Class: 114
+      Script: {instanceID: 12984}
+    - Class: 114
+      Script: {instanceID: 331424}
+    - Class: 114
+      Script: {instanceID: 356554}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
   scriptHashData:
   - hash:
       serializedVersion: 2
@@ -132,12 +219,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
-  - hash:
-      serializedVersion: 2
-      Hash: d5598c730b9072185f44bb34c2687e51
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SpawnerBehaviour
   - hash:
       serializedVersion: 2
       Hash: 3c08375166df118bd1801438fc36b92f
@@ -158,10 +239,22 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 3c6ae8ba87d405386dd695f1482a0c50
+      Hash: dbc948c4014be5b4325698fa60b4d163
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InputManager
+  - hash:
+      serializedVersion: 2
+      Hash: ae869fca3704d40514955680fb5d1f15
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BossWallBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: f9a731fcb9b3e37a226679245a566965
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BossCoreBehaviour
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -260,7 +353,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: fd63873581491bbe21d8f3f32967c1d7
+      Hash: 46b189d3dd890d3d81f3e2cb7211c7f7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerBehaviour
@@ -308,19 +401,13 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 41548ed0266be9610e663685e2779b5e
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HealthBarBehaviour
-  - hash:
-      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 9a4c1566d4ec81997f31fa3b81417aa7
+      Hash: a48c4145c31bb1a80e7ee6ad4f53270d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ComponentBehaviour
@@ -344,7 +431,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: d988c9d991fdd0fd2b36d1024830b447
+      Hash: 4f00b352a7b19409ba24eed40a4d7b95
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GruntBotBehaviour
@@ -368,12 +455,6 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 64768d3a87c837eb6394c60e0098100d
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: BossCoreBehaviour
-  - hash:
-      serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -392,10 +473,22 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: 98e6bcee00dfa0e39996307c0e12529b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: WaveManager
+  - hash:
+      serializedVersion: 2
       Hash: 92c10b59351a69972e2db3d431166ccb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SentryDroneBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 4f00b352a7b19409ba24eed40a4d7b95
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BossDroneBehaviour
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -428,10 +521,22 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
+      Hash: 8a716a0e0c06ee3afdaf1e5db046f451
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SpawnerBehaviour
+  - hash:
+      serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemiesManager
   - hash:
       serializedVersion: 2
       Hash: 783f593b9380cf72d0f7ebfd4a0d4bcd
@@ -506,10 +611,10 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: ae869fca3704d40514955680fb5d1f15
+      Hash: 8adc35a832ac3f57a179833796890e22
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: BossWallBehaviour
+    className: Wave
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -578,7 +683,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: ccf617e7080763e382db2a44ca33c429
+      Hash: c2c377a415eaf8e9bbf98c021c1c91d0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AmmoBarBehaviour
@@ -626,10 +731,10 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: d988c9d991fdd0fd2b36d1024830b447
+      Hash: 41548ed0266be9610e663685e2779b5e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: BossDroneBehaviour
+    className: HealthBarBehaviour
   - hash:
       serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
@@ -642,7 +747,32 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: c73da7302b2020000e4b4833bdd1167b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerShootingBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 1dcb3e3faf7d12ff8e03fc38b9a8a785
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AmmoRowBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StartBtnBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 70fb4107eb52b7bcdd013ca9325141bf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MenuNavigationController
   platform: 37
   scenePathNames:
+  - Assets/Scenes/Gunner_MainMenu.unity
   - Assets/Scenes/Gunner_AppleTV.unity
-  playerPath: C:/Users/keely/Desktop/Directories/scl/sdev/mini-capstone/cursor-test
+  playerPath: C:/Users/keely/Desktop/dev/Testing

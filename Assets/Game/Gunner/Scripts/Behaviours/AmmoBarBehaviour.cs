@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmoBarBehaviour : MonoBehaviour
 {
-    public List<GameObject> Slots;
+    public List<AmmoRowBehaviour> Rows;
 
     private float ammoAmount;
     private float lastAmmoAmount = 0.0f;
@@ -23,22 +23,24 @@ public class AmmoBarBehaviour : MonoBehaviour
 
     private void AmmoBarUpdate()
     {
+        int index = 0;
         if(ammoAmount != lastAmmoAmount)
         {
             lastAmmoAmount = ammoAmount;
-            AmmoSlotBehaviour temp;
-            //Do the update
-            for (int i = 0; i < Slots.Count; i++)
-            {
-                temp = Slots[i].GetComponent<AmmoSlotBehaviour>();
 
-                if (i >= ammoAmount)
+            foreach(AmmoRowBehaviour row in Rows)
+            {
+                foreach(AmmoSlotBehaviour slot in row.AmmoSlots)
                 {
-                    temp.FillingObject.SetActive(false);
-                }
-                else
-                {
-                    temp.FillingObject.SetActive(true);
+                    if (index >= ammoAmount)
+                    {
+                        slot.FillingObject.SetActive(false);
+                    }
+                    else
+                    {
+                        slot.FillingObject.SetActive(true);
+                    }
+                    index++;
                 }
             }
         }

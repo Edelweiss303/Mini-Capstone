@@ -18,44 +18,42 @@ public class Wave : MonoBehaviour
 
     private void Update()
     {
-        if(NumberOfEnemiesToKill > numberOfEnemiesKilled)
+        if (!IsComplete)
         {
-            Notification = Name + ": " + (NumberOfEnemiesToKill - numberOfEnemiesKilled).ToString() + " Enemies Remaining.";
-            NotificationColour = SpawningColour;
-        }
-        else if (BossBehaviour && BossBehaviour.IsAlive)
-        {
-            if (SpawnerObject.activeSelf)
+            if (NumberOfEnemiesToKill > numberOfEnemiesKilled)
             {
-                SpawnerObject.SetActive(false);
+                Notification = Name + ": " + (NumberOfEnemiesToKill - numberOfEnemiesKilled).ToString() + " Enemies Remaining.";
+                NotificationColour = SpawningColour;
             }
-            if (!BossBehaviour.gameObject.activeSelf)
+            else if (BossBehaviour && BossBehaviour.IsAlive)
             {
-                BossBehaviour.gameObject.SetActive(true);
+                if (SpawnerObject.activeSelf)
+                {
+                    SpawnerObject.SetActive(false);
+                }
+                if (!BossBehaviour.gameObject.activeSelf)
+                {
+                    BossBehaviour.gameObject.SetActive(true);
+                }
+                Notification = "BOSS BATTLE!!!";
+                NotificationColour = BossColour;
             }
-            Notification = "BOSS BATTLE!!!";
-            NotificationColour = BossColour;
-        }
-        else
-        {
-            if (SpawnerObject.activeSelf)
+            else
             {
-                SpawnerObject.SetActive(false);
-                
-            }
-            if (BossBehaviour)
-            {
-                BossBehaviour.gameObject.SetActive(false);
-            }
+                if (SpawnerObject.activeSelf)
+                {
+                    SpawnerObject.SetActive(false);
+                }
+                if (BossBehaviour)
+                {
+                    BossBehaviour.gameObject.SetActive(false);
+                }
 
-            Transform eManagerTransform = EnemiesManager.Instance.transform;
-            foreach (Transform child in eManagerTransform)
-            {
-                GameObject.Destroy(child.gameObject);
+                EnemiesManager.Instance.removeAllEnemies();
+                IsComplete = true;
             }
-
-            IsComplete = true;
         }
+        
     }
 
     public void activate()
