@@ -84,7 +84,8 @@
     <Compile Include="Assets\Game\Gunner\Scripts\Singleton.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\Wave.cs" />
     <Compile Include="Assets\Game\Gunner\Scripts\WaveManager.cs" />
-    <Compile Include="Assets\MenuNavigationController.cs" />
+    <Compile Include="Assets\GameManager.cs" />
+    <Compile Include="Assets\PauseMenuController.cs" />
     <Compile Include="Assets\PlayerShootingBehaviour.cs" />
     <Compile Include="Assets\Scenes\Scripts\OnClickFunctions.cs" />
     <Reference Include="Unity.Timeline.Editor">

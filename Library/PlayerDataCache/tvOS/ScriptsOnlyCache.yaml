@@ -12,10 +12,11 @@ ScriptsOnlyBuild:
     - ComponentBehaviour
     - EffectsContainerBehaviour
     - EnemiesManager
+    - GameManager
     - GruntBotBehaviour
     - HealthBarBehaviour
     - InputManager
-    - MenuNavigationController
+    - PauseMenuController
     - PlayerBehaviour
     - PlayerShootingBehaviour
     - SentryDroneBehaviour
@@ -82,57 +83,63 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11168}
+      Script: {instanceID: 11150}
     - Class: 114
-      Script: {instanceID: 11234}
+      Script: {instanceID: 11218}
     - Class: 114
-      Script: {instanceID: 11236}
+      Script: {instanceID: 11220}
     - Class: 114
-      Script: {instanceID: 11264}
+      Script: {instanceID: 11248}
     - Class: 114
-      Script: {instanceID: 11330}
+      Script: {instanceID: 11258}
     - Class: 114
-      Script: {instanceID: 11370}
+      Script: {instanceID: 11316}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11356}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11452}
     - Class: 114
-      Script: {instanceID: 11694}
+      Script: {instanceID: 11504}
     - Class: 114
-      Script: {instanceID: 11722}
+      Script: {instanceID: 11680}
     - Class: 114
-      Script: {instanceID: 11762}
+      Script: {instanceID: 11708}
     - Class: 114
-      Script: {instanceID: 11774}
+      Script: {instanceID: 11748}
     - Class: 114
-      Script: {instanceID: 11986}
+      Script: {instanceID: 11760}
     - Class: 114
-      Script: {instanceID: 12006}
+      Script: {instanceID: 11972}
     - Class: 114
-      Script: {instanceID: 12030}
+      Script: {instanceID: 11992}
     - Class: 114
-      Script: {instanceID: 12230}
+      Script: {instanceID: 12016}
     - Class: 114
-      Script: {instanceID: 12262}
+      Script: {instanceID: 12134}
     - Class: 114
-      Script: {instanceID: 12626}
+      Script: {instanceID: 12216}
     - Class: 114
-      Script: {instanceID: 12664}
+      Script: {instanceID: 12248}
     - Class: 114
-      Script: {instanceID: 12896}
+      Script: {instanceID: 12614}
     - Class: 114
-      Script: {instanceID: 12934}
+      Script: {instanceID: 12652}
     - Class: 114
-      Script: {instanceID: 12954}
+      Script: {instanceID: 12698}
     - Class: 114
-      Script: {instanceID: 12984}
+      Script: {instanceID: 12886}
     - Class: 114
-      Script: {instanceID: 13026}
+      Script: {instanceID: 12924}
     - Class: 114
-      Script: {instanceID: 17670}
+      Script: {instanceID: 12944}
     - Class: 114
-      Script: {instanceID: 272108}
+      Script: {instanceID: 12974}
+    - Class: 114
+      Script: {instanceID: 13016}
+    - Class: 114
+      Script: {instanceID: 26164}
+    - Class: 114
+      Script: {instanceID: 26178}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -177,25 +184,23 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11168}
+      Script: {instanceID: 11150}
     - Class: 114
-      Script: {instanceID: 11234}
+      Script: {instanceID: 11182}
     - Class: 114
-      Script: {instanceID: 11330}
+      Script: {instanceID: 11218}
     - Class: 114
-      Script: {instanceID: 11370}
+      Script: {instanceID: 11316}
     - Class: 114
-      Script: {instanceID: 11762}
+      Script: {instanceID: 11356}
     - Class: 114
-      Script: {instanceID: 12148}
+      Script: {instanceID: 11748}
     - Class: 114
-      Script: {instanceID: 12626}
+      Script: {instanceID: 12134}
     - Class: 114
-      Script: {instanceID: 12984}
+      Script: {instanceID: 12614}
     - Class: 114
-      Script: {instanceID: 331424}
-    - Class: 114
-      Script: {instanceID: 356554}
+      Script: {instanceID: 12974}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -227,6 +232,12 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StartBtnBehaviour
+  - hash:
+      serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -239,7 +250,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: dbc948c4014be5b4325698fa60b4d163
+      Hash: 087b9f8888d56f1290a13f9485daa291
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InputManager
@@ -255,6 +266,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BossCoreBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 1dcb3e3faf7d12ff8e03fc38b9a8a785
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AmmoRowBehaviour
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -617,6 +634,12 @@ ScriptsOnlyBuild:
     className: Wave
   - hash:
       serializedVersion: 2
+      Hash: fd4967df677e3119bad1f2f680a376bc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerShootingBehaviour
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -749,28 +772,16 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: c73da7302b2020000e4b4833bdd1167b
+      Hash: a5940c97325452de41e83f7130e00339
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: PlayerShootingBehaviour
-  - hash:
-      serializedVersion: 2
-      Hash: 1dcb3e3faf7d12ff8e03fc38b9a8a785
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: AmmoRowBehaviour
+    className: GameManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: StartBtnBehaviour
-  - hash:
-      serializedVersion: 2
-      Hash: 70fb4107eb52b7bcdd013ca9325141bf
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MenuNavigationController
+    className: PauseMenuController
   platform: 37
   scenePathNames:
   - Assets/Scenes/Gunner_MainMenu.unity

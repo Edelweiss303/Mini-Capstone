@@ -17,6 +17,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
     public float Damage = 1.0f;
     public float AutoAimStrength = 3.0f;
     public float AutoAimWeight = 0.75f;
+    public float CrosshairSpeed = 500.0f;
 
     private GameObject effectsContainer;
     private float currentAmmo;
@@ -45,7 +46,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
             if (Physics.Raycast(rayFromCursor, out hit, Range))
             {
                 Ray line = new Ray(rayFromCursor.origin, hit.point - rayFromCursor.origin);
-                eBehaviour = EnemiesManager.Instance.GetClosestEnemy(line, AutoAimRange, out autoAimDirection);
+                //eBehaviour = EnemiesManager.Instance.GetClosestEnemy(line, AutoAimRange, out autoAimDirection);
 
                 if (InputManager.Instance.FireInput)
                 {
@@ -80,16 +81,54 @@ public class PlayerShootingBehaviour : MonoBehaviour
                 }
             }
 
+            Vector3 movementToApply = new Vector3(InputManager.Instance.CursorMovement.x * Screen.width * CrosshairSpeed, InputManager.Instance.CursorMovement.y * Screen.height * CrosshairSpeed, 0);
+            if (Crosshairs.transform.position.x > Screen.width && movementToApply.x > 0)
+            {
+                movementToApply.x = 0;
+            }
+            else if(Crosshairs.transform.position.x < 0 && movementToApply.x < 0)
+            {
+                movementToApply.x = 0;
+            }
+
+            if (Crosshairs.transform.position.y > Screen.height && movementToApply.y > 0)
+            {
+                movementToApply.y = 0;
+            }
+            else if (Crosshairs.transform.position.y < 0 && movementToApply.y < 0)
+            {
+                movementToApply.y = 0;
+            }
+
+            Crosshairs.transform.position += movementToApply * Time.deltaTime * CrosshairSpeed;
+
+            Vector3 adjustment = Vector3.zero;
+            if(Crosshairs.transform.position.x < 0)
+            {
+                adjustment.x += 10;
+            }
+            else if(Crosshairs.transform.position.x > Screen.width)
+            {
+                adjustment.x -= 10;
+            }
+
+            if(Crosshairs.transform.position.y < 0)
+            {
+                adjustment.y += 10;
+            }
+            else if(Crosshairs.transform.position.y > Screen.height)
+            {
+                adjustment.y -= 10;
+            }
+
+            Crosshairs.transform.position += adjustment;
+
             if (eBehaviour)
             {
                 //Do a ray to the enemy?
                 Vector3 autoAimTarget = Crosshairs.transform.position + autoAimDirection * AutoAimStrength;
-                Crosshairs.transform.position = Vector3.Lerp(Crosshairs.transform.position, InputManager.Instance.CursorLocation, 0.2f);
+                Crosshairs.transform.position = Vector3.Lerp(Crosshairs.transform.position, Crosshairs.transform.position, 0.2f);
                 Crosshairs.transform.position = Vector3.Lerp(Crosshairs.transform.position, autoAimTarget, AutoAimWeight);
-            }
-            else
-            {
-                Crosshairs.transform.position = InputManager.Instance.CursorLocation;
             }
         }
 

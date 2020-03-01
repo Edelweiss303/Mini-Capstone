@@ -93,8 +93,6 @@ public class EnemiesManager : Singleton<EnemiesManager>
 
         if (closestEnemy)
         {
-            Debug.Log(closestEnemy.transform.position);
-            Debug.DrawLine(inRay.origin, closestEnemy.transform.position, Color.red);
             Vector3 test = (inRay.origin + inRay.direction * dotproduct);
             if (test.x > closestEnemy.transform.position.x)
             {

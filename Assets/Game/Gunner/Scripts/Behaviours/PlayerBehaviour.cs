@@ -72,34 +72,34 @@ public class PlayerBehaviour : MonoBehaviour
 
     void CameraUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            currentRotation.y = -RotationRate;
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            currentRotation.y = RotationRate;
-        }
-        else
-        {
-            currentRotation.y = 0.0f;
-        }
+        //if (Input.GetKey(KeyCode.LeftArrow))
+        //{
+        //    currentRotation.y = -RotationRate;
+        //}
+        //else if (Input.GetKey(KeyCode.RightArrow))
+        //{
+        //    currentRotation.y = RotationRate;
+        //}
+        //else
+        //{
+        //    currentRotation.y = 0.0f;
+        //}
 
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            currentRotation.x = RotationRate;
-        }
-        else if (Input.GetKey(KeyCode.UpArrow))
-        {
-            currentRotation.x = -RotationRate;
-        }
-        else
-        {
-            currentRotation.x = 0.0f;
-        }
+        //if (Input.GetKey(KeyCode.DownArrow))
+        //{
+        //    currentRotation.x = RotationRate;
+        //}
+        //else if (Input.GetKey(KeyCode.UpArrow))
+        //{
+        //    currentRotation.x = -RotationRate;
+        //}
+        //else
+        //{
+        //    currentRotation.x = 0.0f;
+        //}
 
-        //Apply the rotation
-        transform.Rotate(currentRotation);
+        ////Apply the rotation
+        //transform.Rotate(currentRotation);
 
     }
 
@@ -127,5 +127,6 @@ public class PlayerBehaviour : MonoBehaviour
     public void Die()
     {
         Alive = false;
+        GameManager.Instance.QuitGame();
     }
 }

@@ -267,9 +267,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoAimable: 1
-  Speed: 2
+  Speed: 0.25
   Health: 3
-  Damage: 5
+  Damage: 15.8
   DeathTime: 2
   Alive: 1
   ExplosionPrefab: {fileID: 7558208222552816495, guid: 9c9cabe2883573c4d9466ebdbb5774ce,
