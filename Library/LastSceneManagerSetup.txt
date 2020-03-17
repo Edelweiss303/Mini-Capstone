@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Gunner_AppleTV.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
