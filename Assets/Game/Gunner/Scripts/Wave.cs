@@ -6,7 +6,7 @@ public class Wave : MonoBehaviour
 {
     public int NumberOfEnemiesToKill = 20;
     public GameObject SpawnerObject;
-    public BossBehaviour BossBehaviour;
+    public FactoryMachine BossBehaviour;
     public bool IsComplete = false;
     public string Notification = "";
     public string Name = "Wave One";
@@ -25,7 +25,7 @@ public class Wave : MonoBehaviour
                 Notification = Name + ": " + (NumberOfEnemiesToKill - numberOfEnemiesKilled).ToString() + " Enemies Remaining.";
                 NotificationColour = SpawningColour;
             }
-            else if (BossBehaviour && BossBehaviour.IsAlive)
+            else if (BossBehaviour && BossBehaviour.IsAlive())
             {
                 if (SpawnerObject.activeSelf)
                 {

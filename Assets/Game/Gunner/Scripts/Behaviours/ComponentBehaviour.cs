@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ComponentBehaviour : EnemyBehaviour
+public class ComponentBehaviour : EnemyBase
 {
-    private SentryDroneBehaviour sdBehaviour;
-    private BossBehaviour bBehaviour;
+    private SentryDrone sdBehaviour;
+    private FactoryMachine bBehaviour;
     private MeshRenderer sdcRenderer;
     public bool Selected;
     public Material SelectionMaterial;
@@ -20,8 +21,8 @@ public class ComponentBehaviour : EnemyBehaviour
 
     private void Awake()
     {
-        sdBehaviour = transform.parent.GetComponent<SentryDroneBehaviour>();
-        bBehaviour = transform.GetComponentInParent<BossBehaviour>();
+        sdBehaviour = transform.parent.GetComponent<SentryDrone>();
+        bBehaviour = transform.GetComponentInParent<FactoryMachine>();
         sdcRenderer = GetComponent<MeshRenderer>();
         AutoAimable = false;
     }
@@ -51,15 +52,20 @@ public class ComponentBehaviour : EnemyBehaviour
         }
     }
 
+    public override void Die()
+    {
+        //throw new NotImplementedException();
+    }
+
     public override bool IsAlive()
     {
         if (sdBehaviour)
         {
-            return sdBehaviour.Alive;
+            return sdBehaviour.IsAlive();
         }
         else if (bBehaviour)
         {
-            return bBehaviour.IsAlive;
+            return bBehaviour.IsAlive();
         }
 
         return false;
