@@ -18,6 +18,12 @@ public class Shield : MonoBehaviour
         initialShieldAlpha = shieldRenderer.material.color.a;
     }
 
+    public void SetShieldType(GameManager.EnemyType inEnemyType)
+    {
+        shieldRenderer.material = GameManager.Instance.ShieldMaterialMap[inEnemyType];
+        initialShieldAlpha = shieldRenderer.material.color.a;
+    }
+
     // Update is called once per frame
     void Update()
     {

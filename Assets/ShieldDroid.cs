@@ -60,9 +60,16 @@ public class ShieldDroid : EnemyBase
     {
         enemyRenderer = GetComponent<MeshRenderer>();
         enemyCollider = GetComponent<BoxCollider>();
+        SetEnemyType();
+        enemyRenderer.material = EnemyMaterial;
         rb = GetComponent<Rigidbody>();
         EnemiesManager.Instance.addEnemy(gameObject);
         TargetUpdate();
+        Shield temp = GetComponentInChildren<Shield>();
+        if (temp)
+        {
+            temp.SetShieldType(Type);
+        }
     }
 
     // Update is called once per frame

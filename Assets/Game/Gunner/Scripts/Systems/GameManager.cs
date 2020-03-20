@@ -12,11 +12,21 @@ public class GameManager : Singleton<GameManager>
     }
     public PlayerType playerType = PlayerType.Friend;
 
+    public enum EnemyType
+    {
+        A, B, C
+    }
+
     public bool GameStatus = true;
     public GameObject PauseMenu;
     public Vector2 ScreenSize;
     public Text InputTest;
     public LayerMask PlayerProjectileMask, EnemyLayerMask;
+    public Material EnemyTypeAMaterial, EnemyTypeBMaterial, EnemyTypeCMaterial;
+    public Material ShieldTypeAMaterial, ShieldTypeBMaterial, ShieldTypeCMaterial;
+    public Dictionary<EnemyType, Material> EnemyMaterialMap = new Dictionary<EnemyType, Material>();
+    public Dictionary<EnemyType, Material> ShieldMaterialMap = new Dictionary<EnemyType, Material>();
+    public List<EnemyType> AllEnemyTypes = new List<EnemyType>() { EnemyType.A, EnemyType.B, EnemyType.C };
 
     public List<Transform> FactoryMarkers = new List<Transform>();
     public GameObject ProjectilesCollection, EffectsContainer;
@@ -32,6 +42,15 @@ public class GameManager : Singleton<GameManager>
         GameStatus = false;
     }
 
+    public void Awake()
+    {
+        EnemyMaterialMap.Add(EnemyType.A, EnemyTypeAMaterial);
+        EnemyMaterialMap.Add(EnemyType.B, EnemyTypeBMaterial);
+        EnemyMaterialMap.Add(EnemyType.C, EnemyTypeCMaterial);
+        ShieldMaterialMap.Add(EnemyType.A, ShieldTypeAMaterial);
+        ShieldMaterialMap.Add(EnemyType.B, ShieldTypeBMaterial);
+        ShieldMaterialMap.Add(EnemyType.C, ShieldTypeCMaterial);
+    }
     public void Start()
     {
         switch (playerType)
@@ -43,6 +62,8 @@ public class GameManager : Singleton<GameManager>
                 PlayerObject = FindObjectOfType<PlayerBehaviour>().gameObject;
                 break;
         }
+
+
     }
 
     public void Update()
@@ -79,6 +100,11 @@ public class GameManager : Singleton<GameManager>
             InputTest.text = "Rotation Rate: " + (int)InputManager.Instance.CursorMovement.x + ", " + (int)InputManager.Instance.CursorMovement.y + ", " + (int)InputManager.Instance.CursorMovement.z;
         }
 
+    }
+
+    public EnemyType GetRandomizedEnemyType()
+    {
+        return AllEnemyTypes[Random.Range(0, AllEnemyTypes.Count)];
     }
 
 }

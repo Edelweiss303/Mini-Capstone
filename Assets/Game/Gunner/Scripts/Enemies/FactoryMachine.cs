@@ -29,6 +29,7 @@ public class FactoryMachine : EnemyBase
         steeringAgent = GetComponent<SteeringAgent>();
         rb = GetComponent<Rigidbody>();
         seekSteeringBehaviour.enabled = false;
+        SetEnemyType();
         EnemiesManager.Instance.addEnemy(gameObject);
     }
 
@@ -65,7 +66,7 @@ public class FactoryMachine : EnemyBase
     void selectComponent()
     {
         selectedComponent = Shields[UnityEngine.Random.Range(0, Shields.Count)];
-        selectedComponent.Select();
+        selectedComponent.Select(Type, EnemyMaterial);
     }
 
     private void checkForDestinationChange()

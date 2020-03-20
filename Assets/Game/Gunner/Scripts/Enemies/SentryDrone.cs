@@ -47,10 +47,10 @@ public class SentryDrone : EnemyBase
         selectedDrone = DroneComponents[droneSelectionIndex].GetComponent<ComponentBehaviour>();
         sentryShooting = GetComponentInChildren<SentryShooting>();
 
-
+        SetEnemyType();
         if (selectedDrone)
         {
-            selectedDrone.Select();
+            selectedDrone.Select(Type, EnemyMaterial);
         }
         EnemiesManager.Instance.addEnemy(gameObject);
         sState = SentryState.Idle;   

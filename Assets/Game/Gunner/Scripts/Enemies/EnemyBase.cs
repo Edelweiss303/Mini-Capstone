@@ -14,6 +14,8 @@ public abstract class EnemyBase : MonoBehaviour
     public bool DieOnCollision = true;
     public float Damage;
     public int ProtectionPriority;
+    public GameManager.EnemyType Type;
+    public Material EnemyMaterial;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +34,10 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-
+    protected void SetEnemyType()
+    {
+        Type = GameManager.Instance.GetRandomizedEnemyType();
+        EnemyMaterial = GameManager.Instance.EnemyMaterialMap[Type];
+    }
 }
 

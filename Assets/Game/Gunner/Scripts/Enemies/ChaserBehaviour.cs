@@ -33,6 +33,8 @@ public class ChaserBehaviour : EnemyBase
         retreatSteeringBehaviour.enabled = false;
         chaseSteeringBehaviour.enabled = true;
         EnemiesManager.Instance.addEnemy(gameObject);
+        SetEnemyType();
+        enemyRenderer.material = EnemyMaterial;
     }
 
     void Update()

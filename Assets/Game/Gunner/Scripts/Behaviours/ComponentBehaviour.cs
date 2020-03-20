@@ -73,14 +73,17 @@ public class ComponentBehaviour : EnemyBase
         
     }
 
-    public void Select()
+    public void Select(GameManager.EnemyType inEnemyType, Material inEnemyMaterial)
     {
+        Type = inEnemyType;
+        EnemyMaterial = inEnemyMaterial;
+
         Selected = true;
         AutoAimable = true;
         EnemiesManager.Instance.addToAimables(this);
-        if (SelectionMaterial && sdcRenderer)
+        if (sdcRenderer)
         {
-            sdcRenderer.material = SelectionMaterial;
+            sdcRenderer.material = EnemyMaterial;
         }
     }
 }

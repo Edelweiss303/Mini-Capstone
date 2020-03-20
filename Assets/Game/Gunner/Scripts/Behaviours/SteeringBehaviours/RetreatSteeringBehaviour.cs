@@ -20,7 +20,7 @@ public class RetreatSteeringBehaviour : SteeringBehaviourBase
     public float RepathingCooldown = 0.5f;
     public float SetNewPathTargetDistance = 0.05f;
 
-    private void Start()
+    private void Awake()
     {
         switch (targetType)
         {

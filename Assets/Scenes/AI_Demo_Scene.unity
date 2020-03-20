@@ -233,7 +233,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14142
+  m_Name: pb_Mesh14158
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1333,6 +1333,13 @@ MonoBehaviour:
   EnemyLayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  EnemyTypeAMaterial: {fileID: 2100000, guid: ba8d88a315eaa834db78f1083c1ca2c9, type: 2}
+  EnemyTypeBMaterial: {fileID: 2100000, guid: 64626ec9f9fff0343bd83fff80bea6b1, type: 2}
+  EnemyTypeCMaterial: {fileID: 2100000, guid: ed275714e8cd9a541899d9d015ffbe94, type: 2}
+  ShieldTypeAMaterial: {fileID: 2100000, guid: b1d5c6834db37f246a372aefcdcaf44e, type: 2}
+  ShieldTypeBMaterial: {fileID: 2100000, guid: 25d4332105dd4b64492e1fd0b2162ce6, type: 2}
+  ShieldTypeCMaterial: {fileID: 2100000, guid: 6d4e17c95ec13514f829f6b30392d93a, type: 2}
+  AllEnemyTypes: 000000000100000002000000
   FactoryMarkers: []
   ProjectilesCollection: {fileID: 169806838}
   EffectsContainer: {fileID: 0}
@@ -1384,7 +1391,7 @@ MeshCollider:
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1552328376}
+  m_Mesh: {fileID: 1447900413}
 --- !u!114 &420085636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4162,7 +4169,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420085633}
-  m_Mesh: {fileID: 1552328376}
+  m_Mesh: {fileID: 1447900413}
 --- !u!1 &453686004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5401679602862512748, guid: b698eaac3b20b1f44acbe7cbdcf5a9cc,
@@ -7428,6 +7435,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Speed: 100
   Health: 3
   DeathTime: 4
@@ -7465,45 +7474,13 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2730264532266339450}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1491649314
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1491649315}
-  m_Layer: 0
-  m_Name: Collections
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1491649315
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491649314}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.72, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 169806839}
-  - {fileID: 321987224}
-  m_Father: {fileID: 2087096250}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &1552328376
+--- !u!43 &1447900413
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14090
+  m_Name: pb_Mesh14106
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7660,6 +7637,38 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1491649314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1491649315}
+  m_Layer: 0
+  m_Name: Collections
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1491649315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491649314}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.72, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 169806839}
+  - {fileID: 321987224}
+  m_Father: {fileID: 2087096250}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1701482677
 GameObject:
   m_ObjectHideFlags: 0
@@ -8651,6 +8660,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Health: 15
   mainBehaviour: {fileID: 0}
 --- !u!4 &225135691913399205
@@ -8890,6 +8901,8 @@ MonoBehaviour:
   DieOnCollision: 0
   Damage: 0
   ProtectionPriority: 4
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   State: 0
   Shields: []
   ChangeDestinationFrequency: 3
@@ -9030,6 +9043,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9049,6 +9064,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9068,6 +9085,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9087,6 +9106,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9106,6 +9127,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9125,6 +9148,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9144,6 +9169,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9163,6 +9190,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9182,6 +9211,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9201,6 +9232,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9220,6 +9253,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -9239,6 +9274,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -10131,6 +10168,8 @@ MonoBehaviour:
   DieOnCollision: 0
   Damage: 0
   ProtectionPriority: 2
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   DroneComponents:
   - {fileID: 1065065417}
   - {fileID: 573707891}
@@ -10509,6 +10548,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -10528,6 +10569,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -10547,6 +10590,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -10566,6 +10611,8 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
+  Type: 0
+  EnemyMaterial: {fileID: 0}
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
