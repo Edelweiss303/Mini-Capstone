@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+
+
     public PlayerShootingBehaviour shootBehaviour;
 
     public GameObject DamageVisionPanel;

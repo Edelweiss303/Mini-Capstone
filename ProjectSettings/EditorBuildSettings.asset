@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Gunner_MainMenu.unity
-    guid: 5a9cd950531b538499fde40238db4cd2
-  - enabled: 1
-    path: Assets/Scenes/Gunner_AppleTV.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Main.unity
+    guid: 80e5e9ec64685ab4694488dad5d14575
   m_configObjects: {}

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.tvOS;
+//using UnityEngine.tvOS;
 
 
 class InputManager : Singleton<InputManager>
 {
     public enum InputMode
     {
-        PC, AppleTV
+        PC, AppleTV, AndroidTablet
     }
     public InputMode inputMode = InputMode.PC;
 
@@ -32,8 +32,8 @@ class InputManager : Singleton<InputManager>
         if (Application.platform == RuntimePlatform.tvOS)
         {
             inputMode = InputMode.AppleTV;
-            Remote.allowExitToHome = false;
-            Remote.touchesEnabled = true;
+            //Remote.allowExitToHome = false;
+            //Remote.touchesEnabled = true;
 
             Vector3 accelerationSnapshot = Input.acceleration;
 
