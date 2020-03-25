@@ -4,6 +4,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyNetwork : MonoBehaviourPunCallbacks
@@ -38,7 +39,6 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
             print("Connecting to server..");
             PhotonNetwork.ConnectUsingSettings();
         }
-
     }
 
     private void Update()
@@ -109,11 +109,14 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
         }
 
         Player[] photonPlayers = PhotonNetwork.PlayerList;
-
+        Debug.Log(photonPlayers.Length);
         foreach (Player photonPlayer in photonPlayers)
         {
             MainMenuButtons.Instance.PlayerListings.PlayerJoinedRoom(photonPlayer);
         }
+
+        MainMenuButtons.Instance.LobbyStartGameBtn.SetActive(PhotonNetwork.IsMasterClient);
+        
     }
 
     public bool CreateRoom(string roomName)
@@ -142,14 +145,14 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
 
     public bool ChooseName(string inName)
     {
-
-        if (nicknames.Contains(inName))
+        string name = inName + "_" + Random.Range(1, 1000);
+        if (nicknames.Contains(name))
         {
             return false;
         }
-        nicknames.Add(inName);
-        PhotonNetwork.NickName = inName;
-        MainMenuButtons.Instance.AcceptName(inName);
+        nicknames.Add(name);
+        PhotonNetwork.NickName = name;
+        MainMenuButtons.Instance.AcceptName(name);
         
         return true;
     }
@@ -158,7 +161,7 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
 
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        PhotonNetwork.LeaveRoom();
+        
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -180,7 +183,7 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
         MainMenuButtons.Instance.PlayerListings.PlayerLeftRoom(otherPlayer);
     }
 
-    private void SendEvents()
+    public void SendEvents()
     {
         object newEventMessage;
 
@@ -192,6 +195,7 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
 
         foreach(string queuedEvent in FromClientQueue)
         {
+            Debug.Log(queuedEvent);
             newEventMessage = PhotonNetwork.NickName + ":" + queuedEvent;
             PhotonNetwork.RaiseEvent(LOBBY_FROMCLIENT_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
         }
@@ -205,7 +209,6 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
         BroadcastQueue.Clear();
         FromClientQueue.Clear();
         ToClientQueue.Clear();
-
     }
 
     private void NetworkingClient_EventReceived(EventData obj)
@@ -228,6 +231,12 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
                     case ("PlayerJoinUpdateCircles"):
                         MainMenuButtons.Instance.UpdatePlayerRoleCircles(messageSegments[2], messageSegments[4], messageSegments[6]);
                         break;
+                    case ("TryPlayerLoadLevel"):
+                        if (messageSegments[2] == PhotonNetwork.NickName)
+                        {
+                            LoadLevel(messageSegments[1]);
+                        }
+                        break;
                         
                 }
 
@@ -240,6 +249,7 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
                     switch (messageSegments[1])
                     {
                         case ("TrySelectPlayerRole"):
+                            
                             if (MainMenuButtons.Instance.TrySelectingRole(messageSegments[2], messageSegments[0]))
                             {
                                 ToClientQueue.Add(messageSegments[0] + ":SuccessfulSelect:" + messageSegments[2]);
@@ -274,5 +284,10 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
 
                 break;
         }
+    }
+
+    public void LoadLevel(string levelName)
+    {
+        SceneManager.LoadScene(levelName, LoadSceneMode.Single);
     }
 }

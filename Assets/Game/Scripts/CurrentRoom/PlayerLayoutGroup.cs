@@ -3,6 +3,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerLayoutGroup : MonoBehaviourPunCallbacks
 {
@@ -17,6 +18,21 @@ public class PlayerLayoutGroup : MonoBehaviourPunCallbacks
     private List<PlayerListing> PlayerListings
     {
         get { return _playerListings; }
+    }
+
+    private void Update()
+    {
+        List<Player> allPlayers = PhotonNetwork.PlayerList.ToList();
+
+
+        for(int i = PlayerListings.Count -1; i >= 0; i--)
+        {
+            if (allPlayers.Where(p => p == PlayerListings[i].PhotonPlayer).ToList().Count != 1)
+            {
+                Destroy(PlayerListings[i].gameObject);
+                PlayerListings.RemoveAt(i);
+            }
+        }
     }
 
     public void PlayerJoinedRoom(Player photonPlayer)
@@ -35,8 +51,6 @@ public class PlayerLayoutGroup : MonoBehaviourPunCallbacks
         playerListing.ApplyPhotonPlayer(photonPlayer);
 
         PlayerListings.Add(playerListing);
-
-
     }
 
     public void PlayerLeftRoom(Player photonPlayer)

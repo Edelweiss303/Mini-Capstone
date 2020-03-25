@@ -2,16 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour
 {
-    public GameObject FrontPageObject, MultiplayerPageObject, LobbyPageObject;
+    public GameObject FrontPageObject, MultiplayerPageObject, LobbyPageObject, SettingsPageObject;
     public GameObject ChooseNamePopupObject, CreateGamePopupObject, JoinGamePopupObject;
     public static MainMenuButtons Instance;
     public Text CreateRoomName, JoinRoomName, NameEnterText;
     public Text GunnerPlayerText, TechnicianPlayerText, PilotPlayerText;
     public GameObject GunnerPlayerTextBG, TechnicianPlayerTextBG, PilotPlayerTextBG;
+    public GameObject LobbyStartGameBtn;
     public LoginInformation CreateGameLoginInfo, JoinGameLoginInfo;
     public PlayerLayoutGroup PlayerListings;
     public bool IsRoleSelected = false;
@@ -21,6 +23,7 @@ public class MainMenuButtons : MonoBehaviour
     public Text DebugText;
     private void Start()
     {
+        hasName = false;
         if (Instance == null)
         {
             Instance = this;
@@ -30,6 +33,11 @@ public class MainMenuButtons : MonoBehaviour
     private void Update()
     {
         DebugText.text = IsRoleSelected.ToString();
+    }
+
+    public void MainPage_TutorialClick()
+    {
+        LobbyNetwork.Instance.LoadLevel("Tutorial_Placeholder");
     }
 
     public void ConnectedToServer()
@@ -43,6 +51,18 @@ public class MainMenuButtons : MonoBehaviour
         MultiplayerPageObject.SetActive(true);
     }
 
+    public void MainPage_SettingsClick()
+    {
+        SettingsPageObject.SetActive(true);
+        FrontPageObject.SetActive(false);
+    }
+
+    public void MainPage_ExitClick()
+    {
+        //Exit the game
+        Application.Quit();
+    }
+
     public void JoinedLobby()
     {
         if (!hasName)
@@ -51,16 +71,14 @@ public class MainMenuButtons : MonoBehaviour
             if (temp != "")
             {
                 hasName = true;
-                PhotonNetwork.NickName = temp + ":" + Random.Range(0,1000);
+                PhotonNetwork.NickName = temp + "_" + Random.Range(0,1000);
                 FrontPageObject.SetActive(true);
             }
             else
             {
                 ChooseNamePopupObject.SetActive(true);
             }
-            
         }
-
     }
 
     public void JoinedRoom()
@@ -68,7 +86,6 @@ public class MainMenuButtons : MonoBehaviour
         LobbyPageObject.SetActive(true);
         JoinGamePopupObject.SetActive(false);
         MultiplayerPageObject.SetActive(false);
-        //Update the player listing
     }
 
     public void MultiplayerPage_CreateGameOnClick()
@@ -113,23 +130,69 @@ public class MainMenuButtons : MonoBehaviour
 
     public void JoinGamePopup_CancelClick()
     {
-        
         JoinGamePopupObject.SetActive(false);
     }
 
     public void LobbyPage_StartGameClick()
     {
+        string loadingLevel = "";
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //Send load messages to other players
+            if(GunnerPlayerText.text != "")
+            {
+                if(GunnerPlayerText.text == PhotonNetwork.NickName)
+                {
+                    loadingLevel = "Gunner_Placeholder";
+                }
+                else
+                {
+                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Gunner_Placeholder:" + GunnerPlayerText.text);
+                }
+            }
 
+            if (PilotPlayerText.text != "")
+            {
+                if (PilotPlayerText.text == PhotonNetwork.NickName)
+                {
+                    loadingLevel = "Pilot_Placeholder";
+                }
+                else
+                {
+                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Pilot_Placeholder:" + PilotPlayerText.text);
+                }
+            }
+
+            if (TechnicianPlayerText.text != "")
+            {
+                if (TechnicianPlayerText.text == PhotonNetwork.NickName)
+                {
+                    loadingLevel = "Technician_Placeholder";
+                }
+                else
+                {
+                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Technician_Placeholder:" + TechnicianPlayerText.text);
+                }
+            }
+
+            if(loadingLevel != "")
+            {
+                LobbyNetwork.Instance.LoadLevel(loadingLevel);
+            }
+        }
     }
 
     public void AcceptName(string name)
     {
         if(PhotonNetwork.NickName == name)
         {
-            FrontPageObject.SetActive(true);
             ChooseNamePopupObject.SetActive(false);
+            if(!SettingsPageObject.activeSelf && !FrontPageObject.activeSelf)
+            {
+                FrontPageObject.SetActive(true);
+            }
             hasName = true;
-            PlayerPrefs.SetString("PlayerName", name.Split(';')[0]);
+            PlayerPrefs.SetString("PlayerName", name.Split('_')[0]);
         }
     }
 
@@ -199,6 +262,7 @@ public class MainMenuButtons : MonoBehaviour
                 return false;
             }
         }
+
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -302,8 +366,26 @@ public class MainMenuButtons : MonoBehaviour
                 LobbyNetwork.Instance.BroadcastQueue.Add("DeselectPlayerRole:Pilot");
             }
         }
+        IsRoleSelected = false;
+        LobbyNetwork.Instance.SendEvents();
         LobbyPageObject.SetActive(false);
         LobbyNetwork.Instance.LeaveRoom();
+    }
+
+    public void SettingsPage_VolumeChanged(float newVolume)
+    {
+        AudioManager.Instance.SetGameVolume(newVolume);
+    }
+
+    public void SettingsPage_ChangeNameClick()
+    {
+        ChooseNamePopupObject.SetActive(true);
+    }
+
+    public void SettingsPage_BackClick()
+    {
+        SettingsPageObject.SetActive(false);
+        FrontPageObject.SetActive(true);
     }
 
     public void LeftLobby()
@@ -340,7 +422,6 @@ public class MainMenuButtons : MonoBehaviour
             default:
                 return;
         }
-
         PlayerRoleMapping[roleType] = playerName;
     }
 
@@ -363,7 +444,6 @@ public class MainMenuButtons : MonoBehaviour
             default:
                 return;
         }
-
         PlayerRoleMapping[roleType] = "";
     }
 

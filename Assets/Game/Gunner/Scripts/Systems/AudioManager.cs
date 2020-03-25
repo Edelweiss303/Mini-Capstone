@@ -35,4 +35,12 @@ public class AudioManager : Singleton<AudioManager>
         selectedSound.source.Play();
 
     }
+
+    public void SetGameVolume(float newVolume)
+    {
+        foreach(Sound sound in Sounds)
+        {
+            sound.source.volume = newVolume * sound.volume;
+        }
+    }
 }
