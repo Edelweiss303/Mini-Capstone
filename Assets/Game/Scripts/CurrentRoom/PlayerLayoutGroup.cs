@@ -59,7 +59,11 @@ public class PlayerLayoutGroup : MonoBehaviourPunCallbacks
 
         if(index != -1)
         {
-            Destroy(PlayerListings[index].gameObject);
+            if (PlayerListings[index].gameObject)
+            {
+                Destroy(PlayerListings[index].gameObject);
+            }
+            
             PlayerListings.RemoveAt(index);
         }
     }
