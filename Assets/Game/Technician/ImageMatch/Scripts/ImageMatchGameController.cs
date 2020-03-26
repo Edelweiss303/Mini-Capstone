@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ImageMatchGameController : MonoBehaviour
+public class ImageMatchGameController : Singleton<ImageMatchGameController>
 {
-    public static ImageMatchGameController Instance;
-
     public enum ImageColour
     {
         red, green, blue, orange
@@ -22,24 +20,16 @@ public class ImageMatchGameController : MonoBehaviour
     public List<IconBehaviour> IconGrid;
     private IconBehaviour iconToMatch;
     public GameObject IconPrefab;
-    private bool initialized = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        initialized = false;
-
         //Load all of the images into the image maps
         bgImages = getIconImages("Base");
         mgImages = getIconImages("Midground");
         fgImages = getIconImages("Foreground");
 
-        startNewGrid(IconSize, IconColumns, IconRows);
-        resetGrid();
+        resetGame();
     }
 
     Dictionary<ImageColour, List<Sprite>> getIconImages(string folderName)
@@ -183,5 +173,11 @@ public class ImageMatchGameController : MonoBehaviour
                                     iconToMatch.FGName + ":"  + iconToMatch.ForegroundOrientation.ToString() + ":" + iconToMatch.FGColour;
         GameNetwork.Instance.ToPlayerQueue.Add(iconSetupMessage);
 
+    }
+
+    public void resetGame()
+    {
+        startNewGrid(IconSize, IconColumns, IconRows);
+        resetGrid();
     }
 }

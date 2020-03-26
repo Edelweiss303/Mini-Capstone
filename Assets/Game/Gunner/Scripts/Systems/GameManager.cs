@@ -62,8 +62,6 @@ public class GameManager : Singleton<GameManager>
                 PlayerObject = FindObjectOfType<PlayerBehaviour>().gameObject;
                 break;
         }
-
-
     }
 
     public void Update()

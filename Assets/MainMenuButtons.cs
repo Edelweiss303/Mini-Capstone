@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class MainMenuButtons : MonoBehaviour
 {
     public GameObject FrontPageObject, MultiplayerPageObject, LobbyPageObject, SettingsPageObject;
-    public GameObject ChooseNamePopupObject, CreateGamePopupObject, JoinGamePopupObject;
+    public GameObject ChooseNamePopupObject, CreateGamePopupObject, JoinGamePopupObject, InputDetectionPopupObject;
     public static MainMenuButtons Instance;
     public Text CreateRoomName, JoinRoomName, NameEnterText;
     public Text GunnerPlayerText, TechnicianPlayerText, PilotPlayerText;
@@ -32,12 +32,34 @@ public class MainMenuButtons : MonoBehaviour
 
     private void Update()
     {
-        DebugText.text = IsRoleSelected.ToString();
+        //DebugText.text = IsRoleSelected.ToString();
     }
 
-    public void MainPage_TutorialClick()
+    public void InputTypeAccepted()
     {
-        LobbyNetwork.Instance.LoadLevel("Tutorial_Placeholder");
+        InputDetectionPopupObject.SetActive(false);
+        DebugText.text = InputManager.Instance.inputMode.ToString();
+        PhotonNetwork.NickName = InputManager.Instance.inputMode.ToString() + "_" + Random.Range(0, 1000);
+        FrontPageObject.SetActive(true);
+        //if (!hasName)
+        //{
+        //    string temp = PlayerPrefs.GetString("PlayerName");
+        //    if (temp != "")
+        //    {
+        //        hasName = true;
+        //        PhotonNetwork.NickName = temp + "_" + Random.Range(0, 1000);
+        //        FrontPageObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        ChooseNamePopupObject.SetActive(true);
+        //    }
+        //}
+    }
+
+    public void MainPage_AIDemoClick()
+    {
+        LobbyNetwork.Instance.LoadLevel("AI_Demo_Scene");
     }
 
     public void ConnectedToServer()
@@ -65,19 +87,9 @@ public class MainMenuButtons : MonoBehaviour
 
     public void JoinedLobby()
     {
-        if (!hasName)
+        if(InputManager.Instance.inputMode == InputManager.InputMode.Null)
         {
-            string temp = PlayerPrefs.GetString("PlayerName");
-            if (temp != "")
-            {
-                hasName = true;
-                PhotonNetwork.NickName = temp + "_" + Random.Range(0,1000);
-                FrontPageObject.SetActive(true);
-            }
-            else
-            {
-                ChooseNamePopupObject.SetActive(true);
-            }
+            InputDetectionPopupObject.SetActive(true);
         }
     }
 
@@ -90,12 +102,16 @@ public class MainMenuButtons : MonoBehaviour
 
     public void MultiplayerPage_CreateGameOnClick()
     {
-        CreateGamePopupObject.SetActive(true);
+        //CreateGamePopupObject.SetActive(true);
+        LobbyNetwork.Instance.CreateRoom("TestRoom");
+        CreateGamePopupObject.SetActive(false);
+        MultiplayerPageObject.SetActive(false);
     }
 
     public void MultiplayerPage_JoinGameOnClick()
     {
-        JoinGamePopupObject.SetActive(true);
+        LobbyNetwork.Instance.JoinRoom("TestRoom");
+        //JoinGamePopupObject.SetActive(true);
     }
 
     public void MultiplayerPage_BackClick()

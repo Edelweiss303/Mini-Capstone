@@ -11,9 +11,9 @@ class InputManager : Singleton<InputManager>
 {
     public enum InputMode
     {
-        PC, AppleTV, AndroidTablet
+        PC, AppleTV, AndroidTablet, Null
     }
-    public InputMode inputMode = InputMode.PC;
+    public InputMode inputMode = InputMode.Null;
 
     // public Vector3 CursorLocation = Vector3.zero;
     public Vector3 CursorMovement = Vector3.zero;
@@ -62,7 +62,7 @@ class InputManager : Singleton<InputManager>
         {
 
             //CursorLocation = Input.mousePosition;
-            //FireInput = Input.GetMouseButtonDown(0);
+            FireInput = Input.GetMouseButtonDown(0);
             CursorMovement = Input.mousePosition - lastCursorPosition;
 
             //if (CursorMovement.sqrMagnitude > 1)
@@ -71,7 +71,7 @@ class InputManager : Singleton<InputManager>
             //}
 
             lastCursorPosition = Input.mousePosition;
-            FireInput = Input.GetKeyDown(KeyCode.Space);
+            //FireInput = Input.GetKeyDown(KeyCode.Space);
             Escape = Input.GetKeyDown(KeyCode.Escape);
 
             if (Reloading)
