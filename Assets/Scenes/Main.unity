@@ -3282,6 +3282,9 @@ MonoBehaviour:
   PlayerListings: {fileID: 273272007}
   IsRoleSelected: 0
   DebugText: {fileID: 129965245}
+  AIDemoBtn: {fileID: 518726896}
+  CreateGameBtn: {fileID: 2135501651}
+  LobbyBackBtn: {fileID: 1155599506}
 --- !u!1 &666764760
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,7 +3958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 518726896}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &856253438

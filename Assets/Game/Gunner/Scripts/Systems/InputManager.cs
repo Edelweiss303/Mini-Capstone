@@ -31,7 +31,7 @@ class InputManager : Singleton<InputManager>
     {
         if (Application.platform == RuntimePlatform.tvOS)
         {
-            inputMode = InputMode.AppleTV;
+            //inputMode = InputMode.AppleTV;
             //Remote.allowExitToHome = false;
             //Remote.touchesEnabled = true;
 
@@ -45,7 +45,7 @@ class InputManager : Singleton<InputManager>
         }
         else
         {
-            inputMode = InputMode.PC;
+            //inputMode = InputMode.PC;
             lastCursorPosition = Input.mousePosition;
         }
             

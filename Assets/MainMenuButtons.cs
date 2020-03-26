@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -19,8 +20,9 @@ public class MainMenuButtons : MonoBehaviour
     public bool IsRoleSelected = false;
     private bool hasName = false;
     public Dictionary<string, string> PlayerRoleMapping = new Dictionary<string, string>() { { "Gunner", "" }, { "Pilot", "" }, { "Technician", "" } };
-
     public Text DebugText;
+
+    public GameObject AIDemoBtn, CreateGameBtn, LobbyBackBtn;
     private void Start()
     {
         hasName = false;
@@ -41,6 +43,7 @@ public class MainMenuButtons : MonoBehaviour
         DebugText.text = InputManager.Instance.inputMode.ToString();
         PhotonNetwork.NickName = InputManager.Instance.inputMode.ToString() + "_" + Random.Range(0, 1000);
         FrontPageObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(AIDemoBtn);
         //if (!hasName)
         //{
         //    string temp = PlayerPrefs.GetString("PlayerName");
@@ -71,6 +74,7 @@ public class MainMenuButtons : MonoBehaviour
     {
         FrontPageObject.SetActive(false);
         MultiplayerPageObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(CreateGameBtn);
     }
 
     public void MainPage_SettingsClick()
@@ -96,6 +100,7 @@ public class MainMenuButtons : MonoBehaviour
     public void JoinedRoom()
     {
         LobbyPageObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(LobbyBackBtn);
         JoinGamePopupObject.SetActive(false);
         MultiplayerPageObject.SetActive(false);
     }
@@ -118,6 +123,8 @@ public class MainMenuButtons : MonoBehaviour
     {
         FrontPageObject.SetActive(true);
         MultiplayerPageObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(AIDemoBtn);
+
     }
 
     public void CreateGamePopup_CreateClick()
@@ -386,6 +393,7 @@ public class MainMenuButtons : MonoBehaviour
         LobbyNetwork.Instance.SendEvents();
         LobbyPageObject.SetActive(false);
         LobbyNetwork.Instance.LeaveRoom();
+        EventSystem.current.SetSelectedGameObject(CreateGameBtn);
     }
 
     public void SettingsPage_VolumeChanged(float newVolume)
