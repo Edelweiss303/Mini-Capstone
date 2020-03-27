@@ -1385,7 +1385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db58a78669fa36643bd089c03a5bd77f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IconSize: 64
+  IconSize: 100
   IconColumns: 10
   IconRows: 10
   IconGrid: []

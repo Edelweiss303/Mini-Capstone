@@ -8,7 +8,7 @@ public class TechnicianController : Singleton<TechnicianController>
     private ImageMatchGameController imageGameController;
     private LockRotationGameController lockGameController;
 
-    private bool initialized = false;
+    private bool Setup = false;
 
     private void Start()
     {
@@ -18,11 +18,11 @@ public class TechnicianController : Singleton<TechnicianController>
 
     private void Update()
     {
-        if (!initialized)
+        if (!Setup)
         {
             ImageMatchControllerObject.SetActive(false);
             LockRotationControllerObject.SetActive(false);
-            initialized = true;
+            Setup = true;
         }
     }
 

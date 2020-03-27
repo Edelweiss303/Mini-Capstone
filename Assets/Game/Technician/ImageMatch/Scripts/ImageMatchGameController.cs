@@ -179,5 +179,6 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
     {
         startNewGrid(IconSize, IconColumns, IconRows);
         resetGrid();
+        selectIconToMatch();
     }
 }
