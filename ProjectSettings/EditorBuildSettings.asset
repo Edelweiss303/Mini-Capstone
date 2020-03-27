@@ -9,14 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 80e5e9ec64685ab4694488dad5d14575
   - enabled: 1
-    path: Assets/Scenes/AI_Demo_Scene.unity
-    guid: 0dde1f79361ca1945b7ac63bcd4d5572
-  - enabled: 1
     path: Assets/Scenes/Placeholders/Gunner_Placeholder.unity
     guid: d286b2adbd5caee4287bf78f57522a37
-  - enabled: 1
-    path: Assets/Scenes/Placeholders/Pilot_Placeholder.unity
-    guid: b55c5f475aa1f6846969e9fc95e6b374
   - enabled: 1
     path: Assets/Scenes/Placeholders/Technician_Placeholder.unity
     guid: 88a2f568453027e438df6979d41e97cd

@@ -20,7 +20,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public AudioSource TakeDamageAudioSource;
     public HealthBarBehaviour healthBarBehaviour;
-
+    public GameObject Camera;
     private float damageVisionEffectTimer = 0.0f;
     private float currentHealth;
 
@@ -39,6 +39,8 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Camera.transform.position = transform.position;
+
         if (Alive)
         {
             PlayerUpdate();
