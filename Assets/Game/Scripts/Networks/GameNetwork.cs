@@ -72,6 +72,9 @@ public class GameNetwork : MonoBehaviour
                 messageSegments = datas.ToString().Split(':');
                 switch (messageSegments[0])
                 {
+                    case "TechnicianMessengerReset":
+                        TechnicianMessenger.Instance.ResetMessenger();
+                        break;
                     default:
                         break;
                 }
@@ -87,6 +90,9 @@ public class GameNetwork : MonoBehaviour
                     {
                         case "ChooseIcon":
                             TechnicianMessenger.Instance.UpdateIcon(messageSegments);
+                            break;
+                        case "SetLockInvalids":
+                            TechnicianMessenger.Instance.UpdateLockMessage(messageSegments[2]);
                             break;
                         default:
                             break;

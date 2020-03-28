@@ -45,6 +45,7 @@ public class TechnicianController : Singleton<TechnicianController>
     {
         FrontPageObject.SetActive(true);
         ImageMatchControllerObject.SetActive(false);
+        GameNetwork.Instance.BroadcastMessage("TechnicianMessengerReset");
         
     }
 
@@ -52,5 +53,6 @@ public class TechnicianController : Singleton<TechnicianController>
     {
         FrontPageObject.SetActive(true);
         LockRotationControllerObject.SetActive(false);
+        GameNetwork.Instance.BroadcastMessage("TechnicianMessengerReset");
     }
 }

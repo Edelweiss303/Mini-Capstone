@@ -150,22 +150,22 @@ public class CircleLock : MonoBehaviour
                         remainingChars.Remove(key.CodeText.text[0].ToString());
                         if(invalidsChooser == 0)
                         {
-                            invalidList1.Add(key.CodeText.text[0].ToString() + ", ");
+                            invalidList1.Add(key.CodeText.text[0].ToString() + System.Environment.NewLine);
                         }
                         else
                         {
-                            invalidList2.Add(key.CodeText.text[0].ToString() + ", ");
+                            invalidList2.Add(key.CodeText.text[0].ToString() + System.Environment.NewLine);
                         }
                         break;
                     case 1:
                         remainingNums.Remove(key.CodeText.text[1].ToString());
                         if (invalidsChooser == 0)
                         {
-                            invalidList1.Add(key.CodeText.text[1].ToString() + ", ");
+                            invalidList1.Add(key.CodeText.text[1].ToString() + System.Environment.NewLine);
                         }
                         else
                         {
-                            invalidList2.Add(key.CodeText.text[1].ToString() + ", ");
+                            invalidList2.Add(key.CodeText.text[1].ToString() + System.Environment.NewLine);
                         }
                         break;
                     case 2:
@@ -173,11 +173,11 @@ public class CircleLock : MonoBehaviour
                         remainingCols.Remove(currentKeyColour);
                         if (invalidsChooser == 0)
                         {
-                            invalidList1.Add(currentKeyColour.ToString() + ", ");
+                            invalidList1.Add(currentKeyColour.ToString() + System.Environment.NewLine);
                         }
                         else
                         {
-                            invalidList2.Add(currentKeyColour.ToString() + ", ");
+                            invalidList2.Add(currentKeyColour.ToString() + System.Environment.NewLine);
                         }
                         break;
                 }
@@ -190,17 +190,17 @@ public class CircleLock : MonoBehaviour
         {
             case 0:
                 currentIndex = Random.Range(0, remainingChars.Count);
-                invalidList1.Add(remainingChars[currentIndex] + ", ");
+                invalidList1.Add(remainingChars[currentIndex] + System.Environment.NewLine);
                 remainingChars.RemoveAt(currentIndex);
                 break;
             case 1:
                 currentIndex = Random.Range(0, remainingNums.Count);
-                invalidList1.Add(remainingNums[currentIndex] + ", ");
+                invalidList1.Add(remainingNums[currentIndex] + System.Environment.NewLine);
                 remainingNums.RemoveAt(currentIndex);
                 break;
             case 2:
                 currentIndex = Random.Range(0, remainingCols.Count);
-                invalidList2.Add(remainingCols[currentIndex].ToString() + ", ");
+                invalidList2.Add(remainingCols[currentIndex].ToString() + System.Environment.NewLine);
                 remainingCols.RemoveAt(currentIndex);
                 break;
         }
@@ -211,17 +211,17 @@ public class CircleLock : MonoBehaviour
         {
             case 0:
                 currentIndex = Random.Range(0, remainingChars.Count);
-                invalidList2.Add(remainingChars[currentIndex] + ", ");
+                invalidList2.Add(remainingChars[currentIndex] + System.Environment.NewLine);
                 remainingChars.RemoveAt(currentIndex);
                 break;
             case 1:
                 currentIndex = Random.Range(0, remainingNums.Count);
-                invalidList2.Add(remainingNums[currentIndex] + ", ");
+                invalidList2.Add(remainingNums[currentIndex] + System.Environment.NewLine);
                 remainingNums.RemoveAt(currentIndex);
                 break;
             case 2:
                 currentIndex = Random.Range(0, remainingCols.Count);
-                invalidList2.Add(remainingCols[currentIndex].ToString() + ", ");
+                invalidList2.Add(remainingCols[currentIndex].ToString() + System.Environment.NewLine);
                 remainingCols.RemoveAt(currentIndex);
                 break;
         }

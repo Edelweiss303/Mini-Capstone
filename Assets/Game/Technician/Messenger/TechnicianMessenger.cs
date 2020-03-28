@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using static ImageMatchGameController;
 
 public class TechnicianMessenger : MonoBehaviour
 {
     public static TechnicianMessenger Instance;
     public IconBehaviour IconMatchImage;
-
+    public Text LockMessageText;
     private Dictionary<ImageColour, Dictionary<string,Sprite>> bgImages, mgImages, fgImages = new Dictionary<ImageColour, Dictionary<string,Sprite>>();
 
     // Start is called before the first frame update
@@ -27,6 +28,9 @@ public class TechnicianMessenger : MonoBehaviour
 
     public void UpdateIcon(string[] iconDetailsMessage)
     {
+        ResetMessenger();
+        IconMatchImage.gameObject.SetActive(true);
+
         IconMatchImage.MidgroundImage.transform.rotation = Quaternion.identity;
         IconMatchImage.ForegroundImage.transform.rotation = Quaternion.identity;
 
@@ -43,6 +47,19 @@ public class TechnicianMessenger : MonoBehaviour
 
         IconMatchImage.MidgroundImage.transform.Rotate(0, 0, IconMatchImage.MidgroundOrientation);
         IconMatchImage.ForegroundImage.transform.Rotate(0, 0, IconMatchImage.ForegroundOrientation);
+    }
+
+    public void UpdateLockMessage(string lockMessage)
+    {
+        ResetMessenger();
+        LockMessageText.gameObject.SetActive(true);
+        LockMessageText.text = lockMessage;
+    }
+
+    public void ResetMessenger()
+    {
+        IconMatchImage.gameObject.SetActive(false);
+        LockMessageText.gameObject.SetActive(false);
     }
 
     private ImageMatchGameController.ImageColour getColourFromCode(string code)
@@ -84,4 +101,6 @@ public class TechnicianMessenger : MonoBehaviour
 
         return iconImages;
     }
+
+
 }
