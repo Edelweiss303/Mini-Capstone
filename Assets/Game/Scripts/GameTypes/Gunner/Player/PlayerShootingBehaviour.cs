@@ -10,17 +10,26 @@ public class PlayerShootingBehaviour : MonoBehaviour
     public Camera GameCamera;
 
     public AmmoBarBehaviour ammoBarBehaviour;
-    public float MaxAmmo = 24.0f;
+    public int MaxAmmo = 24;
     public float ReloadingTime = 1.5f;
     public GameObject BulletImpactEffectPrefab;
     public AudioSource ShotAudioSource, ReloadAudioSource;
     public float Damage = 1.0f;
-    public float AutoAimStrength = 3.0f;
+    public float DeadZone = 0.1f;
     public float AutoAimWeight = 0.75f;
     public float CrosshairSpeed = 500.0f;
+    public float MaximumAutoAimAdjustment = 3.0f;
+
+    private Vector3 originalCrosshairPositionReference;
+    private Vector3 totalAutoAimMovement;
 
     private GameObject effectsContainer;
-    private float currentAmmo;
+
+    private GunnerController.EnemyType currentEnemyType;
+    private Dictionary<GunnerController.EnemyType, int> ammoTypes = new Dictionary<GunnerController.EnemyType, int>();
+    private List<GunnerController.EnemyType> enemyTypes = new List<GunnerController.EnemyType>()
+                                                        { GunnerController.EnemyType.A, GunnerController.EnemyType.B, GunnerController.EnemyType.C };
+    private int currentEnemyIndex;
     private float reloadingTimer;
     private bool isReloading = false;
     private LineRenderer currentAimTrajectory;
@@ -29,64 +38,103 @@ public class PlayerShootingBehaviour : MonoBehaviour
     {
         effectsContainer = GunnerController.Instance.EffectsContainer;
         ammoBarBehaviour = FindObjectOfType<AmmoBarBehaviour>();
-        currentAmmo = MaxAmmo;
+        currentEnemyType = GunnerController.EnemyType.A;
+        currentEnemyIndex = 0;
+        ammoTypes.Add(GunnerController.EnemyType.A, MaxAmmo);
+        ammoTypes.Add(GunnerController.EnemyType.B, MaxAmmo);
+        ammoTypes.Add(GunnerController.EnemyType.C, MaxAmmo);
+
         currentAimTrajectory = GetComponent<LineRenderer>();
+        originalCrosshairPositionReference = Crosshairs.transform.position;
+        totalAutoAimMovement = originalCrosshairPositionReference;
+        ammoBarBehaviour.ChangeAmmoType(currentEnemyType);
+        ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyType]);
     }
 
     public void ShootUpdate()
     {
-        RaycastHit hit;
-        Ray rayFromCursor;
-        Vector3 autoAimDirection = Vector3.zero;
-        EnemyBase eBehaviour = null;
         if (Crosshairs)
         {
-            rayFromCursor = GameCamera.ScreenPointToRay(Crosshairs.transform.position);
-
-            if (Physics.Raycast(rayFromCursor, out hit, Range))
+            Shoot();
+            if (InputManager.Instance.DoubleCenterTap)
             {
-                Ray line = new Ray(rayFromCursor.origin, hit.point - rayFromCursor.origin);
-                //eBehaviour = EnemiesManager.Instance.GetClosestEnemy(line, AutoAimRange, out autoAimDirection);
-
-                if (InputManager.Instance.FireInput)
+                Crosshairs.transform.position = originalCrosshairPositionReference;
+            }
+            if (InputManager.Instance.Swiping)
+            {
+                currentEnemyIndex++;
+                if(currentEnemyIndex >= enemyTypes.Count)
                 {
-                    if (currentAmmo > 0)
+                    currentEnemyIndex = 0;
+                }
+                currentEnemyType = enemyTypes[currentEnemyIndex];
+                ammoBarBehaviour.ChangeAmmoType(currentEnemyType);
+                ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyType]);
+            }
+            MoveCursor();
+        }
+        Reload();
+
+    }
+
+    private void Shoot()
+    {
+        RaycastHit hit;
+        Ray rayFromCursor = GameCamera.ScreenPointToRay(Crosshairs.transform.position);
+
+        if (Physics.Raycast(rayFromCursor, out hit, Range))
+        {
+            Ray line = new Ray(rayFromCursor.origin, hit.point - rayFromCursor.origin);
+
+            if (InputManager.Instance.FireInput)
+            {
+                if (ammoTypes[currentEnemyType] > 0)
+                {
+                    ammoTypes[currentEnemyType]--;
+                    if (ammoBarBehaviour)
                     {
-                        currentAmmo--;
-                        if (ammoBarBehaviour)
-                        {
-                            ammoBarBehaviour.SetAmmo(currentAmmo);
-                        }
-
-                        EnemyBase hitEnemy;
-
-                        if (ShotAudioSource)
-                        {
-                            ShotAudioSource.PlayOneShot(ShotAudioSource.clip);
-                        }
-                        GameObject effect = Instantiate(BulletImpactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-                        if (effectsContainer)
-                        {
-                            effect.transform.parent = effectsContainer.transform;
-                        }
-
-                        hitEnemy = hit.collider.GetComponent<EnemyBase>();
-
-                        if (hitEnemy != null && hitEnemy.IsAlive())
-                        {
-                            hitEnemy.TakeDamage(Damage);
-                        }
+                        ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyType]);
                     }
 
+                    EnemyBase hitEnemy;
+
+                    if (ShotAudioSource)
+                    {
+                        ShotAudioSource.PlayOneShot(ShotAudioSource.clip);
+                    }
+                    GameObject effect = Instantiate(BulletImpactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+                    if (effectsContainer)
+                    {
+                        effect.transform.parent = effectsContainer.transform;
+                    }
+
+                    hitEnemy = hit.collider.GetComponent<EnemyBase>();
+
+                    if (hitEnemy != null && hitEnemy.IsAlive())
+                    {
+                        hitEnemy.TakeDamage(Damage);
+                    }
                 }
             }
+        }
 
-            Vector3 movementToApply = new Vector3(InputManager.Instance.CursorMovement.x * Screen.width * CrosshairSpeed, InputManager.Instance.CursorMovement.y * Screen.height * CrosshairSpeed, 0);
+
+    }
+
+    private void MoveCursor()
+    {
+        Vector3 movementToApply = new Vector3(InputManager.Instance.CursorMovement.x * Screen.width * CrosshairSpeed, InputManager.Instance.CursorMovement.y * Screen.height * CrosshairSpeed, 0);
+        if (movementToApply.magnitude < DeadZone)
+        {
+            movementToApply = Vector3.zero;
+        }
+        else
+        {
             if (Crosshairs.transform.position.x > Screen.width && movementToApply.x > 0)
             {
                 movementToApply.x = 0;
             }
-            else if(Crosshairs.transform.position.x < 0 && movementToApply.x < 0)
+            else if (Crosshairs.transform.position.x < 0 && movementToApply.x < 0)
             {
                 movementToApply.x = 0;
             }
@@ -99,63 +147,37 @@ public class PlayerShootingBehaviour : MonoBehaviour
             {
                 movementToApply.y = 0;
             }
-
-            Crosshairs.transform.position += movementToApply * Time.deltaTime * CrosshairSpeed;
-
-            Vector3 adjustment = Vector3.zero;
-            if(Crosshairs.transform.position.x < 0)
-            {
-                adjustment.x += 10;
-            }
-            else if(Crosshairs.transform.position.x > Screen.width)
-            {
-                adjustment.x -= 10;
-            }
-
-            if(Crosshairs.transform.position.y < 0)
-            {
-                adjustment.y += 10;
-            }
-            else if(Crosshairs.transform.position.y > Screen.height)
-            {
-                adjustment.y -= 10;
-            }
-
-            Crosshairs.transform.position += adjustment;
-
-            if (eBehaviour)
-            {
-                //Do a ray to the enemy?
-                Vector3 autoAimTarget = Crosshairs.transform.position + autoAimDirection * AutoAimStrength;
-                Crosshairs.transform.position = Vector3.Lerp(Crosshairs.transform.position, Crosshairs.transform.position, 0.2f);
-                Crosshairs.transform.position = Vector3.Lerp(Crosshairs.transform.position, autoAimTarget, AutoAimWeight);
-            }
         }
 
-        if ((InputManager.Instance.Reloading && !isReloading) || currentAmmo == 0)
+        Crosshairs.transform.position += movementToApply * Time.deltaTime * CrosshairSpeed;
+    }
+
+    private void Reload()
+    {
+        if (ammoTypes[currentEnemyType] == 0)
         {
             isReloading = true;
-            currentAmmo = 0;
+            ammoTypes[currentEnemyType] = 0;
             ammoBarBehaviour.SetAmmo(0);
         }
-        if(isReloading)
+        if (isReloading)
         {
             reloadingTimer += Time.deltaTime;
-            if (reloadingTimer > ReloadingTime && !InputManager.Instance.Reloading)
+            if (reloadingTimer > ReloadingTime)
             {
                 if (ReloadAudioSource)
                 {
                     ReloadAudioSource.PlayOneShot(ReloadAudioSource.clip);
                 }
 
-                currentAmmo = MaxAmmo;
+                ammoTypes[currentEnemyType] = MaxAmmo;
                 reloadingTimer = 0;
                 isReloading = false;
 
                 //Reload
-                ammoBarBehaviour.SetAmmo(currentAmmo);
+                ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyType]);
             }
-
         }
+
     }
 }

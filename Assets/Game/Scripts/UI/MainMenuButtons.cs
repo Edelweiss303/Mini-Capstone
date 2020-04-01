@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MainMenuButtons : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class MainMenuButtons : MonoBehaviour
     public static MainMenuButtons Instance;
 
     public Text GunnerPlayerText, TechnicianPlayerText, PilotPlayerText;
+    public GameObject AIDemoBtn, CreateGameBtn, LobbyBackBtn, SettingsBackBtn;
     public GameObject GunnerPlayerTextBG, TechnicianPlayerTextBG, PilotPlayerTextBG;
     public GameObject LobbyStartGameBtn;
     public PlayerLayoutGroup PlayerListings;
@@ -35,6 +37,7 @@ public class MainMenuButtons : MonoBehaviour
         DebugText.text = InputManager.Instance.inputMode.ToString();
         PhotonNetwork.NickName = InputManager.Instance.inputMode.ToString() + "_" + Random.Range(0, 1000);
         FrontPageObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(AIDemoBtn);
 
     }
 
@@ -48,12 +51,14 @@ public class MainMenuButtons : MonoBehaviour
     {
         FrontPageObject.SetActive(false);
         MultiplayerPageObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(CreateGameBtn);
     }
 
     public void MainPage_SettingsClick()
     {
         SettingsPageObject.SetActive(true);
         FrontPageObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(SettingsBackBtn);
     }
 
     public void MainPage_ExitClick()
@@ -81,6 +86,7 @@ public class MainMenuButtons : MonoBehaviour
     {
         LobbyPageObject.SetActive(true);
         MultiplayerPageObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(LobbyBackBtn);
     }
 
     public void LeftLobby()
@@ -111,6 +117,7 @@ public class MainMenuButtons : MonoBehaviour
     {
         FrontPageObject.SetActive(true);
         MultiplayerPageObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(AIDemoBtn);
     }
     #endregion
 
@@ -339,6 +346,7 @@ public class MainMenuButtons : MonoBehaviour
         LobbyNetwork.Instance.SendEvents();
         LobbyPageObject.SetActive(false);
         LobbyNetwork.Instance.LeaveRoom();
+
     }
 
     public void SelectPlayerRole(string roleType, string playerName)
@@ -426,6 +434,7 @@ public class MainMenuButtons : MonoBehaviour
     {
         SettingsPageObject.SetActive(false);
         FrontPageObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(AIDemoBtn);
     }
     #endregion
 }

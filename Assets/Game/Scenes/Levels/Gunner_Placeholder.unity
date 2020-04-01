@@ -5637,7 +5637,7 @@ Transform:
   - {fileID: 663125670}
   - {fileID: 769861345}
   m_Father: {fileID: 484886896}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &459433429
 AudioSource:
@@ -5910,7 +5910,6 @@ Transform:
   m_LocalPosition: {x: -511.70316, y: -380.1, z: -9.421412}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1429287819}
   - {fileID: 829737878}
   - {fileID: 459433428}
   - {fileID: 974697688}
@@ -7534,7 +7533,7 @@ RectTransform:
   m_Children:
   - {fileID: 1667731273}
   m_Father: {fileID: 484886896}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9117,7 +9116,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 484886896}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &974697689
 MonoBehaviour:
@@ -9143,9 +9142,10 @@ MonoBehaviour:
   ShotAudioSource: {fileID: 1831558831}
   ReloadAudioSource: {fileID: 769861344}
   Damage: 1
-  AutoAimStrength: 1.5
-  AutoAimWeight: 0.5
+  DeadZone: 0.05
+  AutoAimWeight: 3
   CrosshairSpeed: 0.4
+  MaximumAutoAimAdjustment: 10.31
 --- !u!1 &998958929
 GameObject:
   m_ObjectHideFlags: 0
@@ -10473,10 +10473,15 @@ MonoBehaviour:
   inputMode: 0
   CursorMovement: {x: 0, y: 0, z: 0}
   FireInput: 0
-  Reloading: 0
   Escape: 0
+  Swiping: 0
   AppleTVReloadingThreshold: 1
   ReloadingCooldown: 5
+  DoubleCenterTap: 0
+  CenterTapTimingThreshold: 0.2
+  CenterTapDistanceThreshold: 5
+  NewTouchThreshold: 0.05
+  SwipingThreshold: 10
 --- !u!4 &1189918332
 Transform:
   m_ObjectHideFlags: 0
@@ -12193,12 +12198,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429287816}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.999864, z: -0, w: 0.01649273}
+  m_LocalPosition: {x: 0.29684448, y: 3.899994, z: -9.421412}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 484886896}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1437802224
 GameObject:
@@ -15958,6 +15963,9 @@ MonoBehaviour:
   ShieldTypeAMaterial: {fileID: 2100000, guid: b1d5c6834db37f246a372aefcdcaf44e, type: 2}
   ShieldTypeBMaterial: {fileID: 2100000, guid: 25d4332105dd4b64492e1fd0b2162ce6, type: 2}
   ShieldTypeCMaterial: {fileID: 2100000, guid: 6d4e17c95ec13514f829f6b30392d93a, type: 2}
+  AmmoColorA: {r: 1, g: 0, b: 0, a: 1}
+  AmmoColorB: {r: 0, g: 0.116532326, b: 1, a: 1}
+  AmmoColorC: {r: 0, g: 1, b: 0.0791831, a: 1}
   AllEnemyTypes: 000000000100000002000000
   FactoryMarkers: []
   ProjectilesCollection: {fileID: 0}

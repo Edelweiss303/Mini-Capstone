@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AmmoBarBehaviour : MonoBehaviour
 {
@@ -49,5 +50,16 @@ public class AmmoBarBehaviour : MonoBehaviour
     public void SetAmmo(float inAmmoAmount)
     {
         ammoAmount = inAmmoAmount;
+    }
+
+    public void ChangeAmmoType(GunnerController.EnemyType enemyType)
+    {
+        foreach(AmmoRowBehaviour row in Rows)
+        {
+            foreach(AmmoSlotBehaviour slot in row.AmmoSlots)
+            {
+                slot.FillingObject.GetComponent<Image>().color = GunnerController.Instance.AmmoColorMap[enemyType];
+            }
+        }
     }
 }

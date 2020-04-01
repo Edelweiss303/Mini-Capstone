@@ -25,8 +25,10 @@ public class GunnerController : Singleton<GunnerController>
     public LayerMask PlayerProjectileMask, EnemyLayerMask;
     public Material EnemyTypeAMaterial, EnemyTypeBMaterial, EnemyTypeCMaterial;
     public Material ShieldTypeAMaterial, ShieldTypeBMaterial, ShieldTypeCMaterial;
+    public Color AmmoColorA, AmmoColorB, AmmoColorC;
     public Dictionary<EnemyType, Material> EnemyMaterialMap = new Dictionary<EnemyType, Material>();
     public Dictionary<EnemyType, Material> ShieldMaterialMap = new Dictionary<EnemyType, Material>();
+    public Dictionary<EnemyType, Color> AmmoColorMap = new Dictionary<EnemyType, Color>();
     public List<EnemyType> AllEnemyTypes = new List<EnemyType>() { EnemyType.A, EnemyType.B, EnemyType.C };
 
     public List<Transform> FactoryMarkers = new List<Transform>();
@@ -48,9 +50,14 @@ public class GunnerController : Singleton<GunnerController>
         EnemyMaterialMap.Add(EnemyType.A, EnemyTypeAMaterial);
         EnemyMaterialMap.Add(EnemyType.B, EnemyTypeBMaterial);
         EnemyMaterialMap.Add(EnemyType.C, EnemyTypeCMaterial);
+
         ShieldMaterialMap.Add(EnemyType.A, ShieldTypeAMaterial);
         ShieldMaterialMap.Add(EnemyType.B, ShieldTypeBMaterial);
         ShieldMaterialMap.Add(EnemyType.C, ShieldTypeCMaterial);
+
+        AmmoColorMap.Add(EnemyType.A, AmmoColorA);
+        AmmoColorMap.Add(EnemyType.B, AmmoColorB);
+        AmmoColorMap.Add(EnemyType.C, AmmoColorC);
     }
     public void Start()
     {
@@ -96,7 +103,7 @@ public class GunnerController : Singleton<GunnerController>
 
         if (InputTest)
         {
-            InputTest.text = "Rotation Rate: " + (int)InputManager.Instance.CursorMovement.x + ", " + (int)InputManager.Instance.CursorMovement.y + ", " + (int)InputManager.Instance.CursorMovement.z;
+            //InputTest.text = "Rotation Rate: " + (int)InputManager.Instance.CursorMovement.x + ", " + (int)InputManager.Instance.CursorMovement.y + ", " + (int)InputManager.Instance.CursorMovement.z;
         }
 
     }

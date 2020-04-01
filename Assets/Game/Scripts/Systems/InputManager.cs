@@ -18,23 +18,26 @@ class InputManager : Singleton<InputManager>
     // public Vector3 CursorLocation = Vector3.zero;
     public Vector3 CursorMovement = Vector3.zero;
     public bool FireInput = false;
-    public bool Reloading = false;
     public bool Escape = false;
+    public bool Swiping = false;
     public float AppleTVReloadingThreshold = 1.0f;
     public float ReloadingCooldown = 5.0f;
+    public bool DoubleCenterTap = false;
+    public float CenterTapTimingThreshold = 0.2f;
+    public float CenterTapDistanceThreshold = 5.0f;
+    public float NewTouchThreshold = 0.05f;
+    public float SwipingThreshold = 10.0f;
 
-    private float lastReloadingTime = -1.0f;
+    private float timeSinceLastCenterTap = 0.0f;
     private Vector3 lastCursorPosition = Vector3.zero;
     private Quaternion remoteCalibration;
+    private Vector2 centerOfScreen;
+
 
     public void Start()
     {
         if (Application.platform == RuntimePlatform.tvOS)
         {
-            //inputMode = InputMode.AppleTV;
-            //Remote.allowExitToHome = false;
-            //Remote.touchesEnabled = true;
-
             Vector3 accelerationSnapshot = Input.acceleration;
 
             Quaternion rotateQuaternion = Quaternion.FromToRotation(
@@ -42,6 +45,7 @@ class InputManager : Singleton<InputManager>
 
             remoteCalibration = Quaternion.Inverse(rotateQuaternion);
             lastCursorPosition = Input.gyro.rotationRate;
+            centerOfScreen = new Vector2(Screen.width / 2, Screen.height / 2);
         }
         else
         {
@@ -60,37 +64,14 @@ class InputManager : Singleton<InputManager>
     {
         if (inputMode == InputMode.PC)
         {
-
-            //CursorLocation = Input.mousePosition;
+            #region PC
             FireInput = Input.GetMouseButtonDown(0);
             CursorMovement = Input.mousePosition - lastCursorPosition;
 
-            //if (CursorMovement.sqrMagnitude > 1)
-            //{
-            //    CursorMovement.Normalize();
-            //}
-
             lastCursorPosition = Input.mousePosition;
-            //FireInput = Input.GetKeyDown(KeyCode.Space);
             Escape = Input.GetKeyDown(KeyCode.Escape);
-
-            if (Reloading)
-            {
-                lastReloadingTime += Time.deltaTime;
-                if (lastReloadingTime > ReloadingCooldown)
-                {
-                    Reloading = false;
-                    lastReloadingTime = -1.0f;
-                }
-            }
-            else if (lastReloadingTime == -1.0f)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    lastReloadingTime = 0.0f;
-                    Reloading = true;
-                }
-            }
+            Swiping = Input.GetKeyDown(KeyCode.E);
+            #endregion
 
         }
         else if (inputMode == InputMode.AppleTV)
@@ -99,17 +80,31 @@ class InputManager : Singleton<InputManager>
 
             FireInput = Input.GetButtonDown("Submit");
             Escape = Input.GetButtonDown("Pause");
+            timeSinceLastCenterTap += Time.deltaTime;
 
-            if (Reloading)
+            if(Input.touches.Count() == 1)
             {
-                lastReloadingTime += Time.deltaTime;
-                if(lastReloadingTime > ReloadingCooldown)
+                GunnerController.Instance.InputTest.text = "";
+                Swiping = Input.touches[0].deltaPosition.magnitude > SwipingThreshold;
+                Vector2 currentTouchPosition = Input.touches[0].position;
+                GunnerController.Instance.InputTest.text += "TouchSpeed: " + Input.touches[0].deltaPosition.magnitude + System.Environment.NewLine;
+                GunnerController.Instance.InputTest.text += "CurrentTouchPosition: " + currentTouchPosition.x + ", " + currentTouchPosition.y + System.Environment.NewLine;
+
+                bool isNewTouch = timeSinceLastCenterTap > NewTouchThreshold;
+                bool hasBeenTooLongSinceLastTouch = timeSinceLastCenterTap > CenterTapTimingThreshold;
+                bool isACenterTouch = (currentTouchPosition - centerOfScreen).magnitude < CenterTapDistanceThreshold;
+
+                DoubleCenterTap = isNewTouch && !hasBeenTooLongSinceLastTouch && isACenterTouch;
+
+                if (isNewTouch && isACenterTouch)
                 {
-                    Reloading = false;
-                    lastReloadingTime = -1.0f;
+                    timeSinceLastCenterTap = 0.0f;
                 }
             }
+            else
+            {
+                DoubleCenterTap = false;
+            }
         }
-
     }
 }
