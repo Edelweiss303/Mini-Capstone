@@ -25,6 +25,7 @@ public class GunnerController : Singleton<GunnerController>
     public LayerMask PlayerProjectileMask, EnemyLayerMask;
     public Material EnemyTypeAMaterial, EnemyTypeBMaterial, EnemyTypeCMaterial;
     public Material ShieldTypeAMaterial, ShieldTypeBMaterial, ShieldTypeCMaterial;
+
     public Color AmmoColorA, AmmoColorB, AmmoColorC;
     public Dictionary<EnemyType, Material> EnemyMaterialMap = new Dictionary<EnemyType, Material>();
     public Dictionary<EnemyType, Material> ShieldMaterialMap = new Dictionary<EnemyType, Material>();

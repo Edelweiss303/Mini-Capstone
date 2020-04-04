@@ -4,6 +4,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameNetwork : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameNetwork : MonoBehaviour
 
     public List<string> ToPlayerQueue = new List<string>();
     public List<string> BroadcastQueue = new List<string>();
+    public Text DebugText;
 
     private void Start()
     {
@@ -42,9 +44,10 @@ public class GameNetwork : MonoBehaviour
     public void SendEvents()
     {
         object newEventMessage;
-
+        
         foreach (string queuedEvent in BroadcastQueue)
         {
+            DebugText.text += queuedEvent + System.Environment.NewLine;
             Debug.Log("Sending message: " + queuedEvent);
             newEventMessage = queuedEvent;
             PhotonNetwork.RaiseEvent(GAME_BROADCAST_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
@@ -52,6 +55,7 @@ public class GameNetwork : MonoBehaviour
 
         foreach (string queuedEvent in ToPlayerQueue)
         {
+            DebugText.text += queuedEvent + System.Environment.NewLine;
             Debug.Log("Sending message: " + queuedEvent);
             newEventMessage = queuedEvent;
             PhotonNetwork.RaiseEvent(GAME_TOPLAYER_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
@@ -83,16 +87,24 @@ public class GameNetwork : MonoBehaviour
             case GAME_TOPLAYER_EVENT:
                 datas = obj.CustomData;
                 messageSegments = datas.ToString().Split(':');
-                Debug.Log("Receiving message: " + messageSegments[0] + messageSegments[1]);
+                DebugText.text += messageSegments[0] + messageSegments[1] + System.Environment.NewLine;
                 if (getPlayerTypeFromCode(messageSegments[0]) == Type)
                 {
                     switch (messageSegments[1])
                     {
-                        case "ChooseIcon":
+                        case "MiniGameIMChooseIcon":
                             TechnicianMessenger.Instance.UpdateIcon(messageSegments);
                             break;
-                        case "SetLockInvalids":
+                        case "MiniGameLRSetLockInvalids":
                             TechnicianMessenger.Instance.UpdateLockMessage(messageSegments[2]);
+                            break;
+                        case "MiniGameTBChoosePatterns":
+                            Debug.Log("Patterns" + messageSegments.Length);
+                            TechnicianMessenger.Instance.UpdatePatterns(messageSegments[3], messageSegments[5], messageSegments[7]);
+                            break;
+                        case "MiniGameTBSetColours":
+                            Debug.Log("Colours" + messageSegments.Length);
+                            TechnicianMessenger.Instance.UpdateColours(messageSegments);
                             break;
                         default:
                             break;

@@ -42,8 +42,8 @@ public class LockRotationGameController : Singleton<LockRotationGameController>
     {
         string invalids1, invalids2;
         ActiveLock.getInvalids(out invalids1, out invalids2);
-        GameNetwork.Instance.ToPlayerQueue.Add("g:SetLockInvalids:" + invalids1);
-        GameNetwork.Instance.ToPlayerQueue.Add("p:SetLockInvalids:" + invalids2);
+        GameNetwork.Instance.ToPlayerQueue.Add("g:MiniGameLRSetLockInvalids:" + invalids1);
+        GameNetwork.Instance.ToPlayerQueue.Add("p:MiniGameLRSetLockInvalids:" + invalids2);
         //InvalidText1.text = invalids1;
         //InvalidText2.text = invalids2;
     }

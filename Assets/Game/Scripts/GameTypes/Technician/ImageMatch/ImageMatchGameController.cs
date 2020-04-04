@@ -1,15 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class ImageMatchGameController : Singleton<ImageMatchGameController>
 {
-    public enum ImageColour
+    public enum ImageHue
     {
-        red, green, blue, orange
+        r, g , b
     }
-    private Dictionary<ImageColour, List<Sprite>> bgImages, mgImages, fgImages = new Dictionary<ImageColour, List<Sprite>>();
+    public enum ImageValue
+    {
+        main, shade, tone, tint
+    }
+    public enum ImageLayer
+    {
+        back, mid, front
+    }
+
+    public Dictionary<ImageLayer, Dictionary<ImageHue, Dictionary<ImageValue, List<Sprite>>>> matchingImages = new Dictionary<ImageLayer, Dictionary<ImageHue, Dictionary<ImageValue, List<Sprite>>>>();
+    private List<ImageLayer> layers = new List<ImageLayer>();
+    private List<ImageHue> hues = new List<ImageHue>();
+    private List<ImageValue> values = new List<ImageValue>();
     private List<float> imageOrientations = new List<float>() { 0, 90, 180, 270 };
     private List<string> usedIcons;
 
@@ -25,36 +38,63 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
     void Start()
     {
         //Load all of the images into the image maps
-        bgImages = getIconImages("ImageMatch/Base");
-        mgImages = getIconImages("ImageMatch/Midground");
-        fgImages = getIconImages("ImageMatch/Foreground");
+        getIconImages();
 
         resetGame();
     }
 
-    Dictionary<ImageColour, List<Sprite>> getIconImages(string folderName)
+    void getIconImages()
     {
-        Dictionary<ImageColour, List<Sprite>> iconImages = new Dictionary<ImageColour, List<Sprite>>();
-
-        foreach(ImageColour colour in ImageColour.GetValues(typeof(ImageColour)))
+        foreach(ImageLayer layer in Enum.GetValues(typeof(ImageLayer)))
         {
-            iconImages.Add(colour, new List<Sprite>());
-        }
-
-        List<Sprite> allImages = Resources.LoadAll<Sprite>(folderName).ToList();
-
-        foreach(Sprite image in allImages)
-        {
-            foreach (ImageColour colour in ImageColour.GetValues(typeof(ImageColour)))
+            layers.Add(layer);
+            matchingImages.Add(layer, new Dictionary<ImageHue, Dictionary<ImageValue, List<Sprite>>>());
+            foreach(ImageHue hue in Enum.GetValues(typeof(ImageHue)))
             {
-                if (image.name.Contains(colour.ToString()))
+                if (!hues.Contains(hue))
                 {
-                    iconImages[colour].Add(image);
+                    hues.Add(hue);
+                }
+                
+                matchingImages[layer].Add(hue, new Dictionary<ImageValue, List<Sprite>>());
+                foreach(ImageValue value in Enum.GetValues(typeof(ImageValue)))
+                {
+                    if (!values.Contains(value))
+                    {
+                        values.Add(value);
+                    }
+                    
+                    matchingImages[layer][hue].Add(value, new List<Sprite>());
                 }
             }
         }
 
-        return iconImages;
+
+        List<Sprite> allImages = Resources.LoadAll<Sprite>("ImageMatch").ToList();
+        ImageLayer currentLayer;
+        ImageHue currentHue;
+        ImageValue currentValue;
+        foreach(Sprite image in allImages)
+        {
+            string[] imageSegments = image.name.Split('_');
+            if(layers.Any(l => l.ToString() == imageSegments[2]))
+            {
+                currentLayer = layers.Single(l => l.ToString() == imageSegments[2]);
+
+                if(hues.Any(l => l.ToString() == imageSegments[0]))
+                {
+                    currentHue = hues.Single(l => l.ToString() == imageSegments[0]);
+
+                    if(values.Any(l => l.ToString() == imageSegments[1]))
+                    {
+                        currentValue = values.Single(l => l.ToString() == imageSegments[1]);
+
+                        matchingImages[currentLayer][currentHue][currentValue].Add(image);
+                    }
+                }
+            }
+
+        }
     }
 
     void startNewGrid(int size, int columns, int rows)
@@ -118,11 +158,20 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
     void resetGrid()
     {
         bool validIconFound = false;
-        List<ImageColour> currentlyAvailableColours;
+        List<ImageHue> currentlyAvailableColours = new List<ImageHue>(hues);
+        ImageHue bgHue = currentlyAvailableColours[UnityEngine.Random.Range(0, currentlyAvailableColours.Count)];
+        currentlyAvailableColours.Remove(bgHue);
+        ImageHue mgHue = currentlyAvailableColours[UnityEngine.Random.Range(0, currentlyAvailableColours.Count)];
+        currentlyAvailableColours.Remove(mgHue);
+        ImageHue fgHue = currentlyAvailableColours[UnityEngine.Random.Range(0, currentlyAvailableColours.Count)];
+        currentlyAvailableColours.Remove(fgHue);
+
+
         usedIcons = new List<string>();
 
-        ImageColour tempColour;
+        ImageValue currentValue;
         Sprite tempSprite;
+        
 
         //Create a randomized and unique set of icons
         foreach(IconBehaviour icon in IconGrid)
@@ -132,27 +181,27 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
             icon.ForegroundImage.transform.rotation = Quaternion.identity;
             while (!validIconFound)
             {
-                currentlyAvailableColours = new List<ImageColour>() { ImageColour.red, ImageColour.orange, ImageColour.green, ImageColour.blue };
-
-                tempColour = currentlyAvailableColours[Random.Range(0, currentlyAvailableColours.Count())];
-                icon.BGColour = tempColour;
-
-                tempSprite = bgImages[icon.BGColour][Random.Range(0, bgImages[icon.BGColour].Count())];
+                icon.BGColour = bgHue;
+                icon.BGValue = values[UnityEngine.Random.Range(0, values.Count)];
+                tempSprite = matchingImages[ImageLayer.back][icon.BGColour][icon.BGValue][UnityEngine.Random.Range(0, matchingImages[ImageLayer.back][icon.BGColour][icon.BGValue].Count)];
                 icon.BackgroundImage.sprite = tempSprite;
                 icon.BGName = icon.BackgroundImage.sprite.name;
-                currentlyAvailableColours.Remove(icon.BGColour);
 
-                icon.MGColour = currentlyAvailableColours[Random.Range(0, currentlyAvailableColours.Count())];
-                icon.MidgroundImage.sprite = mgImages[icon.MGColour][Random.Range(0, mgImages[icon.MGColour].Count())];
+                icon.MGColour = mgHue;
+                icon.MGValue = values[UnityEngine.Random.Range(0, values.Count)];
+                tempSprite = matchingImages[ImageLayer.mid][icon.MGColour][icon.MGValue][UnityEngine.Random.Range(0, matchingImages[ImageLayer.mid][icon.MGColour][icon.MGValue].Count)];
+                icon.MidgroundImage.sprite = tempSprite;
                 icon.MGName = icon.MidgroundImage.sprite.name;
-                icon.MidgroundOrientation = imageOrientations[Random.Range(0, imageOrientations.Count())];
+                icon.MidgroundOrientation = imageOrientations[UnityEngine.Random.Range(0, imageOrientations.Count())];
 
-                currentlyAvailableColours.Remove(icon.MGColour);
 
-                icon.FGColour = currentlyAvailableColours[Random.Range(0, currentlyAvailableColours.Count())];
-                icon.ForegroundImage.sprite = fgImages[icon.FGColour][Random.Range(0, fgImages[icon.FGColour].Count())];
+                icon.FGColour = fgHue;
+                icon.FGValue = values[UnityEngine.Random.Range(0, values.Count)];
+
+                tempSprite = matchingImages[ImageLayer.front][icon.FGColour][icon.FGValue][UnityEngine.Random.Range(0, matchingImages[ImageLayer.front][icon.FGColour][icon.FGValue].Count)];
+                icon.ForegroundImage.sprite = tempSprite;
                 icon.FGName = icon.ForegroundImage.sprite.name;
-                icon.ForegroundOrientation = imageOrientations[Random.Range(0, imageOrientations.Count())];
+                icon.ForegroundOrientation = imageOrientations[UnityEngine.Random.Range(0, imageOrientations.Count())];
 
                 if (!usedIcons.Contains(icon.ToString()))
                 {
@@ -167,10 +216,10 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
 
     void selectIconToMatch()
     {
-        iconToMatch = IconGrid[Random.Range(0, IconGrid.Count())];
-        string iconSetupMessage = "g:ChooseIcon:" + iconToMatch.BGName + ":" + iconToMatch.BGColour.ToString() +":" +
-                                    iconToMatch.MGName + ":"  + iconToMatch.MidgroundOrientation.ToString() + ":" + iconToMatch.MGColour + ":" +
-                                    iconToMatch.FGName + ":"  + iconToMatch.ForegroundOrientation.ToString() + ":" + iconToMatch.FGColour;
+        iconToMatch = IconGrid[UnityEngine.Random.Range(0, IconGrid.Count())];
+        string iconSetupMessage = "g:MiniGameIMChooseIcon:" + iconToMatch.BGName + ":" + iconToMatch.BGColour.ToString() + ":" + iconToMatch.BGValue.ToString() + ":" +
+                                    iconToMatch.MGName + ":"  + iconToMatch.MidgroundOrientation.ToString() + ":" + iconToMatch.MGColour + ":" +  iconToMatch.MGValue.ToString() + ":" +
+                                    iconToMatch.FGName + ":"  + iconToMatch.ForegroundOrientation.ToString() + ":" + iconToMatch.FGColour + ":"  + iconToMatch.FGValue;
         GameNetwork.Instance.ToPlayerQueue.Add(iconSetupMessage);
 
     }

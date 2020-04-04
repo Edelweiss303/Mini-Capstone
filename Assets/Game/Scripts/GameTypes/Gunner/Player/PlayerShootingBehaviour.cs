@@ -82,19 +82,18 @@ public class PlayerShootingBehaviour : MonoBehaviour
         RaycastHit hit;
         Ray rayFromCursor = GameCamera.ScreenPointToRay(Crosshairs.transform.position);
 
-        if (Physics.Raycast(rayFromCursor, out hit, Range))
+        if (InputManager.Instance.FireInput)
         {
-            Ray line = new Ray(rayFromCursor.origin, hit.point - rayFromCursor.origin);
-
-            if (InputManager.Instance.FireInput)
+            if (ammoTypes[currentEnemyType] > 0)
             {
-                if (ammoTypes[currentEnemyType] > 0)
+                ammoTypes[currentEnemyType]--;
+                if (ammoBarBehaviour)
                 {
-                    ammoTypes[currentEnemyType]--;
-                    if (ammoBarBehaviour)
-                    {
-                        ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyType]);
-                    }
+                    ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyType]);
+                }
+
+                if (Physics.Raycast(rayFromCursor, out hit, Range))
+                {
 
                     EnemyBase hitEnemy;
 
@@ -103,6 +102,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
                         ShotAudioSource.PlayOneShot(ShotAudioSource.clip);
                     }
                     GameObject effect = Instantiate(BulletImpactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+                    effect.GetComponent<Renderer>().material = GunnerController.Instance.EnemyMaterialMap[currentEnemyType];
                     if (effectsContainer)
                     {
                         effect.transform.parent = effectsContainer.transform;
@@ -110,12 +110,15 @@ public class PlayerShootingBehaviour : MonoBehaviour
 
                     hitEnemy = hit.collider.GetComponent<EnemyBase>();
 
-                    if (hitEnemy != null && hitEnemy.IsAlive())
+                    if (hitEnemy != null && hitEnemy.IsAlive() && currentEnemyType == hitEnemy.Type)
                     {
                         hitEnemy.TakeDamage(Damage);
                     }
+
                 }
+
             }
+
         }
 
 

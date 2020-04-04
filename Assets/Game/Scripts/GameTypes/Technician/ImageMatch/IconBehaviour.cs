@@ -7,7 +7,8 @@ public class IconBehaviour : MonoBehaviour
 {
     public Image BackgroundImage, MidgroundImage, ForegroundImage;
     public string BGName, MGName, FGName;
-    public ImageMatchGameController.ImageColour BGColour, MGColour, FGColour;
+    public ImageMatchGameController.ImageHue BGColour, MGColour, FGColour;
+    public ImageMatchGameController.ImageValue BGValue, MGValue, FGValue;
     public float MidgroundOrientation, ForegroundOrientation;
 
     // Start is called before the first frame update

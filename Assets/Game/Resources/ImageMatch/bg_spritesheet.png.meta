@@ -1,55 +1,67 @@
 fileFormatVersion: 2
-guid: f0da730b7c2f7204e9da7928c40434c9
+guid: cc46b57db9d3d6141934e19aea7a6098
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -241367327064348561
-    second: blue_ball
+      213: -7466555125596336743
+    second: blue_base
   - first:
-      213: 828571559528381854
-    second: blue_circles
+      213: 4104995803132060671
+    second: green_base
   - first:
-      213: -5029256817339898879
-    second: blue_pentagon
+      213: 8647056125236329492
+    second: orange_base
   - first:
-      213: 3848820032578226090
-    second: blue_triangles
+      213: -7868805984275841162
+    second: red_base
   - first:
-      213: -6615549943846129238
-    second: green_ball
+      213: 7772441664794813122
+    second: r_main_back_std
   - first:
-      213: 8444865197859276994
-    second: green_circles
+      213: 7993420659292649268
+    second: r_shade_back_std
   - first:
-      213: 5941930014470120407
-    second: green_pentagon
+      213: 2239879226053729302
+    second: r_tone_back_std
   - first:
-      213: 138735187204251860
-    second: green_triangles
+      213: -2782826442531173489
+    second: r_tint_back_std
   - first:
-      213: -3884917172167586246
-    second: orange_ball
+      213: -4620256333897228374
+    second: g_main_back_std
   - first:
-      213: 5819580548982110345
-    second: orange_circles
+      213: -53974655389983576
+    second: g_shade_back_std
   - first:
-      213: 3200421829748172528
-    second: orange_pentagon
+      213: -7765843976066832032
+    second: g_tone_back_std
   - first:
-      213: -5008728807766872584
-    second: orange_triangles
+      213: 1882740918355290996
+    second: g_tint_back_std
   - first:
-      213: -5805500666772929769
-    second: red_ball
+      213: -649944003062388778
+    second: b_main_back_std
   - first:
-      213: 8602922931022451138
-    second: red_circles
+      213: 7090212214073514692
+    second: b_shade_back_std
   - first:
-      213: -8203323110503424482
-    second: red_pentagon
+      213: 8340967601090504323
+    second: b_tone_back_std
   - first:
-      213: -3182309846765549008
-    second: red_triangles
+      213: -2699576707713061332
+    second: b_tint_back_std
+  - first:
+      213: 5694886232478613766
+    second: bg_spritesheet_12
+  - first:
+      213: -9123732078375597470
+    second: bg_spritesheet_13
+  - first:
+      213: 8024951121734569402
+    second: bg_spritesheet_14
+  - first:
+      213: -2763819485875754041
+    second: bg_spritesheet_15
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -134,7 +146,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blue_ball
+      name: r_main_back_std
       rect:
         serializedVersion: 2
         x: 0
@@ -148,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f68a1f1e1bd76acf0800000000000000
-      internalID: -241367327064348561
+      spriteID: 2c26a8393824ddb60800000000000000
+      internalID: 7772441664794813122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_circles
+      name: r_shade_back_std
       rect:
         serializedVersion: 2
         x: 48
@@ -169,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9d3ea4817daf7b00800000000000000
-      internalID: 828571559528381854
+      spriteID: 43738691db55eee60800000000000000
+      internalID: 7993420659292649268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_pentagon
+      name: r_tone_back_std
       rect:
         serializedVersion: 2
         x: 96
@@ -190,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1046e3e129d743ab0800000000000000
-      internalID: -5029256817339898879
+      spriteID: 61c95b8e946a51f10800000000000000
+      internalID: 2239879226053729302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_triangles
+      name: r_tint_back_std
       rect:
         serializedVersion: 2
         x: 144
@@ -211,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa78b3e7d61c96530800000000000000
-      internalID: 3848820032578226090
+      spriteID: f8b8d55381a6169d0800000000000000
+      internalID: -2782826442531173489
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: green_ball
+      name: g_main_back_std
       rect:
         serializedVersion: 2
         x: 0
@@ -232,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa132337068d034a0800000000000000
-      internalID: -6615549943846129238
+      spriteID: aaf9ecee75d81efb0800000000000000
+      internalID: -4620256333897228374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: green_circles
+      name: g_shade_back_std
       rect:
         serializedVersion: 2
         x: 48
@@ -253,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c806769720323570800000000000000
-      internalID: 8444865197859276994
+      spriteID: 8ac1b9e365e304ff0800000000000000
+      internalID: -53974655389983576
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: green_pentagon
+      name: g_tone_back_std
       rect:
         serializedVersion: 2
         x: 96
@@ -274,14 +286,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d329b0ddd9f57250800000000000000
-      internalID: 5941930014470120407
+      spriteID: 069ed698c0e2a3490800000000000000
+      internalID: -7765843976066832032
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: green_triangles
+      name: g_tint_back_std
       rect:
         serializedVersion: 2
         x: 144
@@ -295,14 +307,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d0282feae2ece100800000000000000
-      internalID: 138735187204251860
+      spriteID: 47be8aad3e6d02a10800000000000000
+      internalID: 1882740918355290996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: orange_ball
+      name: b_main_back_std
       rect:
         serializedVersion: 2
         x: 0
@@ -316,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3ec2234a60061ac0800000000000000
-      internalID: -3884917172167586246
+      spriteID: 6d7229d6f5feaf6f0800000000000000
+      internalID: -649944003062388778
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: orange_circles
+      name: b_shade_back_std
       rect:
         serializedVersion: 2
         x: 48
@@ -337,14 +349,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 988f9d30dad43c050800000000000000
-      internalID: 5819580548982110345
+      spriteID: 4cadcf1717e756260800000000000000
+      internalID: 7090212214073514692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: orange_pentagon
+      name: b_tone_back_std
       rect:
         serializedVersion: 2
         x: 96
@@ -358,14 +370,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f6ab8592be2a6c20800000000000000
-      internalID: 3200421829748172528
+      spriteID: 386aa0247d111c370800000000000000
+      internalID: 8340967601090504323
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: orange_triangles
+      name: b_tint_back_std
       rect:
         serializedVersion: 2
         x: 144
@@ -379,92 +391,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fd2acccfab6d7ab0800000000000000
-      internalID: -5008728807766872584
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: red_ball
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 713c4b507e7be6fa0800000000000000
-      internalID: -5805500666772929769
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: red_circles
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 64
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c1d7a553d8b36770800000000000000
-      internalID: 8602922931022451138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: red_pentagon
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 64
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e1ed0b41811f72e80800000000000000
-      internalID: -8203323110503424482
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: red_triangles
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 64
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 03acf421e0a26d3d0800000000000000
-      internalID: -3182309846765549008
+      spriteID: c2e28dc894d298ad0800000000000000
+      internalID: -2699576707713061332
       vertices: []
       indices: 
       edges: []
@@ -472,7 +400,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: eca62cb43eb1c2e469e950889795a29b
+    spriteID: a774a780fe41dfb4f9115ba279d99394
     internalID: 0
     vertices: []
     indices: 

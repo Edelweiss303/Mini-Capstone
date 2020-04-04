@@ -56,6 +56,8 @@ public class ChaserBehaviour : EnemyBase
                     chaseSteeringBehaviour.enabled = true;
                 }
             }
+
+            DamageEffectLoop(false);
         }
         else
         {
@@ -71,6 +73,7 @@ public class ChaserBehaviour : EnemyBase
 
     override public void TakeDamage(float damage)
     {
+        ShowDamageEffect();
         Health -= damage;
         retreatSteeringBehaviour.enabled = true;
         retreatSteeringBehaviour.target = chaseSteeringBehaviour.target;
