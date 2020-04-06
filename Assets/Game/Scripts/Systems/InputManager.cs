@@ -15,8 +15,15 @@ class InputManager : Singleton<InputManager>
     }
     public InputMode inputMode = InputMode.Null;
 
-    // public Vector3 CursorLocation = Vector3.zero;
+    public enum Direction
+    {
+        up, down, left, right
+    }
+
     public Vector3 CursorMovement = Vector3.zero;
+    public Vector3 DirectionalInput = Vector3.zero;
+
+    public Dictionary<Direction, bool> DirectionalPresses = new Dictionary<Direction, bool>() { { Direction.up, false }, { Direction.down, false }, { Direction.left, false }, { Direction.right, false } };
     public bool FireInput = false;
     public bool Escape = false;
     public bool Swiping = false;
@@ -71,6 +78,28 @@ class InputManager : Singleton<InputManager>
             lastCursorPosition = Input.mousePosition;
             Escape = Input.GetKeyDown(KeyCode.Escape);
             Swiping = Input.GetKeyDown(KeyCode.E);
+            DirectionalInput = Vector3.zero;
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                DirectionalInput.y++;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                DirectionalInput.y--;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                DirectionalInput.x--;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                DirectionalInput.x++;
+            }
+
+            DirectionalPresses[Direction.up] = Input.GetKeyDown(KeyCode.W);
+            DirectionalPresses[Direction.down] = Input.GetKeyDown(KeyCode.S);
+            DirectionalPresses[Direction.left] = Input.GetKeyDown(KeyCode.A);
+            DirectionalPresses[Direction.right] = Input.GetKeyDown(KeyCode.D);
             #endregion
 
         }

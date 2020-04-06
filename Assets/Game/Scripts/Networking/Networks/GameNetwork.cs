@@ -48,7 +48,6 @@ public class GameNetwork : MonoBehaviour
         foreach (string queuedEvent in BroadcastQueue)
         {
             DebugText.text += queuedEvent + System.Environment.NewLine;
-            Debug.Log("Sending message: " + queuedEvent);
             newEventMessage = queuedEvent;
             PhotonNetwork.RaiseEvent(GAME_BROADCAST_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
         }
@@ -56,7 +55,6 @@ public class GameNetwork : MonoBehaviour
         foreach (string queuedEvent in ToPlayerQueue)
         {
             DebugText.text += queuedEvent + System.Environment.NewLine;
-            Debug.Log("Sending message: " + queuedEvent);
             newEventMessage = queuedEvent;
             PhotonNetwork.RaiseEvent(GAME_TOPLAYER_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
         }
@@ -99,12 +97,13 @@ public class GameNetwork : MonoBehaviour
                             TechnicianMessenger.Instance.UpdateLockMessage(messageSegments[2]);
                             break;
                         case "MiniGameTBChoosePatterns":
-                            Debug.Log("Patterns" + messageSegments.Length);
                             TechnicianMessenger.Instance.UpdatePatterns(messageSegments[3], messageSegments[5], messageSegments[7]);
                             break;
                         case "MiniGameTBSetColours":
-                            Debug.Log("Colours" + messageSegments.Length);
                             TechnicianMessenger.Instance.UpdateColours(messageSegments);
+                            break;
+                        case "PilotTransformUpdate":
+                            GunnerController.Instance.UpdatePlayer(messageSegments);
                             break;
                         default:
                             break;

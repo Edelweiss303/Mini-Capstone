@@ -109,6 +109,14 @@ public class GunnerController : Singleton<GunnerController>
 
     }
 
+    public void UpdatePlayer(string[] messageSegments)
+    {
+        float x = float.Parse(messageSegments[2]), y = float.Parse(messageSegments[3]), z = float.Parse(messageSegments[4]);
+        float rotation = float.Parse(messageSegments[5]);
+        PlayerObject.transform.position = new Vector3(x, y, z);
+        PlayerObject.transform.eulerAngles = new Vector3(PlayerObject.transform.eulerAngles.x, rotation, PlayerObject.transform.eulerAngles.z);
+    }
+
     public EnemyType GetRandomizedEnemyType()
     {
         return AllEnemyTypes[Random.Range(0, AllEnemyTypes.Count)];
