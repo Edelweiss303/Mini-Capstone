@@ -10,7 +10,22 @@ public class LockRotationGameController : Singleton<LockRotationGameController>
     public KeySquare CurrentCheckingKey;
     public Text InvalidText1, InvalidText2;
     private int currentActiveLockIndex = 0;
+    private bool isInitialized = false;
 
+    private void Start()
+    {
+        isInitialized = false;
+    }
+
+    private void Update()
+    {
+        if (!isInitialized)
+        {
+            isInitialized = true;
+            resetGame();
+            
+        }
+    }
     private void randomizeElements()
     {
         foreach(CircleLock Lock in Locks)
@@ -50,16 +65,20 @@ public class LockRotationGameController : Singleton<LockRotationGameController>
 
     public void resetGame()
     {
-        currentActiveLockIndex = 0;
-        randomizeElements();
-        foreach (CircleLock Lock in Locks)
+        if (isInitialized)
         {
-            Lock.resetAngles();
-            Lock.Active = false;
+            currentActiveLockIndex = 0;
+            randomizeElements();
+            foreach (CircleLock Lock in Locks)
+            {
+                Lock.resetAngles();
+                Lock.Active = false;
+            }
+
+            ActiveLock = Locks[currentActiveLockIndex];
+            ActiveLock.Active = true;
+            setInvalids();
         }
-        
-        ActiveLock = Locks[currentActiveLockIndex];
-        ActiveLock.Active = true;
-        setInvalids();
+
     }
 }

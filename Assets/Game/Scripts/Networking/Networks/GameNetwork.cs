@@ -85,7 +85,7 @@ public class GameNetwork : MonoBehaviour
             case GAME_TOPLAYER_EVENT:
                 datas = obj.CustomData;
                 messageSegments = datas.ToString().Split(':');
-                DebugText.text += messageSegments[0] + messageSegments[1] + System.Environment.NewLine;
+                //DebugText.text += messageSegments[0] + messageSegments[1] + System.Environment.NewLine;
                 if (getPlayerTypeFromCode(messageSegments[0]) == Type)
                 {
                     switch (messageSegments[1])

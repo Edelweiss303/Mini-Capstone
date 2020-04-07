@@ -266,8 +266,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 350.1, y: 189.7}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 350.1, y: 22.6}
+  m_SizeDelta: {x: 160, y: 364.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129965245
 MonoBehaviour:
@@ -5385,8 +5385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6671430da5355f49b4307c0e1a80f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lobbyCanvas: {fileID: 0}
-  _currentRoomCanvas: {fileID: 0}
 --- !u!1 &1708253115
 GameObject:
   m_ObjectHideFlags: 0
@@ -5605,11 +5603,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputMode: 3
   CursorMovement: {x: 0, y: 0, z: 0}
+  DirectionalInput: {x: 0, y: 0, z: 0}
   FireInput: 0
-  Reloading: 0
   Escape: 0
+  Swiping: 0
   AppleTVReloadingThreshold: 1
   ReloadingCooldown: 5
+  DoubleCenterTap: 0
+  CenterTapTimingThreshold: 0.2
+  CenterTapDistanceThreshold: 5
+  NewTouchThreshold: 0.05
+  SwipingThreshold: 10
 --- !u!4 &1727950509
 Transform:
   m_ObjectHideFlags: 0

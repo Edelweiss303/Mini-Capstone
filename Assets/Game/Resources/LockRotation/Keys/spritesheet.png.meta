@@ -29,6 +29,45 @@ TextureImporter:
   - first:
       213: -8276262488406422588
     second: circle
+  - first:
+      213: -7740885511988095314
+    second: red_main
+  - first:
+      213: 3158813897272577515
+    second: red_shade
+  - first:
+      213: -5191485754560559691
+    second: green_main
+  - first:
+      213: -5382729079094898936
+    second: green_shade
+  - first:
+      213: -8284369661590253447
+    second: blue_main
+  - first:
+      213: -6781836078250285264
+    second: blue_shade
+  - first:
+      213: 6163195538924204485
+    second: red_tone
+  - first:
+      213: -1370661682523340017
+    second: red_tint
+  - first:
+      213: -6789749554771551278
+    second: green_tone
+  - first:
+      213: -5906973516983679737
+    second: green_tint
+  - first:
+      213: 5777552420452043588
+    second: blue_tint
+  - first:
+      213: 1269540525142108225
+    second: blue_tone
+  - first:
+      213: 8020143640844766479
+    second: lock_selection
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -137,162 +176,183 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: red_sqaure
+      name: circle
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 87
+        width: 168
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cb05a6cd1fc42d80800000000000000
+      internalID: -8276262488406422588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_main
       rect:
         serializedVersion: 2
         x: 0
-        y: 102
-        width: 34
-        height: 34
+        y: 213
+        width: 43
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0d092816264d4f60800000000000000
-      internalID: 8020143640844766479
+      spriteID: ea65bfac3a9d29490800000000000000
+      internalID: -7740885511988095314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_square
+      name: red_shade
       rect:
         serializedVersion: 2
-        x: 34
-        y: 102
-        width: 34
-        height: 34
+        x: 43
+        y: 213
+        width: 43
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 337b0ff32209d39a0800000000000000
-      internalID: -6251682230944352461
+      spriteID: bedcf72e08c56db20800000000000000
+      internalID: 3158813897272577515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: yellow_square
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 68
-        width: 34
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a037fd742aea58ee0800000000000000
-      internalID: -1259408508766424310
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: purple_square
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 68
-        width: 34
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 88ddd6ce8b6514da0800000000000000
-      internalID: -5962389079421231736
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: green_square
+      name: green_main
       rect:
         serializedVersion: 2
         x: 0
-        y: 34
-        width: 34
-        height: 34
+        y: 170
+        width: 43
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5033aaf832cf2b620800000000000000
-      internalID: 2788568348960109317
+      spriteID: 5b5caee363324f7b0800000000000000
+      internalID: -5191485754560559691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: orange_square
+      name: green_shade
       rect:
         serializedVersion: 2
-        x: 34
-        y: 34
-        width: 34
-        height: 34
+        x: 43
+        y: 170
+        width: 43
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac35fa714f8652300800000000000000
-      internalID: 226702753830753226
+      spriteID: 80f0266eb64bc45b0800000000000000
+      internalID: -5382729079094898936
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: white_square
+      name: blue_main
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 34
-        height: 34
+        y: 127
+        width: 43
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25a502d0b44c21290800000000000000
-      internalID: -7921052967969465774
+      spriteID: 970d3ec6fa1080d80800000000000000
+      internalID: -8284369661590253447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: black_square
+      name: blue_shade
       rect:
         serializedVersion: 2
-        x: 34
-        y: 0
-        width: 34
-        height: 34
+        x: 43
+        y: 127
+        width: 43
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 037a6feb40412e1a0800000000000000
+      internalID: -6781836078250285264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_tone
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 84
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c179da40b1188550800000000000000
+      internalID: 6163195538924204485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_tint
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 84
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -305,13 +365,97 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: circle
+      name: green_tone
       rect:
         serializedVersion: 2
-        x: 69
+        x: 0
         y: 0
-        width: 133
-        height: 136
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2db99f9e0c6f5c1a0800000000000000
+      internalID: -6789749554771551278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_tint
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 0
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7054c8ef1e6360ea0800000000000000
+      internalID: -5906973516983679737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_tint
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 0
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44b0e3cc05dfd2050800000000000000
+      internalID: 5777552420452043588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_tone
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 0
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 148ee0d91605e9110800000000000000
+      internalID: 1269540525142108225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lock_selection
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 56
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,8 +463,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cb05a6cd1fc42d80800000000000000
-      internalID: -8276262488406422588
+      spriteID: f0d092816264d4f60800000000000000
+      internalID: 8020143640844766479
       vertices: []
       indices: 
       edges: []

@@ -14,9 +14,14 @@ public class CircleLock : MonoBehaviour
 
     public enum KeyColour
     {
-        red, blue, green, yellow, orange, purple, black, white
+        red_main, red_shade, red_tone, red_tint, blue_main, blue_shade, blue_tone, blue_tint, green_main, green_shade, green_tone, green_tint
     }
-    List<KeyColour> colTemplate = new List<KeyColour>() { KeyColour.red, KeyColour.blue, KeyColour.green, KeyColour.yellow, KeyColour.orange, KeyColour.purple, KeyColour.black, KeyColour.white };
+    List<KeyColour> colTemplate = new List<KeyColour>()
+    {
+        KeyColour.red_main, KeyColour.red_shade, KeyColour.red_tone, KeyColour.red_tint,
+        KeyColour.blue_main, KeyColour.blue_shade, KeyColour.blue_tone, KeyColour.blue_tint,
+        KeyColour.green_main, KeyColour.green_shade, KeyColour.green_tone, KeyColour.green_tint
+    };
 
     private Dictionary<KeyColour, Sprite> keyBoxImages = new Dictionary<KeyColour, Sprite>();
     private Quaternion origin;

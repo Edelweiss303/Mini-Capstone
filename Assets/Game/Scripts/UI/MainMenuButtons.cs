@@ -31,6 +31,13 @@ public class MainMenuButtons : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        DebugText.text = "# of Rooms: "  + PhotonNetwork.CountOfRooms + System.Environment.NewLine;
+        DebugText.text += "Currently in a lobby: " + PhotonNetwork.InLobby.ToString();
+    }
+
+
     public void InputTypeAccepted()
     {
         InputDetectionPopupObject.SetActive(false);
@@ -104,13 +111,13 @@ public class MainMenuButtons : MonoBehaviour
     #region Multiplayer Page
     public void MultiplayerPage_CreateGameOnClick()
     {
-        LobbyNetwork.Instance.CreateRoom("TestRoom");
+        LobbyNetwork.Instance.CreateRoom("0");
         MultiplayerPageObject.SetActive(false);
     }
 
     public void MultiplayerPage_JoinGameOnClick()
     {
-        LobbyNetwork.Instance.JoinRoom("TestRoom");
+        LobbyNetwork.Instance.JoinRoom("0");
     }
 
     public void MultiplayerPage_BackClick()

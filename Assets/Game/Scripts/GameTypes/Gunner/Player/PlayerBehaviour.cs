@@ -74,6 +74,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     void CameraUpdate()
     {
+        Camera.main.transform.position = transform.position;
+        Camera.main.transform.rotation = transform.rotation;
         //if (Input.GetKey(KeyCode.LeftArrow))
         //{
         //    currentRotation.y = -RotationRate;

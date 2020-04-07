@@ -158,6 +158,7 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
     #region Failure Callbacks
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
+        MainMenuButtons.Instance.DebugText.text = "Failed to join room: " + returnCode + "-" + message;
         Debug.Log("Failed to join room: " + returnCode + "-" + message);
     }
     #endregion
