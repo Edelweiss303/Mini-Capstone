@@ -16234,7 +16234,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-48718
+  m_Name: pb_Mesh34876
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19640,6 +19640,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77619689613c53e4590748bdab9f8e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChaserShellPrefab: {fileID: 2894226955708077130, guid: d313d8dfa68297d4398d63893c52c473,
+    type: 3}
+  SentryShellPrefab: {fileID: 1624467293414018681, guid: a977efcc1e6204641a2b01238ab27ba6,
+    type: 3}
+  DroidShellPrefab: {fileID: 6501478552151426217, guid: 2db8d293a723681478557e9041621426,
+    type: 3}
+  FactoryShellPrefab: {fileID: 8600526027260107608, guid: a5f3b1e3883a35e4c9b0294543fea072,
+    type: 3}
+  NetworkingUpdateThreshold: 0.5
 --- !u!43 &836603154
 Mesh:
   m_ObjectHideFlags: 0

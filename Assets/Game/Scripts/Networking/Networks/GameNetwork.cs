@@ -17,6 +17,7 @@ public class GameNetwork : MonoBehaviour
 
     private const byte GAME_BROADCAST_EVENT = 4;
     private const byte GAME_TOPLAYER_EVENT = 5;
+    private const byte GAME_ENEMYUPDATE_EVENT = 6;
 
     public List<string> ToPlayerQueue = new List<string>();
     public List<string> BroadcastQueue = new List<string>();
@@ -47,14 +48,12 @@ public class GameNetwork : MonoBehaviour
         
         foreach (string queuedEvent in BroadcastQueue)
         {
-            DebugText.text += queuedEvent + System.Environment.NewLine;
             newEventMessage = queuedEvent;
             PhotonNetwork.RaiseEvent(GAME_BROADCAST_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
         }
 
         foreach (string queuedEvent in ToPlayerQueue)
         {
-            DebugText.text += queuedEvent + System.Environment.NewLine;
             newEventMessage = queuedEvent;
             PhotonNetwork.RaiseEvent(GAME_TOPLAYER_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
         }
@@ -62,6 +61,14 @@ public class GameNetwork : MonoBehaviour
         BroadcastQueue.Clear();
         ToPlayerQueue.Clear();
     }
+
+    public void UpdateEnemies(string message)
+    {
+        object newMessage = message;
+        PhotonNetwork.RaiseEvent(GAME_ENEMYUPDATE_EVENT, newMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
+    }
+
+
 
     private void NetworkingClient_EventReceived(EventData obj)
     {
@@ -85,7 +92,6 @@ public class GameNetwork : MonoBehaviour
             case GAME_TOPLAYER_EVENT:
                 datas = obj.CustomData;
                 messageSegments = datas.ToString().Split(':');
-                //DebugText.text += messageSegments[0] + messageSegments[1] + System.Environment.NewLine;
                 if (getPlayerTypeFromCode(messageSegments[0]) == Type)
                 {
                     switch (messageSegments[1])
@@ -109,6 +115,14 @@ public class GameNetwork : MonoBehaviour
                             break;
                     }
                 }
+                break;
+            case GAME_ENEMYUPDATE_EVENT:
+                if(Type == PlayerType.Pilot)
+                {
+                    datas = obj.CustomData;
+                    EnemiesManager.Instance.UpdateEnemies(datas.ToString());
+                }
+
                 break;
         }
     }

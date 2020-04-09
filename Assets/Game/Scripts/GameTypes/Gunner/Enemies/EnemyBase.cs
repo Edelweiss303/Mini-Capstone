@@ -7,6 +7,11 @@ using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
 {
+    public enum EnemyType
+    {
+        none, chaser, sentry, droid, factory, spawn
+    }
+
     abstract public void TakeDamage(float damage);
     abstract public bool IsAlive();
     public abstract void Die();
@@ -22,7 +27,14 @@ public abstract class EnemyBase : MonoBehaviour
     private Renderer eRenderer;
     private Color originalColor;
     private Color damagedColor;
+    protected EnemyType type;
     protected float timeDamaged = 0.0f;
+    protected int gameID;
+
+    protected virtual void Start()
+    {
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {

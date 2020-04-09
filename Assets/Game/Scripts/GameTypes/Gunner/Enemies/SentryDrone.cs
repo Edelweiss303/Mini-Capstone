@@ -36,8 +36,10 @@ public class SentryDrone : EnemyBase
     private bool isAlive = true;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        type = EnemyType.sentry;
+        base.Start();
         //pBehaviour = FindObjectOfType<PlayerBehaviour>();
         //pTransform = pBehaviour.gameObject.transform;
         pTransform = FindObjectOfType<FriendController>().transform;
@@ -52,7 +54,7 @@ public class SentryDrone : EnemyBase
         {
             selectedDrone.Select(Type, EnemyMaterial);
         }
-        EnemiesManager.Instance.addEnemy(gameObject);
+        
         sState = SentryState.Idle;   
     }
 

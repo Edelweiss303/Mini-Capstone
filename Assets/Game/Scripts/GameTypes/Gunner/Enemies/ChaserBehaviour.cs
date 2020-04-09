@@ -22,8 +22,10 @@ public class ChaserBehaviour : EnemyBase
     private RetreatSteeringBehaviour retreatSteeringBehaviour;
     private SteeringAgent agent;
 
-    void Start()
+    protected override void Start()
     {
+
+
         timeRetreating = 0.0f;
         agent = GetComponent<SteeringAgent>();
         enemyRenderer = GetComponent<MeshRenderer>();
@@ -32,9 +34,13 @@ public class ChaserBehaviour : EnemyBase
         retreatSteeringBehaviour = GetComponentInChildren<RetreatSteeringBehaviour>();
         retreatSteeringBehaviour.enabled = false;
         chaseSteeringBehaviour.enabled = true;
-        EnemiesManager.Instance.addEnemy(gameObject);
+
+
         SetEnemyType();
         enemyRenderer.material = EnemyMaterial;
+        type = EnemyType.chaser;
+        gameID = gameObject.GetInstanceID();
+        EnemiesManager.Instance.addEnemy(gameID, gameObject, type, Type);
     }
 
     void Update()
@@ -102,6 +108,7 @@ public class ChaserBehaviour : EnemyBase
         {
             enemyRenderer.enabled = false;
         }
+        EnemiesManager.Instance.removeEnemy(gameID);
 
         //Create a death explosion effect and sound
         AudioManager.Instance.PlaySound(DeathAudioClipName);

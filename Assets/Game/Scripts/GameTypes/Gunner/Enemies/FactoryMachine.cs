@@ -23,14 +23,15 @@ public class FactoryMachine : EnemyBase
     private Rigidbody rb;
     private float timeSinceLastChangeDestinationCheck = 0.0f;
 
-    void Start()
+    protected override void Start()
     {
+        type = EnemyType.factory;
+        base.Start();
         seekSteeringBehaviour = GetComponentInChildren<SeekSteeringBehaviour>();
         steeringAgent = GetComponent<SteeringAgent>();
         rb = GetComponent<Rigidbody>();
         seekSteeringBehaviour.enabled = false;
         SetEnemyType();
-        EnemiesManager.Instance.addEnemy(gameObject);
     }
 
     void Update()

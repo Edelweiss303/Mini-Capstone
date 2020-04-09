@@ -32,7 +32,7 @@ public class SpawnerBehaviour : MonoBehaviour
                 );
                 int spawnIndex = Random.Range(0, SpawnPrefabs.Count);
                 GameObject newSpawn = Instantiate(SpawnPrefabs[spawnIndex], spawnPoint + transform.position, Quaternion.identity);
-                EnemiesManager.Instance.addEnemy(newSpawn);
+                //EnemiesManager.Instance.addEnemy(newSpawn);
                 spawns.Add(newSpawn);
                 
                 timeSinceLastSpawn = 0.0f;

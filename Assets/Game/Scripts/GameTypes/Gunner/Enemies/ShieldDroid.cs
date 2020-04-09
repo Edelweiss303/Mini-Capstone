@@ -55,14 +55,15 @@ public class ShieldDroid : EnemyBase
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        type = EnemyType.droid;
+        base.Start();
         enemyRenderer = GetComponent<MeshRenderer>();
         enemyCollider = GetComponent<BoxCollider>();
         SetEnemyType();
         enemyRenderer.material = EnemyMaterial;
         rb = GetComponent<Rigidbody>();
-        EnemiesManager.Instance.addEnemy(gameObject);
         TargetUpdate();
         Shield temp = GetComponentInChildren<Shield>();
         if (temp)

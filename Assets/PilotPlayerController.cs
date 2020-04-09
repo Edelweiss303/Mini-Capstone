@@ -9,7 +9,7 @@ public class PilotPlayerController : MonoBehaviour
 
     public Transform TorsoTransform;
     public Transform CameraTransform;
-    public float GunnerMoveUpdateSyncThreshold = 0.2f;
+    public float GunnerMoveUpdateSyncThreshold = 0.5f;
 
     [SerializeField]
     private int rotationTargetAngle = 0;
@@ -79,7 +79,6 @@ public class PilotPlayerController : MonoBehaviour
         if (timeSinceLateGunnerMoveUpdate > GunnerMoveUpdateSyncThreshold)
         {
             string message = "g:PilotTransformUpdate:" + transform.position.x + ":" + transform.position.y + ":" + transform.position.z + ":" + validRotations[currentTargetRotationIndex];
-            Debug.Log(message);
             GameNetwork.Instance.ToPlayerQueue.Add(message);
             timeSinceLateGunnerMoveUpdate = 0.0f;
         }
