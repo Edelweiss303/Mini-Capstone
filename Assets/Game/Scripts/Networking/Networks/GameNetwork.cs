@@ -44,28 +44,36 @@ public class GameNetwork : MonoBehaviour
 
     public void SendEvents()
     {
-        object newEventMessage;
-        
-        foreach (string queuedEvent in BroadcastQueue)
+        if (PhotonNetwork.InRoom)
         {
-            newEventMessage = queuedEvent;
-            PhotonNetwork.RaiseEvent(GAME_BROADCAST_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
+            object newEventMessage;
+
+            foreach (string queuedEvent in BroadcastQueue)
+            {
+                newEventMessage = queuedEvent;
+                PhotonNetwork.RaiseEvent(GAME_BROADCAST_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
+            }
+
+            foreach (string queuedEvent in ToPlayerQueue)
+            {
+                newEventMessage = queuedEvent;
+                PhotonNetwork.RaiseEvent(GAME_TOPLAYER_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
+            }
+
+            BroadcastQueue.Clear();
+            ToPlayerQueue.Clear();
         }
 
-        foreach (string queuedEvent in ToPlayerQueue)
-        {
-            newEventMessage = queuedEvent;
-            PhotonNetwork.RaiseEvent(GAME_TOPLAYER_EVENT, newEventMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
-        }
-
-        BroadcastQueue.Clear();
-        ToPlayerQueue.Clear();
     }
 
     public void UpdateEnemies(string message)
     {
-        object newMessage = message;
-        PhotonNetwork.RaiseEvent(GAME_ENEMYUPDATE_EVENT, newMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
+        if (PhotonNetwork.InRoom)
+        {
+            object newMessage = message;
+            PhotonNetwork.RaiseEvent(GAME_ENEMYUPDATE_EVENT, newMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
+        }
+
     }
 
 
@@ -113,6 +121,9 @@ public class GameNetwork : MonoBehaviour
                             break;
                         case "GunnerGetAmmo":
                             GunnerController.Instance.UpdateAmmo(messageSegments);
+                            break;
+                        case "GunnerCreateAmmo":
+                            GunnerController.Instance.AddAmmoPickup(messageSegments);
                             break;
                         default:
                             break;

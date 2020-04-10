@@ -68,7 +68,7 @@ public class ShieldDroid : EnemyBase
         Shield temp = GetComponentInChildren<Shield>();
         if (temp)
         {
-            temp.SetShieldType(Type);
+            temp.SetShieldType(Colour);
         }
     }
 

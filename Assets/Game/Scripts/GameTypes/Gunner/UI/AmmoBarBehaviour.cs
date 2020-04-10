@@ -52,13 +52,13 @@ public class AmmoBarBehaviour : MonoBehaviour
         ammoAmount = inAmmoAmount;
     }
 
-    public void ChangeAmmoType(GunnerController.EnemyType enemyType)
+    public void ChangeAmmoType(EnemyBase.EnemyColour enemyColour)
     {
         foreach(AmmoRowBehaviour row in Rows)
         {
             foreach(AmmoSlotBehaviour slot in row.AmmoSlots)
             {
-                slot.FillingObject.GetComponent<Image>().color = GunnerController.Instance.AmmoColorMap[enemyType];
+                slot.FillingObject.GetComponent<Image>().color = ColourManager.Instance.AmmoColorMap[enemyColour];
             }
         }
     }

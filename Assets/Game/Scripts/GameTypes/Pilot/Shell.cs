@@ -10,10 +10,10 @@ public class Shell : MonoBehaviour
     public Material material, shieldMaterial;
 
 
-    public void ChangeColour(GunnerController.EnemyType inEnemyType)
+    public void ChangeColour(EnemyBase.EnemyColour inEnemyColour)
     {
-        material = PilotController.Instance.EnemyMaterialMap[inEnemyType];
-        shieldMaterial = PilotController.Instance.ShieldMaterialMap[inEnemyType];
+        material = ColourManager.Instance.EnemyMaterialMap[inEnemyColour];
+        shieldMaterial = ColourManager.Instance.ShieldMaterialMap[inEnemyColour];
 
         foreach(Renderer materialObject in materialObjects)
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemiesManager : Singleton<EnemiesManager>
 {
-    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, FactoryShellPrefab;
+    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, FactoryShellPrefab, SpawnerShellPrefab;
     public float NetworkingUpdateThreshold = 0.1f;
 
     private List<EnemyBase> aimableTargets = new List<EnemyBase>();
@@ -86,7 +86,7 @@ public class EnemiesManager : Singleton<EnemiesManager>
         }
     }
 
-    public void addEnemy(int enemyID, GameObject newEnemyObject, EnemyBase.EnemyType enemyType, GunnerController.EnemyType enemyColour)
+    public void addEnemy(int enemyID, GameObject newEnemyObject, EnemyBase.EnemyType enemyType, EnemyBase.EnemyColour enemyColour)
     {
         enemiesSpawnMsg += ":" + enemyID + ":" + enemyType.ToString() + ":" + enemyColour.ToString();
         
@@ -232,20 +232,20 @@ public class EnemiesManager : Singleton<EnemiesManager>
 
         int objectID;
         GameObject currentObject;
-        GunnerController.EnemyType colour;
+        EnemyBase.EnemyColour colour;
         for (int i = 2; i < messageSegments.Length; i += 3)
         {
             objectID = int.Parse(messageSegments[i]);
             switch(messageSegments[i + 2])
             {
                 case "B":
-                    colour = GunnerController.EnemyType.B;
+                    colour = EnemyBase.EnemyColour.B;
                     break;
                 case "C":
-                    colour = GunnerController.EnemyType.C;
+                    colour = EnemyBase.EnemyColour.C;
                     break;
                 default:
-                    colour = GunnerController.EnemyType.A;
+                    colour = EnemyBase.EnemyColour.A;
                     break;
             }
 
@@ -268,6 +268,10 @@ public class EnemiesManager : Singleton<EnemiesManager>
                 case "factory":
                     currentObject = Instantiate(FactoryShellPrefab);
                     addEnemy(objectID, currentObject, EnemyBase.EnemyType.factory, colour);
+                    break;
+                case "spawn":
+                    currentObject = Instantiate(SpawnerShellPrefab);
+                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.spawn, colour);
                     break;
                 default:
                     continue;

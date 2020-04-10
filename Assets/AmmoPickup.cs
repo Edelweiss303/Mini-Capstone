@@ -6,12 +6,13 @@ public class AmmoPickup : MonoBehaviour
 {
     public Material AmmoMaterial;
     public Color LightColor;
-    public GunnerController.EnemyType EnemyType;
+    public EnemyBase.EnemyColour EnemyColour;
     public List<GameObject> Canisters;
     public int AmmoAmount = 4;
 
     private Light ammoLight;
     private List<MeshRenderer> canisterRenderers = new List<MeshRenderer>();
+    private float gameID;
 
     private void Start()
     {
@@ -22,17 +23,19 @@ public class AmmoPickup : MonoBehaviour
             canisterRenderers.Add(canister.GetComponent<MeshRenderer>());
         }
 
-        ChangeEnemyType(PilotController.Instance.AllEnemyTypes[Random.Range(0, PilotController.Instance.AllEnemyTypes.Count + 1)]);
+        ChangeEnemyType(ColourManager.Instance.AllEnemyTypes[Random.Range(0, ColourManager.Instance.AllEnemyTypes.Count)]);
+        gameID = gameObject.GetInstanceID();
+        GameNetwork.Instance.ToPlayerQueue.Add("g:GunnerCreateAmmo:" + EnemyColour.ToString() + ":" + gameID + ":" + transform.position.x  + ":" + transform.position.y + ":" + transform.position.z);
     }
 
-    public void ChangeEnemyType(GunnerController.EnemyType inEnemyType)
+    public void ChangeEnemyType(EnemyBase.EnemyColour inEnemyColour)
     {
-        EnemyType = inEnemyType;
+        EnemyColour = inEnemyColour;
 
-        LightColor = PilotController.Instance.AmmoColorMap[EnemyType];
+        LightColor = ColourManager.Instance.AmmoColorMap[inEnemyColour];
         ammoLight.color = LightColor;
 
-        AmmoMaterial = PilotController.Instance.EnemyMaterialMap[EnemyType];
+        AmmoMaterial = ColourManager.Instance.EnemyMaterialMap[inEnemyColour];
         foreach(MeshRenderer canisterRenderer in canisterRenderers)
         {
             canisterRenderer.material = AmmoMaterial;
@@ -41,7 +44,11 @@ public class AmmoPickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameNetwork.Instance.ToPlayerQueue.Add("g:GunnerGetAmmo:" + EnemyType.ToString() + ":" + AmmoAmount);
-        Destroy(gameObject);
+        if (other.GetComponent<PilotPlayerController>())
+        {
+            GameNetwork.Instance.ToPlayerQueue.Add("g:GunnerGetAmmo:" + EnemyColour.ToString() + ":" + gameID + ":" + AmmoAmount);
+            Destroy(gameObject);
+        }
+
     }
 }

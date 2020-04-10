@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static EnemyBase;
 
 public class GunnerController : Singleton<GunnerController>
 {
@@ -13,24 +14,15 @@ public class GunnerController : Singleton<GunnerController>
 
     public PlayerType playerType = PlayerType.Game;
 
-    public enum EnemyType
-    {
-        A, B, C
-    }
-
     public bool GameStatus = true;
     public GameObject PauseMenu;
     public Vector2 ScreenSize;
     public Text InputTest;
     public LayerMask PlayerProjectileMask, EnemyLayerMask;
-    public Material EnemyTypeAMaterial, EnemyTypeBMaterial, EnemyTypeCMaterial;
-    public Material ShieldTypeAMaterial, ShieldTypeBMaterial, ShieldTypeCMaterial;
+    public List<EnemyColour> AllEnemyColours = new List<EnemyColour>() { EnemyColour.A, EnemyColour.B, EnemyColour.C };
+    public GameObject PickupsShellPrefab;
+    public Dictionary<float, GameObject> PickupsMap = new Dictionary<float, GameObject>();
 
-    public Color AmmoColorA, AmmoColorB, AmmoColorC;
-    public Dictionary<EnemyType, Material> EnemyMaterialMap = new Dictionary<EnemyType, Material>();
-    public Dictionary<EnemyType, Material> ShieldMaterialMap = new Dictionary<EnemyType, Material>();
-    public Dictionary<EnemyType, Color> AmmoColorMap = new Dictionary<EnemyType, Color>();
-    public List<EnemyType> AllEnemyTypes = new List<EnemyType>() { EnemyType.A, EnemyType.B, EnemyType.C };
 
     public List<Transform> FactoryMarkers = new List<Transform>();
     public GameObject ProjectilesCollection, EffectsContainer;
@@ -48,20 +40,6 @@ public class GunnerController : Singleton<GunnerController>
         GameStatus = false;
     }
 
-    public void Awake()
-    {
-        EnemyMaterialMap.Add(EnemyType.A, EnemyTypeAMaterial);
-        EnemyMaterialMap.Add(EnemyType.B, EnemyTypeBMaterial);
-        EnemyMaterialMap.Add(EnemyType.C, EnemyTypeCMaterial);
-
-        ShieldMaterialMap.Add(EnemyType.A, ShieldTypeAMaterial);
-        ShieldMaterialMap.Add(EnemyType.B, ShieldTypeBMaterial);
-        ShieldMaterialMap.Add(EnemyType.C, ShieldTypeCMaterial);
-
-        AmmoColorMap.Add(EnemyType.A, AmmoColorA);
-        AmmoColorMap.Add(EnemyType.B, AmmoColorB);
-        AmmoColorMap.Add(EnemyType.C, AmmoColorC);
-    }
     public void Start()
     {
         switch (playerType)
@@ -121,29 +99,57 @@ public class GunnerController : Singleton<GunnerController>
         PlayerObject.transform.eulerAngles = new Vector3(PlayerObject.transform.eulerAngles.x, rotation, PlayerObject.transform.eulerAngles.z);
     }
 
-    public EnemyType GetRandomizedEnemyType()
+    public EnemyColour GetRandomizedEnemyColour()
     {
-        return AllEnemyTypes[Random.Range(0, AllEnemyTypes.Count)];
+        return AllEnemyColours[Random.Range(0, AllEnemyColours.Count)];
     }
 
     public void UpdateAmmo(string[] messageSegments)
     {
-        EnemyType typeToIncrease;
-        int amountToIncrease = int.Parse(messageSegments[3]);
+        EnemyColour colourToIncrease;
+        int amountToIncrease = int.Parse(messageSegments[4]);
+        float pickupID = float.Parse(messageSegments[3]);
         switch (messageSegments[2])
         {
             case "B":
-                typeToIncrease = EnemyType.B;
+                colourToIncrease = EnemyColour.B;
                 break;
             case "C":
-                typeToIncrease = EnemyType.C;
+                colourToIncrease = EnemyColour.C;
                 break;
             default:
-                typeToIncrease = EnemyType.A;
+                colourToIncrease = EnemyColour.A;
                 break;
         }
-        shootingBehaviour.increaseAmmo(typeToIncrease, amountToIncrease);
+        shootingBehaviour.increaseAmmo(colourToIncrease, amountToIncrease);
 
+        if (PickupsMap.ContainsKey(pickupID))
+        {
+            Destroy(PickupsMap[pickupID]);
+            PickupsMap.Remove(pickupID);
+        }
+    }
+
+    public void AddAmmoPickup(string[] messageSegments)
+    {
+        EnemyColour ammoColour;
+        switch (messageSegments[2])
+        {
+            case "B":
+                ammoColour = EnemyColour.B;
+                break;
+            case "C":
+                ammoColour = EnemyColour.C;
+                break;
+            default:
+                ammoColour = EnemyColour.A;
+                break;
+        }
+
+        Vector3 pickupPosition = new Vector3(float.Parse(messageSegments[4]), float.Parse(messageSegments[5]), float.Parse(messageSegments[6]));
+        GameObject newPickupShell = Instantiate(PickupsShellPrefab, pickupPosition, Quaternion.identity);
+        newPickupShell.GetComponent<Shell>().ChangeColour(ammoColour);
+        PickupsMap.Add(float.Parse(messageSegments[3]), newPickupShell);
     }
 
 }

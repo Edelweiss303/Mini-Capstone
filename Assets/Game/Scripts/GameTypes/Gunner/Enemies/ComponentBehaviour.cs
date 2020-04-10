@@ -73,9 +73,9 @@ public class ComponentBehaviour : EnemyBase
         
     }
 
-    public void Select(GunnerController.EnemyType inEnemyType, Material inEnemyMaterial)
+    public void Select(EnemyBase.EnemyColour inEnemyColour, Material inEnemyMaterial)
     {
-        Type = inEnemyType;
+        Colour = inEnemyColour;
         EnemyMaterial = inEnemyMaterial;
 
         Selected = true;

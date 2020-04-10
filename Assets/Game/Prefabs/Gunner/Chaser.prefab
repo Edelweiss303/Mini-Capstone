@@ -127,7 +127,6 @@ MonoBehaviour:
   weight: 1
   target: {x: 0, y: 0, z: 0}
   steeringAgent: {fileID: 0}
-  targetType: 0
   RepathingCooldown: 2
   SetNewPathTargetDistance: 0.1
 --- !u!1 &5401679602862512748
@@ -162,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 5401679602862512748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.31314135, y: -6.3064995, z: 4.3914127}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 1125585315}
   m_Father: {fileID: 0}
@@ -244,11 +243,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
-  Speed: 1
+  Speed: 2
   Health: 3
   DeathTime: 4
   RetreatingTime: 1.5
@@ -308,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   summingMethod: 0
   mass: 1
-  maxSpeed: 1
+  maxSpeed: 1.5
   maxForce: 10
   velocity: {x: 0, y: 0, z: 0}
   angularDampeningTime: 5

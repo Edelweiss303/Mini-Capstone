@@ -11,6 +11,10 @@ public abstract class EnemyBase : MonoBehaviour
     {
         none, chaser, sentry, droid, factory, spawn
     }
+    public enum EnemyColour
+    {
+        A, B, C
+    }
 
     abstract public void TakeDamage(float damage);
     abstract public bool IsAlive();
@@ -19,7 +23,7 @@ public abstract class EnemyBase : MonoBehaviour
     public bool DieOnCollision = true;
     public float Damage;
     public int ProtectionPriority;
-    public GunnerController.EnemyType Type;
+    public EnemyColour Colour;
     public Material EnemyMaterial;
 
     public float DamageTransparencyRatio = 0.75f;
@@ -75,8 +79,14 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected void SetEnemyType()
     {
-        Type = GunnerController.Instance.GetRandomizedEnemyType();
-        EnemyMaterial = GunnerController.Instance.EnemyMaterialMap[Type];
+        Colour = GunnerController.Instance.GetRandomizedEnemyColour();
+        EnemyMaterial = ColourManager.Instance.EnemyMaterialMap[Colour];
+    }
+
+    public void SetEnemyColour(EnemyColour inColour)
+    {
+        Colour = inColour;
+        EnemyMaterial = ColourManager.Instance.EnemyMaterialMap[Colour];
     }
 
     protected void ShowDamageEffect()

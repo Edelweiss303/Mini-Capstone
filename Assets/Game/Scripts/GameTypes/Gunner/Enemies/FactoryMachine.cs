@@ -67,7 +67,7 @@ public class FactoryMachine : EnemyBase
     void selectComponent()
     {
         selectedComponent = Shields[UnityEngine.Random.Range(0, Shields.Count)];
-        selectedComponent.Select(Type, EnemyMaterial);
+        selectedComponent.Select(Colour, EnemyMaterial);
     }
 
     private void checkForDestinationChange()

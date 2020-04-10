@@ -18,9 +18,9 @@ public class Shield : MonoBehaviour
         initialShieldAlpha = shieldRenderer.material.color.a;
     }
 
-    public void SetShieldType(GunnerController.EnemyType inEnemyType)
+    public void SetShieldType(EnemyBase.EnemyColour inEnemyColour)
     {
-        shieldRenderer.material = GunnerController.Instance.ShieldMaterialMap[inEnemyType];
+        shieldRenderer.material = ColourManager.Instance.ShieldMaterialMap[inEnemyColour];
         initialShieldAlpha = shieldRenderer.material.color.a;
     }
 

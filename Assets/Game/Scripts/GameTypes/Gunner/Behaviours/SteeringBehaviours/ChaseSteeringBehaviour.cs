@@ -6,12 +6,6 @@ using UnityEngine.AI;
 
 public class ChaseSteeringBehaviour : SteeringBehaviourBase
 {
-    public enum TargetType
-    {
-        Player, Friend, None
-    }
-    public TargetType targetType = TargetType.Player;
-
     private Transform targetTransform;
     private NavMeshPath path;
     private int currentPathTargetIndex = 0;
@@ -22,16 +16,8 @@ public class ChaseSteeringBehaviour : SteeringBehaviourBase
 
     // Start is called before the first frame update
     void Start()
-    {
-        switch (targetType)
-        {
-            case TargetType.Player:
-                targetTransform = FindObjectOfType<PlayerBehaviour>().gameObject.transform;
-                break;
-            case TargetType.Friend:
-                targetTransform = FindObjectOfType<FriendController>().gameObject.transform;
-                break;
-        }
+    { 
+        targetTransform = FindObjectOfType<PlayerBehaviour>().gameObject.transform;
         CalculatePath();
     }
 
@@ -71,7 +57,8 @@ public class ChaseSteeringBehaviour : SteeringBehaviourBase
     void CalculatePath()
     {
         path = new NavMeshPath();
-        NavMesh.CalculatePath(transform.position, targetTransform.position, NavMesh.AllAreas, path);
+        Vector3 test = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
+        NavMesh.CalculatePath(transform.position, test, NavMesh.AllAreas, path);
         if (path != null && path.corners.Length > 0)
         {
             target = path.corners[0];

@@ -25,7 +25,6 @@ public class ChaserBehaviour : EnemyBase
     protected override void Start()
     {
 
-
         timeRetreating = 0.0f;
         agent = GetComponent<SteeringAgent>();
         enemyRenderer = GetComponent<MeshRenderer>();
@@ -40,7 +39,7 @@ public class ChaserBehaviour : EnemyBase
         enemyRenderer.material = EnemyMaterial;
         type = EnemyType.chaser;
         gameID = gameObject.GetInstanceID();
-        EnemiesManager.Instance.addEnemy(gameID, gameObject, type, Type);
+        EnemiesManager.Instance.addEnemy(gameID, gameObject, type, Colour);
     }
 
     void Update()

@@ -52,7 +52,7 @@ public class SentryDrone : EnemyBase
         SetEnemyType();
         if (selectedDrone)
         {
-            selectedDrone.Select(Type, EnemyMaterial);
+            selectedDrone.Select(Colour, EnemyMaterial);
         }
         
         sState = SentryState.Idle;   
