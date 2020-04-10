@@ -9,7 +9,7 @@ public class InputDetection : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            InputManager.Instance.inputMode = InputManager.InputMode.PC;
+            InputManager.Instance.inputMode = InputManager.InputMode.KeyAndMouse;
             MainMenuButtons.Instance.InputTypeAccepted();
         }
 

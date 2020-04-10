@@ -73,7 +73,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
             }
             MoveCursor();
         }
-        Reload();
+        //Reload();
 
     }
 
@@ -182,5 +182,19 @@ public class PlayerShootingBehaviour : MonoBehaviour
             }
         }
 
+    }
+
+    public void increaseAmmo(GunnerController.EnemyType enemyType, int amount)
+    {
+        ammoTypes[enemyType] += amount;
+        if(ammoTypes[enemyType] > MaxAmmo)
+        {
+            ammoTypes[enemyType] = MaxAmmo;
+        }
+
+        if(enemyType == currentEnemyType)
+        {
+            ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyType]);
+        }
     }
 }

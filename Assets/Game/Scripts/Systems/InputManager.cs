@@ -11,7 +11,7 @@ class InputManager : Singleton<InputManager>
 {
     public enum InputMode
     {
-        PC, AppleTV, AndroidTablet, Null
+        KeyAndMouse, Controller, AppleTV, AndroidTablet, Null
     }
     public InputMode inputMode = InputMode.Null;
 
@@ -39,7 +39,7 @@ class InputManager : Singleton<InputManager>
     private Vector3 lastCursorPosition = Vector3.zero;
     private Quaternion remoteCalibration;
     private Vector2 centerOfScreen;
-
+    private bool joystickIsHeld = false;
 
     public void Start()
     {
@@ -69,7 +69,7 @@ class InputManager : Singleton<InputManager>
 
     public void InputUpdate()
     {
-        if (inputMode == InputMode.PC)
+        if (inputMode == InputMode.KeyAndMouse)
         {
             #region PC
             FireInput = Input.GetMouseButtonDown(0);
@@ -101,6 +101,48 @@ class InputManager : Singleton<InputManager>
             DirectionalPresses[Direction.left] = Input.GetKeyDown(KeyCode.A);
             DirectionalPresses[Direction.right] = Input.GetKeyDown(KeyCode.D);
             #endregion
+
+        }
+        else if(inputMode == InputMode.Controller)
+        {
+            DirectionalInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            float lookDirection = Input.GetAxis("LookX");
+
+            Debug.Log(lookDirection);
+            if (!joystickIsHeld)
+            {
+                if (lookDirection < -0.05f)
+                {
+                    DirectionalPresses[Direction.left] = true;
+                    DirectionalPresses[Direction.right] = false;
+                    joystickIsHeld = true;
+                }
+                else if (lookDirection > 0.05f)
+                {
+                    DirectionalPresses[Direction.left] = false;
+                    DirectionalPresses[Direction.right] = true;
+                    joystickIsHeld = true;
+                }
+                else
+                {
+                    DirectionalPresses[Direction.left] = false;
+                    DirectionalPresses[Direction.right] = false;
+                }
+            }
+            else
+            {
+                if(Mathf.Abs(lookDirection) < 0.05f)
+                {
+                    joystickIsHeld = false;
+                }
+                else
+                {
+                    DirectionalPresses[Direction.left] = false;
+                    DirectionalPresses[Direction.right] = false;
+                }
+                
+            }
+
 
         }
         else if (inputMode == InputMode.AppleTV)

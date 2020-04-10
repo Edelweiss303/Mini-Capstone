@@ -11,7 +11,7 @@ public class GunnerController : Singleton<GunnerController>
         Friend, Game
     }
 
-    public PlayerType playerType = PlayerType.Friend;
+    public PlayerType playerType = PlayerType.Game;
 
     public enum EnemyType
     {
@@ -35,6 +35,8 @@ public class GunnerController : Singleton<GunnerController>
     public List<Transform> FactoryMarkers = new List<Transform>();
     public GameObject ProjectilesCollection, EffectsContainer;
     public GameObject PlayerObject;
+
+    private PlayerShootingBehaviour shootingBehaviour;
 
     public void QuitGame()
     {
@@ -66,9 +68,11 @@ public class GunnerController : Singleton<GunnerController>
         {
             case PlayerType.Friend:
                 PlayerObject = FindObjectOfType<FriendController>().gameObject;
+                
                 break;
             case PlayerType.Game:
                 PlayerObject = FindObjectOfType<PlayerBehaviour>().gameObject;
+                shootingBehaviour = PlayerObject.GetComponent<PlayerBehaviour>().shootBehaviour;
                 break;
         }
     }
@@ -120,6 +124,26 @@ public class GunnerController : Singleton<GunnerController>
     public EnemyType GetRandomizedEnemyType()
     {
         return AllEnemyTypes[Random.Range(0, AllEnemyTypes.Count)];
+    }
+
+    public void UpdateAmmo(string[] messageSegments)
+    {
+        EnemyType typeToIncrease;
+        int amountToIncrease = int.Parse(messageSegments[3]);
+        switch (messageSegments[2])
+        {
+            case "B":
+                typeToIncrease = EnemyType.B;
+                break;
+            case "C":
+                typeToIncrease = EnemyType.C;
+                break;
+            default:
+                typeToIncrease = EnemyType.A;
+                break;
+        }
+        shootingBehaviour.increaseAmmo(typeToIncrease, amountToIncrease);
+
     }
 
 }

@@ -111,6 +111,9 @@ public class GameNetwork : MonoBehaviour
                         case "PilotTransformUpdate":
                             GunnerController.Instance.UpdatePlayer(messageSegments);
                             break;
+                        case "GunnerGetAmmo":
+                            GunnerController.Instance.UpdateAmmo(messageSegments);
+                            break;
                         default:
                             break;
                     }
