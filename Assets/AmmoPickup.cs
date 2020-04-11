@@ -9,6 +9,7 @@ public class AmmoPickup : MonoBehaviour
     public EnemyBase.EnemyColour EnemyColour;
     public List<GameObject> Canisters;
     public int AmmoAmount = 4;
+    public string PlayerPickupSoundEffectName;
 
     private Light ammoLight;
     private List<MeshRenderer> canisterRenderers = new List<MeshRenderer>();
@@ -46,6 +47,7 @@ public class AmmoPickup : MonoBehaviour
     {
         if (other.GetComponent<PilotPlayerController>())
         {
+            AudioManager.Instance.PlaySound(PlayerPickupSoundEffectName);
             GameNetwork.Instance.ToPlayerQueue.Add("g:GunnerGetAmmo:" + EnemyColour.ToString() + ":" + gameID + ":" + AmmoAmount);
             Destroy(gameObject);
         }

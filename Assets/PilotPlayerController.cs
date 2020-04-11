@@ -10,6 +10,7 @@ public class PilotPlayerController : MonoBehaviour
     public Transform TorsoTransform;
     public Transform CameraTransform;
     public float GunnerMoveUpdateSyncThreshold = 0.5f;
+    public string PlayerMoveSoundEffectName, PlayerRotateSoundEffectName;
 
     [SerializeField]
     private int rotationTargetAngle = 0;
@@ -20,11 +21,13 @@ public class PilotPlayerController : MonoBehaviour
     private List<int> validRotations = new List<int>() { 0, 45, 90, 135, 180, 225, 270, 315 };
     private int currentTargetRotationIndex = 0;
     private float timeSinceLateGunnerMoveUpdate = 0.0f;
+    private bool isMoving = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        isMoving = false;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -41,6 +44,7 @@ public class PilotPlayerController : MonoBehaviour
 
         if (InputManager.Instance.DirectionalPresses[InputManager.Direction.left])
         {
+            AudioManager.Instance.PlaySound(PlayerRotateSoundEffectName);
             currentTargetRotationIndex--;
             if (currentTargetRotationIndex < 0)
             {
@@ -50,8 +54,9 @@ public class PilotPlayerController : MonoBehaviour
             rotationTargetAngle = validRotations[currentTargetRotationIndex];
             rotationDirection = -1.0f;
         }
-        if (InputManager.Instance.DirectionalPresses[InputManager.Direction.right])
+        else if (InputManager.Instance.DirectionalPresses[InputManager.Direction.right])
         {
+            AudioManager.Instance.PlaySound(PlayerRotateSoundEffectName);
             currentTargetRotationIndex++;
             if (currentTargetRotationIndex >= validRotations.Count)
             {
@@ -64,6 +69,16 @@ public class PilotPlayerController : MonoBehaviour
         }
 
         Vector3 currentVelocity = new Vector3(transform.right.x * InputManager.Instance.DirectionalInput.x, 0, transform.forward.z * InputManager.Instance.DirectionalInput.y) * Time.deltaTime * Speed;
+        if(currentVelocity.magnitude > 0.05f && !isMoving)
+        {
+            AudioManager.Instance.PlaySound(PlayerMoveSoundEffectName);
+            isMoving = true;
+        }
+        else if(isMoving && currentVelocity.magnitude == 0.0f)
+        {
+            AudioManager.Instance.StopSound(PlayerMoveSoundEffectName);
+            isMoving = false;
+        }
         transform.position += currentVelocity;
 
         TorsoTransform.Rotate(TorsoTransform.up, rotationDirection * RotationRate);

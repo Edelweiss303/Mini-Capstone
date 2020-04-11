@@ -12854,10 +12854,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
-  RotationRate: 1.25
+  RotationRate: 2
   TorsoTransform: {fileID: 959450235}
   CameraTransform: {fileID: 1940143562}
   GunnerMoveUpdateSyncThreshold: 0.1
+  PlayerMoveSoundEffectName: Player_Move
+  PlayerRotateSoundEffectName: Player_Rotate
   rotationTargetAngle: 0
 --- !u!136 &674058930
 CapsuleCollider:
@@ -24799,6 +24801,68 @@ Transform:
   m_Father: {fileID: 260831175}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 94.7, z: 0}
+--- !u!1 &1057740016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1057740018}
+  - component: {fileID: 1057740017}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1057740017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057740016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d825bc1fb78020842b0fc6a3062d1128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - name: Player_Move
+    clip: {fileID: 8300000, guid: 45ed833e32d49d348b1916ce19444eb7, type: 3}
+    volume: 0.688
+    pitch: 1
+    looping: 1
+    source: {fileID: 0}
+  - name: Player_Rotate
+    clip: {fileID: 8300000, guid: 3170f52828f4f9b4096f27d2498e8f34, type: 3}
+    volume: 0.627
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - name: Player_Pickup
+    clip: {fileID: 8300000, guid: 73562388370cd7e4aa1fd29133225567, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+--- !u!4 &1057740018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057740016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.940034, y: -2.4174328, z: -13.512606}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1063338438
 GameObject:
   m_ObjectHideFlags: 0

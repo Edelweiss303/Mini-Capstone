@@ -13,7 +13,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
     public int MaxAmmo = 24;
     public float ReloadingTime = 1.5f;
     public GameObject BulletImpactEffectPrefab;
-    public AudioSource ShotAudioSource, ReloadAudioSource;
+    public string ShootingSoundEffectName = "Player_Shoot";
     public float Damage = 1.0f;
     public float DeadZone = 0.1f;
     public float AutoAimWeight = 0.75f;
@@ -86,6 +86,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
         {
             if (ammoTypes[currentEnemyColour] > 0)
             {
+                AudioManager.Instance.PlaySound(ShootingSoundEffectName);
                 ammoTypes[currentEnemyColour]--;
                 if (ammoBarBehaviour)
                 {
@@ -96,10 +97,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
                 {
 
                     EnemyBase hitEnemy;
-                    if (ShotAudioSource)
-                    {
-                        ShotAudioSource.PlayOneShot(ShotAudioSource.clip);
-                    }
+                    
                     GameObject effect = Instantiate(BulletImpactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
                     effect.GetComponent<Renderer>().material = ColourManager.Instance.EnemyMaterialMap[currentEnemyColour];
                     if (effectsContainer)
@@ -115,12 +113,8 @@ public class PlayerShootingBehaviour : MonoBehaviour
                         return;
                     }
                 }
-
             }
-
         }
-
-
     }
 
     private void MoveCursor()
@@ -152,35 +146,6 @@ public class PlayerShootingBehaviour : MonoBehaviour
         }
 
         Crosshairs.transform.position += movementToApply * Time.deltaTime * CrosshairSpeed;
-    }
-
-    private void Reload()
-    {
-        if (ammoTypes[currentEnemyColour] == 0)
-        {
-            isReloading = true;
-            ammoTypes[currentEnemyColour] = 0;
-            ammoBarBehaviour.SetAmmo(0);
-        }
-        if (isReloading)
-        {
-            reloadingTimer += Time.deltaTime;
-            if (reloadingTimer > ReloadingTime)
-            {
-                if (ReloadAudioSource)
-                {
-                    ReloadAudioSource.PlayOneShot(ReloadAudioSource.clip);
-                }
-
-                ammoTypes[currentEnemyColour] = MaxAmmo;
-                reloadingTimer = 0;
-                isReloading = false;
-
-                //Reload
-                ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyColour]);
-            }
-        }
-
     }
 
     public void increaseAmmo(EnemyBase.EnemyColour enemyColour, int amount)

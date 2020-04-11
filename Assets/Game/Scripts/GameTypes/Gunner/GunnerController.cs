@@ -22,13 +22,14 @@ public class GunnerController : Singleton<GunnerController>
     public List<EnemyColour> AllEnemyColours = new List<EnemyColour>() { EnemyColour.A, EnemyColour.B, EnemyColour.C };
     public GameObject PickupsShellPrefab;
     public Dictionary<float, GameObject> PickupsMap = new Dictionary<float, GameObject>();
-
+    public string PlayerMovementSoundEffectName, PlayerRotationSoundEffectName, PickupSoundEffectName;
 
     public List<Transform> FactoryMarkers = new List<Transform>();
     public GameObject ProjectilesCollection, EffectsContainer;
     public GameObject PlayerObject;
 
     private PlayerShootingBehaviour shootingBehaviour;
+    private bool isMoving = false;
 
     public void QuitGame()
     {
@@ -42,6 +43,7 @@ public class GunnerController : Singleton<GunnerController>
 
     public void Start()
     {
+        isMoving = false;
         switch (playerType)
         {
             case PlayerType.Friend:
@@ -95,7 +97,25 @@ public class GunnerController : Singleton<GunnerController>
     {
         float x = float.Parse(messageSegments[2]), y = float.Parse(messageSegments[3]), z = float.Parse(messageSegments[4]);
         float rotation = float.Parse(messageSegments[5]);
-        PlayerObject.transform.position = new Vector3(x, y, z);
+        Vector3 newPosition = new Vector3(x, y, z);
+
+        Debug.Log((newPosition - PlayerObject.transform.position).magnitude);
+        if((newPosition - PlayerObject.transform.position).magnitude > 0.25f && !isMoving)
+        {
+            isMoving = true;
+            AudioManager.Instance.PlaySound(PlayerMovementSoundEffectName);
+        }
+        else if(isMoving && (newPosition - PlayerObject.transform.position).magnitude == 0.0f)
+        {
+            isMoving = false;
+            AudioManager.Instance.StopSound(PlayerMovementSoundEffectName);
+        }
+        PlayerObject.transform.position = newPosition;
+
+        if(Mathf.Abs(PlayerObject.transform.eulerAngles.y - rotation) > 10)
+        {
+            AudioManager.Instance.PlaySound(PlayerRotationSoundEffectName);
+        }
         PlayerObject.transform.eulerAngles = new Vector3(PlayerObject.transform.eulerAngles.x, rotation, PlayerObject.transform.eulerAngles.z);
     }
 
@@ -122,7 +142,7 @@ public class GunnerController : Singleton<GunnerController>
                 break;
         }
         shootingBehaviour.increaseAmmo(colourToIncrease, amountToIncrease);
-
+        AudioManager.Instance.PlaySound(PickupSoundEffectName);
         if (PickupsMap.ContainsKey(pickupID))
         {
             Destroy(PickupsMap[pickupID]);

@@ -32,7 +32,27 @@ public class AudioManager : Singleton<AudioManager>
             return;
         }
 
-        selectedSound.source.Play();
+        if (!selectedSound.source.isPlaying)
+        {
+            selectedSound.source.Play();
+        }
+    }
+
+    public void StopSound(string name)
+    {
+        Sound selectedSound = Sounds.Find(s => s.name == name);
+
+        if (selectedSound == null)
+        {
+            Debug.LogWarning("Sound: " + name + "not found.");
+            return;
+        }
+
+        if (selectedSound.source.isPlaying)
+        {
+            selectedSound.source.Stop();
+        }
+
 
     }
 

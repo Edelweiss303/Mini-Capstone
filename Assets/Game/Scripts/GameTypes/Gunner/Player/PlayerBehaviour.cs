@@ -5,28 +5,19 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-
-
     public PlayerShootingBehaviour shootBehaviour;
-
     public GameObject DamageVisionPanel;
-
     public float MaxHealth = 100.0f;
-
     public float DamageVisionEffectTime = 1.0f;
-
     public float RotationRate = 0.01f;
     public bool Alive = true;
-
-    public AudioSource TakeDamageAudioSource;
+    public string TakeDamageSoundEffectName;
     public HealthBarBehaviour healthBarBehaviour;
 
     private float damageVisionEffectTimer = 0.0f;
     private float currentHealth;
-
     private Vector3 currentRotation;
 
-    // Start is called before the first frame update
     void Start()
     {
         healthBarBehaviour = FindObjectOfType<HealthBarBehaviour>();
@@ -36,7 +27,6 @@ public class PlayerBehaviour : MonoBehaviour
         currentRotation = new Vector3(0, 0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Alive)
@@ -76,35 +66,6 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Camera.main.transform.position = transform.position;
         Camera.main.transform.rotation = transform.rotation;
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    currentRotation.y = -RotationRate;
-        //}
-        //else if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    currentRotation.y = RotationRate;
-        //}
-        //else
-        //{
-        //    currentRotation.y = 0.0f;
-        //}
-
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    currentRotation.x = RotationRate;
-        //}
-        //else if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    currentRotation.x = -RotationRate;
-        //}
-        //else
-        //{
-        //    currentRotation.x = 0.0f;
-        //}
-
-        ////Apply the rotation
-        //transform.Rotate(currentRotation);
-
     }
 
     public void TakeDamage(float damage)
@@ -117,10 +78,7 @@ public class PlayerBehaviour : MonoBehaviour
             DamageVisionPanel.SetActive(true);
         }
 
-        if (TakeDamageAudioSource)
-        {
-            TakeDamageAudioSource.PlayOneShot(TakeDamageAudioSource.clip);
-        }
+        AudioManager.Instance.PlaySound(TakeDamageSoundEffectName);
         
         if(currentHealth <= 0)
         {

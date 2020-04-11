@@ -536,6 +536,7 @@ MonoBehaviour:
     type: 3}
   SentrySpawnWeight: 0
   SentrySpawnRate: 9
+  SpawnerPowerDownSoundEffectName: Spawner_PowerDown
 --- !u!1 &5409556732109855791
 GameObject:
   m_ObjectHideFlags: 0

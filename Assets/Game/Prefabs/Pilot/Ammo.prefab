@@ -209,13 +209,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmmoMaterial: {fileID: 2100000, guid: ba8d88a315eaa834db78f1083c1ca2c9, type: 2}
   LightColor: {r: 1, g: 0, b: 0, a: 1}
-  EnemyType: 0
+  EnemyColour: 0
   Canisters:
   - {fileID: 6843740254260357693}
   - {fileID: 6843740253396451757}
   - {fileID: 6843740254518135949}
   - {fileID: 6843740252999828349}
   AmmoAmount: 4
+  PlayerPickupSoundEffectName: Player_Pickup
 --- !u!65 &6843740254144786502
 BoxCollider:
   m_ObjectHideFlags: 0

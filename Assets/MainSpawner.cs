@@ -19,6 +19,7 @@ public class MainSpawner : EnemyBase
     public GameObject SentryPrefab;
     public int SentrySpawnWeight;
     public float SentrySpawnRate;
+    public string SpawnerPowerDownSoundEffectName;
 
     private List<GameObject> spawnObjects = new List<GameObject>();
     private Dictionary<GameObject, float> spawnRateMap = new Dictionary<GameObject, float>();
@@ -144,5 +145,6 @@ public class MainSpawner : EnemyBase
     public override void Die()
     {
         isActive = false;
+        AudioManager.Instance.PlaySound(SpawnerPowerDownSoundEffectName);
     }
 }
