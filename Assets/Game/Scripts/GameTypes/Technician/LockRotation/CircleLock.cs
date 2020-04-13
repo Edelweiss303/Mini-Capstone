@@ -42,13 +42,24 @@ public class CircleLock : MonoBehaviour
     {
         if (Active)
         {
-            if (Input.GetMouseButton(0))
+            float rotationAmount = 0;
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                changeInPosition = Input.mousePosition - previousPosition;
-                
-                transform.Rotate(transform.forward, -Vector3.Dot(changeInPosition, transform.right));
+                rotationAmount += RotationSpeed;
             }
-            previousPosition = Input.mousePosition;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                rotationAmount -= RotationSpeed;
+            }
+            transform.Rotate(new Vector3(0, 0, rotationAmount));
+
+            //if (Input.GetMouseButton(0))
+            //{
+            //    changeInPosition = Input.mousePosition - previousPosition;
+                
+            //    transform.Rotate(transform.forward, -Vector3.Dot(changeInPosition, transform.right));
+            //}
+            //previousPosition = Input.mousePosition;
         }
     }
 

@@ -110,8 +110,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -225,8 +228,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -340,8 +346,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -455,8 +464,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -570,8 +582,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -685,8 +700,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -800,8 +818,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -915,8 +936,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -1030,8 +1054,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -1145,8 +1172,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -1260,8 +1290,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -1375,8 +1408,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -1490,8 +1526,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -1605,8 +1644,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -1720,8 +1762,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -1835,8 +1880,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 1
@@ -2020,8 +2068,11 @@ MonoBehaviour:
   DieOnCollision: 0
   Damage: 0
   ProtectionPriority: 4
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 4
   State: 0
   Shields: []
   ChangeDestinationFrequency: 3
@@ -2313,7 +2364,10 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 0
   Health: 15
   mainBehaviour: {fileID: 0}

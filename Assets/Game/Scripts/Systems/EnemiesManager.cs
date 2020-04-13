@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemiesManager : Singleton<EnemiesManager>
 {
-    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, FactoryShellPrefab, SpawnerShellPrefab;
+    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, FactoryShellPrefab, SpawnerShellPrefab, BigChaserShellPrefab;
     public float NetworkingUpdateThreshold = 0.1f;
 
     private List<EnemyBase> aimableTargets = new List<EnemyBase>();
@@ -248,13 +248,13 @@ public class EnemiesManager : Singleton<EnemiesManager>
                     colour = EnemyBase.EnemyColour.A;
                     break;
             }
-
+            Shell sBehaviour = null;
             switch (messageSegments[i + 1])
             {
                 case "chaser":
                     currentObject = Instantiate(ChaserShellPrefab);
                     addEnemy(objectID, currentObject, EnemyBase.EnemyType.chaser, colour);
-                    Shell sBehaviour = currentObject.GetComponent<Shell>();
+                    sBehaviour = currentObject.GetComponent<Shell>();
                     sBehaviour.ChangeColour(colour);
                     break;
                 case "sentry":
@@ -272,6 +272,12 @@ public class EnemiesManager : Singleton<EnemiesManager>
                 case "spawn":
                     currentObject = Instantiate(SpawnerShellPrefab);
                     addEnemy(objectID, currentObject, EnemyBase.EnemyType.spawn, colour);
+                    break;
+                case "bigchaser":
+                    currentObject = Instantiate(BigChaserShellPrefab);
+                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.bigchaser, colour);
+                    sBehaviour = currentObject.GetComponent<Shell>();
+                    sBehaviour.ChangeColour(colour);
                     break;
                 default:
                     continue;

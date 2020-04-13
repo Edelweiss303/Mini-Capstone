@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShootingBehaviour : MonoBehaviour
 {
@@ -13,12 +14,17 @@ public class PlayerShootingBehaviour : MonoBehaviour
     public int MaxAmmo = 24;
     public float ReloadingTime = 1.5f;
     public GameObject BulletImpactEffectPrefab;
-    public string ShootingSoundEffectName = "Player_Shoot";
-    public float Damage = 1.0f;
+    public string ShootingSoundEffectName = "Player_Shoot", PlayerPowerupSoundEffectName;
+    public int BaseDamage = 1;
     public float DeadZone = 0.1f;
     public float AutoAimWeight = 0.75f;
     public float CrosshairSpeed = 500.0f;
     public float MaximumAutoAimAdjustment = 3.0f;
+    public float ShootHeatGeneration = 0.25f;
+    public bool IsOverheated = false;
+    public float PowerupTime = 45.0f;
+    public Slider PowerupSlider;
+    public Image PowerupFill;
 
     private Vector3 originalCrosshairPositionReference;
     private Vector3 totalAutoAimMovement;
@@ -26,29 +32,53 @@ public class PlayerShootingBehaviour : MonoBehaviour
     private GameObject effectsContainer;
 
     private EnemyBase.EnemyColour currentEnemyColour;
-    private Dictionary<EnemyBase.EnemyColour, int> ammoTypes = new Dictionary<EnemyBase.EnemyColour, int>();
+    private Dictionary<EnemyBase.EnemyColour, int> ammoAmounts = new Dictionary<EnemyBase.EnemyColour, int>();
     private List<EnemyBase.EnemyColour> enemyColours = new List<EnemyBase.EnemyColour>()
                                                         { EnemyBase.EnemyColour.A, EnemyBase.EnemyColour.B, EnemyBase.EnemyColour.C };
+    private Dictionary<EnemyBase.EnemyColour, int> ammoDamage = new Dictionary<EnemyBase.EnemyColour, int>();
+
+    private EnemyBase.EnemyColour powerupColour;
     private int currentEnemyIndex;
     private float reloadingTimer;
     private bool isReloading = false;
     private LineRenderer currentAimTrajectory;
+    private float currentPowerupTimeRemaining = 0.0f;
 
     public void Start()
     {
+        PowerupSlider.maxValue = 45.0f;
+        PowerupSlider.value = 0.0f;
         effectsContainer = GunnerController.Instance.EffectsContainer;
         ammoBarBehaviour = FindObjectOfType<AmmoBarBehaviour>();
         currentEnemyColour = EnemyBase.EnemyColour.A;
         currentEnemyIndex = 0;
-        ammoTypes.Add(EnemyBase.EnemyColour.A, MaxAmmo);
-        ammoTypes.Add(EnemyBase.EnemyColour.B, MaxAmmo);
-        ammoTypes.Add(EnemyBase.EnemyColour.C, MaxAmmo);
+        ammoAmounts.Add(EnemyBase.EnemyColour.A, MaxAmmo);
+        ammoAmounts.Add(EnemyBase.EnemyColour.B, MaxAmmo);
+        ammoAmounts.Add(EnemyBase.EnemyColour.C, MaxAmmo);
+        ammoDamage.Add(EnemyBase.EnemyColour.A, BaseDamage);
+        ammoDamage.Add(EnemyBase.EnemyColour.B, BaseDamage);
+        ammoDamage.Add(EnemyBase.EnemyColour.C, BaseDamage);
 
         currentAimTrajectory = GetComponent<LineRenderer>();
         originalCrosshairPositionReference = Crosshairs.transform.position;
         totalAutoAimMovement = originalCrosshairPositionReference;
         ammoBarBehaviour.ChangeAmmoType(currentEnemyColour);
-        ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyColour]);
+        ammoBarBehaviour.SetAmmo(ammoAmounts[currentEnemyColour]);
+    }
+
+    public void SetPowerup(EnemyBase.EnemyColour colourToPowerup, int powerupDamage)
+    {
+        foreach(EnemyBase.EnemyColour colour in enemyColours)
+        {
+            ammoDamage[colour] = BaseDamage;
+        }
+
+        AudioManager.Instance.PlaySound(PlayerPowerupSoundEffectName);
+        PowerupFill.color = ColourManager.Instance.AmmoColorMap[colourToPowerup];
+        currentPowerupTimeRemaining = PowerupTime;
+        ammoDamage[colourToPowerup] = powerupDamage;
+        powerupColour = colourToPowerup;
+
     }
 
     public void ShootUpdate()
@@ -69,12 +99,15 @@ public class PlayerShootingBehaviour : MonoBehaviour
                 }
                 currentEnemyColour = enemyColours[currentEnemyIndex];
                 ammoBarBehaviour.ChangeAmmoType(currentEnemyColour);
-                ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyColour]);
+                ammoBarBehaviour.SetAmmo(ammoAmounts[currentEnemyColour]);
             }
             MoveCursor();
-        }
-        //Reload();
 
+            if(currentPowerupTimeRemaining > 0.0f)
+            {
+                PowerupUpdate();
+            }
+        }
     }
 
     private void Shoot()
@@ -82,15 +115,16 @@ public class PlayerShootingBehaviour : MonoBehaviour
         RaycastHit hit;
         Ray rayFromCursor = GameCamera.ScreenPointToRay(Crosshairs.transform.position);
 
-        if (InputManager.Instance.FireInput)
+        if (InputManager.Instance.FireInput && !IsOverheated)
         {
-            if (ammoTypes[currentEnemyColour] > 0)
+            if (ammoAmounts[currentEnemyColour] > 0)
             {
+                GameNetwork.Instance.ToPlayerQueue.Add("t:TechAddHeat:" + ShootHeatGeneration);
                 AudioManager.Instance.PlaySound(ShootingSoundEffectName);
-                ammoTypes[currentEnemyColour]--;
+                ammoAmounts[currentEnemyColour]--;
                 if (ammoBarBehaviour)
                 {
-                    ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyColour]);
+                    ammoBarBehaviour.SetAmmo(ammoAmounts[currentEnemyColour]);
                 }
 
                 if (Physics.Raycast(rayFromCursor, out hit, Range))
@@ -109,7 +143,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
 
                     if (hitEnemy != null && hitEnemy.IsAlive() && currentEnemyColour == hitEnemy.Colour)
                     {
-                        hitEnemy.TakeDamage(Damage);
+                        hitEnemy.TakeDamage(ammoDamage[currentEnemyColour]);
                         return;
                     }
                 }
@@ -150,15 +184,26 @@ public class PlayerShootingBehaviour : MonoBehaviour
 
     public void increaseAmmo(EnemyBase.EnemyColour enemyColour, int amount)
     {
-        ammoTypes[enemyColour] += amount;
-        if(ammoTypes[enemyColour] > MaxAmmo)
+        ammoAmounts[enemyColour] += amount;
+        if(ammoAmounts[enemyColour] > MaxAmmo)
         {
-            ammoTypes[enemyColour] = MaxAmmo;
+            ammoAmounts[enemyColour] = MaxAmmo;
         }
 
         if(enemyColour == currentEnemyColour)
         {
-            ammoBarBehaviour.SetAmmo(ammoTypes[currentEnemyColour]);
+            ammoBarBehaviour.SetAmmo(ammoAmounts[currentEnemyColour]);
+        }
+    }
+
+    private void PowerupUpdate()
+    {
+        PowerupSlider.value = currentPowerupTimeRemaining;
+        currentPowerupTimeRemaining -= Time.deltaTime;
+        if (currentPowerupTimeRemaining <= 0.0f)
+        {
+            currentPowerupTimeRemaining = 0.0f;
+            ammoDamage[powerupColour] = BaseDamage;
         }
     }
 }

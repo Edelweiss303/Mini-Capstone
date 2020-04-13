@@ -25,7 +25,7 @@ public class FactoryMachine : EnemyBase
 
     protected override void Start()
     {
-        type = EnemyType.factory;
+        Type = EnemyType.factory;
         base.Start();
         seekSteeringBehaviour = GetComponentInChildren<SeekSteeringBehaviour>();
         steeringAgent = GetComponent<SteeringAgent>();

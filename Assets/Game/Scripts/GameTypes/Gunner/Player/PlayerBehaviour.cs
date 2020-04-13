@@ -15,6 +15,8 @@ public class PlayerBehaviour : MonoBehaviour
     public HealthBarBehaviour healthBarBehaviour;
 
     private float damageVisionEffectTimer = 0.0f;
+
+    [SerializeField]
     private float currentHealth;
     private Vector3 currentRotation;
 
@@ -79,7 +81,8 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         AudioManager.Instance.PlaySound(TakeDamageSoundEffectName);
-        
+        GameNetwork.Instance.BroadcastQueue.Add("GunnerHealth:" + currentHealth);
+
         if(currentHealth <= 0)
         {
             Die();

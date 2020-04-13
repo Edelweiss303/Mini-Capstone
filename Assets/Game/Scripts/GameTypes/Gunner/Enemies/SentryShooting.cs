@@ -12,7 +12,7 @@ public class SentryShooting : MonoBehaviour
     public float Damage = 1.0f;
     public GameObject CannonObject;
     public string Shoot_Sound;
-
+    private PlayerBehaviour pBehaviour;
     public bool IsRecharged
     {
         get { return totalRechargeTime == 0.0f; }
@@ -21,6 +21,11 @@ public class SentryShooting : MonoBehaviour
     private LineRenderer laser;
     private float totalRechargeTime = 0.0f;
     private float totalChargingTime = 0.0f;
+
+    private void Start()
+    {
+        pBehaviour = GunnerController.Instance.PlayerObject.GetComponent<PlayerBehaviour>();
+    }
 
     public void Charge(Transform target)
     {
@@ -64,7 +69,7 @@ public class SentryShooting : MonoBehaviour
                 AudioManager.Instance.PlaySound(Shoot_Sound);
             }
 
-            //pBehaviour.TakeDamage(Damage);
+            pBehaviour.TakeDamage(Damage);
         }
     }
 

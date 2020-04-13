@@ -44,6 +44,7 @@ public class LockRotationGameController : Singleton<LockRotationGameController>
             if(currentActiveLockIndex >= Locks.Count)
             {
                 resetGame();
+                TechnicianController.Instance.ResetHeat();
                 return;
             }
 
@@ -59,8 +60,6 @@ public class LockRotationGameController : Singleton<LockRotationGameController>
         ActiveLock.getInvalids(out invalids1, out invalids2);
         GameNetwork.Instance.ToPlayerQueue.Add("g:MiniGameLRSetLockInvalids:" + invalids1);
         GameNetwork.Instance.ToPlayerQueue.Add("p:MiniGameLRSetLockInvalids:" + invalids2);
-        //InvalidText1.text = invalids1;
-        //InvalidText2.text = invalids2;
     }
 
     public void resetGame()

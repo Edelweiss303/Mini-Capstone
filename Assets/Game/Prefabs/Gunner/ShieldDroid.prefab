@@ -113,8 +113,11 @@ MonoBehaviour:
   DieOnCollision: 1
   Damage: 0
   ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
+  DamageTransparencyRatio: 0.75
+  TimeDamaged: 0.3
+  Type: 3
   Speed: 500
   Health: 3
   DeathTime: 4

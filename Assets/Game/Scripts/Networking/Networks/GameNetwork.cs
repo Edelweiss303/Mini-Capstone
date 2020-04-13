@@ -92,6 +92,48 @@ public class GameNetwork : MonoBehaviour
                     case "TechnicianMessengerReset":
                         TechnicianMessenger.Instance.ResetMessenger();
                         break;
+                    case "TechnicianHeat":
+                        if(Type != PlayerType.Technician)
+                        {
+                            TechnicianMessenger.Instance.SetHeat(messageSegments);
+                        }
+                        break;
+                    case "TechnicianOverheated":
+                        if(Type != PlayerType.Technician)
+                        {
+                            TechnicianMessenger.Instance.SetOverheated();
+                        }
+                        break;
+                    case "GunnerHealth":
+                        if(Type == PlayerType.Pilot)
+                        {
+                            PilotController.Instance.SetHealth(float.Parse(messageSegments[1]));
+                        }
+                        else if(Type == PlayerType.Technician)
+                        {
+                            TechnicianController.Instance.SetHealth(float.Parse(messageSegments[1]));
+                        }
+                        break;
+                    case "GunnerGameOver":
+                        if (Type == PlayerType.Pilot)
+                        {
+                            //PilotController.Instance.GameOver();
+                        }
+                        else if (Type == PlayerType.Technician)
+                        {
+                            //TechnicianController.Instance.GameOver();
+                        }
+                        break;
+                    case "GunnerRestartGame":
+                        if (Type == PlayerType.Pilot)
+                        {
+                            //PilotController.Instance.RestartGame();
+                        }
+                        else if (Type == PlayerType.Technician)
+                        {
+                            //TechnicianController.Instance.RestartGame();
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -105,15 +147,19 @@ public class GameNetwork : MonoBehaviour
                     switch (messageSegments[1])
                     {
                         case "MiniGameIMChooseIcon":
+                            TechnicianMessenger.Instance.ResetMessenger();
                             TechnicianMessenger.Instance.UpdateIcon(messageSegments);
                             break;
                         case "MiniGameLRSetLockInvalids":
+                            TechnicianMessenger.Instance.ResetMessenger();
                             TechnicianMessenger.Instance.UpdateLockMessage(messageSegments[2]);
                             break;
                         case "MiniGameTBChoosePatterns":
-                            TechnicianMessenger.Instance.UpdatePatterns(messageSegments[3], messageSegments[5], messageSegments[7]);
+                            TechnicianMessenger.Instance.ResetMessenger();
+                            TechnicianMessenger.Instance.UpdatePatterns(messageSegments[2]);
                             break;
                         case "MiniGameTBSetColours":
+                            TechnicianMessenger.Instance.ResetMessenger();
                             TechnicianMessenger.Instance.UpdateColours(messageSegments);
                             break;
                         case "PilotTransformUpdate":
@@ -124,6 +170,15 @@ public class GameNetwork : MonoBehaviour
                             break;
                         case "GunnerCreateAmmo":
                             GunnerController.Instance.AddAmmoPickup(messageSegments);
+                            break;
+                        case "TechAddHeat":
+                            TechnicianController.Instance.IncreaseHeat(float.Parse(messageSegments[2]));
+                            break;
+                        case "GunnerSetPowerup":
+                            GunnerController.Instance.SetPowerup(messageSegments);
+                            break;
+                        case "PilotRadarScan":
+                            PilotController.Instance.ScanRadar();
                             break;
                         default:
                             break;

@@ -25,6 +25,7 @@ public class SentryDrone : EnemyBase
     public float AggroRange = 28.0f;
     public string DeathAudioClipName;
     public GameObject ExplosionPrefab;
+    public float initialHeight = 0.0f;
 
     private SentryShooting sentryShooting;
     private Transform pTransform;
@@ -38,17 +39,16 @@ public class SentryDrone : EnemyBase
     // Start is called before the first frame update
     protected override void Start()
     {
-        type = EnemyType.sentry;
+        Type = EnemyType.sentry;
         base.Start();
-        //pBehaviour = FindObjectOfType<PlayerBehaviour>();
-        //pTransform = pBehaviour.gameObject.transform;
-        pTransform = FindObjectOfType<FriendController>().transform;
+        pBehaviour = FindObjectOfType<PlayerBehaviour>();
+        pTransform = pBehaviour.gameObject.transform;
         chaseSteeringBehaviour = GetComponentInChildren<ChaseSteeringBehaviour>();
         steeringAgent = GetComponent<SteeringAgent>();
         int droneSelectionIndex = UnityEngine.Random.Range(0, DroneComponents.Count - 1);
         selectedDrone = DroneComponents[droneSelectionIndex].GetComponent<ComponentBehaviour>();
         sentryShooting = GetComponentInChildren<SentryShooting>();
-
+        initialHeight = transform.position.y;
         SetEnemyType();
         if (selectedDrone)
         {
@@ -99,6 +99,7 @@ public class SentryDrone : EnemyBase
                 //WaveManager.Instance.EnemyWasKilled();
             }
         }
+       // transform.position = new Vector3(transform.position.x, initialHeight, transform.position.z);
     }
 
     private void SetSentryState()

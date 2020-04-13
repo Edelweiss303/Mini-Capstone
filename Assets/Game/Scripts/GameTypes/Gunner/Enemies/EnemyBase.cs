@@ -9,7 +9,7 @@ public abstract class EnemyBase : MonoBehaviour
 {
     public enum EnemyType
     {
-        none, chaser, sentry, droid, factory, spawn
+        none, chaser, sentry, droid, factory, spawn, bigchaser
     }
     public enum EnemyColour
     {
@@ -31,7 +31,7 @@ public abstract class EnemyBase : MonoBehaviour
     private Renderer eRenderer;
     private Color originalColor;
     private Color damagedColor;
-    protected EnemyType type;
+    public EnemyType Type;
     protected float timeDamaged = 0.0f;
     protected int gameID;
 

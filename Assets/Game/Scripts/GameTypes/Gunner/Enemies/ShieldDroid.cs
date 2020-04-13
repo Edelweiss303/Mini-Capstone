@@ -57,7 +57,7 @@ public class ShieldDroid : EnemyBase
     // Start is called before the first frame update
     protected override void Start()
     {
-        type = EnemyType.droid;
+        Type = EnemyType.droid;
         base.Start();
         enemyRenderer = GetComponent<MeshRenderer>();
         enemyCollider = GetComponent<BoxCollider>();

@@ -19,6 +19,10 @@ public class MainSpawner : EnemyBase
     public GameObject SentryPrefab;
     public int SentrySpawnWeight;
     public float SentrySpawnRate;
+    public GameObject BigChaserPrefab;
+    public int BigChaserSpawnWeight;
+    public float BigChaserSpawnRate;
+
     public string SpawnerPowerDownSoundEffectName;
 
     private List<GameObject> spawnObjects = new List<GameObject>();
@@ -45,22 +49,26 @@ public class MainSpawner : EnemyBase
         {
             spawnObjects.Add(SentryPrefab);
         }
+        for(int i = 0; i < BigChaserSpawnWeight; i++)
+        {
+            spawnObjects.Add(BigChaserPrefab);
+        }
         spawnRateMap.Add(ChaserPrefab, ChaserSpawnRate);
         spawnRateMap.Add(SentryPrefab, SentrySpawnRate);
+        spawnRateMap.Add(BigChaserPrefab, BigChaserSpawnRate);
 
         spawnerRenderer = GetComponent<MeshRenderer>();
         nodeRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
         nodeRenderers.Remove(spawnerRenderer);
         SetEnemyType();
         spawnerRenderer.material = EnemyMaterial;
-        type = EnemyType.chaser;
         gameID = gameObject.GetInstanceID();
         setSpawnColour();
         setSpawnType();
 
-        type = EnemyType.spawn;
+        Type = EnemyType.spawn;
         gameID = gameObject.GetInstanceID();
-        EnemiesManager.Instance.addEnemy(gameID, gameObject, type, Colour);
+        EnemiesManager.Instance.addEnemy(gameID, gameObject, Type, Colour);
     }
 
     // Update is called once per frame

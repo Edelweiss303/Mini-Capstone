@@ -8,7 +8,7 @@ public class AmmoPickup : MonoBehaviour
     public Color LightColor;
     public EnemyBase.EnemyColour EnemyColour;
     public List<GameObject> Canisters;
-    public int AmmoAmount = 4;
+    public int AmmoAmount = 30;
     public string PlayerPickupSoundEffectName;
 
     private Light ammoLight;

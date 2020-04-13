@@ -37,9 +37,8 @@ public class ChaserBehaviour : EnemyBase
 
         SetEnemyType();
         enemyRenderer.material = EnemyMaterial;
-        type = EnemyType.chaser;
         gameID = gameObject.GetInstanceID();
-        EnemiesManager.Instance.addEnemy(gameID, gameObject, type, Colour);
+        EnemiesManager.Instance.addEnemy(gameID, gameObject, Type, Colour);
     }
 
     void Update()

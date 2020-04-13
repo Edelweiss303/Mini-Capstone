@@ -215,7 +215,7 @@ MonoBehaviour:
   - {fileID: 6843740253396451757}
   - {fileID: 6843740254518135949}
   - {fileID: 6843740252999828349}
-  AmmoAmount: 4
+  AmmoAmount: 20
   PlayerPickupSoundEffectName: Player_Pickup
 --- !u!65 &6843740254144786502
 BoxCollider:

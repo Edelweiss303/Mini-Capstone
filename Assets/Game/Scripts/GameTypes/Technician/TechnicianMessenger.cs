@@ -11,13 +11,14 @@ public class TechnicianMessenger : MonoBehaviour
     public static TechnicianMessenger Instance;
     public IconBehaviour IconMatchImage;
     public Text LockMessageText;
-    public Image Pattern1Image, Pattern2Image, Pattern3Image;
-
+    public Image Pattern1Image;
+    public Slider HeatSlider;
     public GameObject PatternsContainer, ColourMatchersContainer;
-
+    public string OverheatedSoundEffectName, ReleaseHeatSoundEffectName;
 
     private Dictionary<string, Sprite> patternImages = new Dictionary<string, Sprite>();
     private Dictionary<string, Sprite> colourImages = new Dictionary<string, Sprite>();
+    private PlayerShootingBehaviour shootBehaviour;
 
     public List<ColourMatchButton> ColourMatchers = new List<ColourMatchButton>();
 
@@ -30,13 +31,17 @@ public class TechnicianMessenger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        HeatSlider.maxValue = 100.0f;
+        HeatSlider.value = 0.0f;
         if (Instance == null)
         {
             Instance = this;
         }
 
-        //Load all of the images into the image maps
-
+        if (GameNetwork.Instance.Type == GameNetwork.PlayerType.Gunner)
+        {
+            shootBehaviour = GunnerController.Instance.PlayerObject.GetComponent<PlayerBehaviour>().shootBehaviour;
+        }
 
         List<Sprite> loadingPatternImages = Resources.LoadAll<Sprite>("ButtonTiming/patterns").ToList();
         List<Sprite> loadingColourImages = Resources.LoadAll<Sprite>("ButtonTiming/colours").ToList();
@@ -93,18 +98,17 @@ public class TechnicianMessenger : MonoBehaviour
 
     public void ResetMessenger()
     {
+        Debug.Log("Reset received.");
         IconMatchImage.gameObject.SetActive(false);
         LockMessageText.gameObject.SetActive(false);
         PatternsContainer.SetActive(false);
         ColourMatchersContainer.SetActive(false);
     }
 
-    public void UpdatePatterns(string pattern1Name, string pattern2Name, string pattern3Name)
+    public void UpdatePatterns(string pattern1Name)
     {
         PatternsContainer.SetActive(true);
         Pattern1Image.sprite = patternImages[pattern1Name];
-        Pattern2Image.sprite = patternImages[pattern2Name];
-        Pattern3Image.sprite = patternImages[pattern3Name];
     }
 
     public void UpdateColours(string[] messageSegments)
@@ -203,6 +207,51 @@ public class TechnicianMessenger : MonoBehaviour
                 }
             }
 
+        }
+    }
+
+    public void SetHeat(string[] messageSegments)
+    {
+        float newHeat = float.Parse(messageSegments[1]);
+        switch (GameNetwork.Instance.Type)
+        {
+            case GameNetwork.PlayerType.Gunner:
+                if(shootBehaviour == null)
+                {
+                    Debug.Log("This is broken.. :(");
+                }
+                if (shootBehaviour.IsOverheated && newHeat == 0)
+                {
+                    AudioManager.Instance.PlaySound(ReleaseHeatSoundEffectName);
+                    shootBehaviour.IsOverheated = false;
+                }
+                break;
+            case GameNetwork.PlayerType.Pilot:
+                if (PilotController.Instance.PlayerController.IsOverheated && newHeat == 0)
+                {
+                    AudioManager.Instance.PlaySound(ReleaseHeatSoundEffectName);
+                    PilotController.Instance.PlayerController.IsOverheated = false;
+                }
+                break;
+        }
+
+        HeatSlider.value = newHeat;
+    }
+
+    public void SetOverheated()
+    {
+        if(GameNetwork.Instance.Type == GameNetwork.PlayerType.Gunner)
+        {
+            if (shootBehaviour)
+            {
+                AudioManager.Instance.PlaySound(OverheatedSoundEffectName);
+                shootBehaviour.IsOverheated = true;
+            }
+        }
+        else if(GameNetwork.Instance.Type == GameNetwork.PlayerType.Pilot)
+        {
+            AudioManager.Instance.PlaySound(OverheatedSoundEffectName);
+            PilotController.Instance.PlayerController.IsOverheated = true;
         }
     }
 

@@ -429,7 +429,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5409556732030063357}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 48.4, y: 4.5, z: -22.8}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
@@ -498,7 +498,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5409556732030063357}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -523,19 +523,24 @@ MonoBehaviour:
   EnemyMaterial: {fileID: 2100000, guid: a54b7ad866d3a9b47bbf3b53baa0acc4, type: 2}
   DamageTransparencyRatio: 0.3
   TimeDamaged: 0.3
+  Type: 5
   MinimumRotation: -0.1
   MaximumRotation: 2
-  RespawnThreshold: 25
+  RespawnThreshold: 60
   Health: 10
   SpawnLocation: {fileID: 5409556731960707306}
   ChaserPrefab: {fileID: 5401679602862512748, guid: b698eaac3b20b1f44acbe7cbdcf5a9cc,
     type: 3}
   ChaserSpawnWeight: 6
-  ChaserSpawnRate: 5
+  ChaserSpawnRate: 10
   SentryPrefab: {fileID: 1719698742031730686, guid: 30b860e43bba3bc40bebc26c57eb9fd9,
     type: 3}
   SentrySpawnWeight: 0
   SentrySpawnRate: 9
+  BigChaserPrefab: {fileID: 2636443521703566201, guid: 160b21e5f4fb8384b9a6bf45d89577fd,
+    type: 3}
+  BigChaserSpawnWeight: 0
+  BigChaserSpawnRate: 0
   SpawnerPowerDownSoundEffectName: Spawner_PowerDown
 --- !u!1 &5409556732109855791
 GameObject:

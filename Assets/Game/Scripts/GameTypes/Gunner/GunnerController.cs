@@ -172,4 +172,24 @@ public class GunnerController : Singleton<GunnerController>
         PickupsMap.Add(float.Parse(messageSegments[3]), newPickupShell);
     }
 
+    public void SetPowerup(string[] messageSegments)
+    {
+        EnemyBase.EnemyColour powerupColour;
+        switch (messageSegments[2])
+        {
+            case "r":
+                powerupColour = EnemyColour.A;
+                break;
+            case "b":
+                powerupColour = EnemyColour.B;
+                break;
+            case "g":
+                powerupColour = EnemyColour.C;
+                break;
+            default:
+                return;
+        }
+        shootingBehaviour.SetPowerup(powerupColour, 2);
+    }
+
 }

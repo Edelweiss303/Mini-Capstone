@@ -25,6 +25,10 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
     private List<ImageValue> values = new List<ImageValue>();
     private List<float> imageOrientations = new List<float>() { 0, 90, 180, 270 };
     private List<string> usedIcons;
+    private bool imagesInitialized = false;
+    private ImageHue selectedPowerupColour;
+
+    public string PowerupSoundEffectName;
 
     public int IconSize = 64;
     public int IconColumns = 10;
@@ -38,9 +42,13 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
     void Start()
     {
         //Load all of the images into the image maps
-        getIconImages();
+        if (!imagesInitialized)
+        {
+            getIconImages();
+        }
 
-        resetGame();
+
+        //resetGame();
     }
 
     void getIconImages()
@@ -95,6 +103,7 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
             }
 
         }
+        imagesInitialized = true;
     }
 
     void startNewGrid(int size, int columns, int rows)
@@ -141,12 +150,14 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
                 if (hit.collider != null)
                 {
                     selectedIcon = hit.transform.gameObject.GetComponent<IconBehaviour>();
+                    TechnicianController.Instance.IncreaseHeat(2.0f);
                     if (selectedIcon)
                     {
                         if (selectedIcon.ToString() == iconToMatch.ToString())
                         {
-                            resetGrid();
-                            selectIconToMatch();
+                            GameNetwork.Instance.ToPlayerQueue.Add("g:GunnerSetPowerup:" + selectedPowerupColour.ToString());
+                            AudioManager.Instance.PlaySound(PowerupSoundEffectName);
+                            TechnicianController.Instance.ImageMatch_BackPress();
                         }
                     }
                 }
@@ -157,6 +168,11 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
 
     void resetGrid()
     {
+        if (!imagesInitialized)
+        {
+            getIconImages();
+        }
+
         bool validIconFound = false;
         List<ImageHue> currentlyAvailableColours = new List<ImageHue>(hues);
         ImageHue bgHue = currentlyAvailableColours[UnityEngine.Random.Range(0, currentlyAvailableColours.Count)];
@@ -224,8 +240,9 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
 
     }
 
-    public void resetGame()
+    public void resetGame(ImageHue inHue)
     {
+        selectedPowerupColour = inHue;
         startNewGrid(IconSize, IconColumns, IconRows);
         resetGrid();
         selectIconToMatch();
