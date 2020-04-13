@@ -4,6 +4,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameNetwork : MonoBehaviour
@@ -104,34 +105,26 @@ public class GameNetwork : MonoBehaviour
                             TechnicianMessenger.Instance.SetOverheated();
                         }
                         break;
-                    case "GunnerHealth":
+                    case "GunnerTakeDamage":
                         if(Type == PlayerType.Pilot)
                         {
                             PilotController.Instance.SetHealth(float.Parse(messageSegments[1]));
+                            PilotController.Instance.PlayerViewScreen.SetDamageScreen();
                         }
                         else if(Type == PlayerType.Technician)
                         {
                             TechnicianController.Instance.SetHealth(float.Parse(messageSegments[1]));
+                            TechnicianController.Instance.PlayerViewScreen.SetDamageScreen();
                         }
                         break;
                     case "GunnerGameOver":
                         if (Type == PlayerType.Pilot)
                         {
-                            //PilotController.Instance.GameOver();
+                            PilotController.Instance.GameOver();
                         }
                         else if (Type == PlayerType.Technician)
                         {
-                            //TechnicianController.Instance.GameOver();
-                        }
-                        break;
-                    case "GunnerRestartGame":
-                        if (Type == PlayerType.Pilot)
-                        {
-                            //PilotController.Instance.RestartGame();
-                        }
-                        else if (Type == PlayerType.Technician)
-                        {
-                            //TechnicianController.Instance.RestartGame();
+                            TechnicianController.Instance.GameOver();
                         }
                         break;
                     default:
@@ -180,6 +173,9 @@ public class GameNetwork : MonoBehaviour
                         case "PilotRadarScan":
                             PilotController.Instance.ScanRadar();
                             break;
+                        case "TechnicianTakeDamage":
+                            GunnerController.Instance.PlayerObject.GetComponent<PlayerBehaviour>().TakeDamage(float.Parse(messageSegments[2]));
+                            break;
                         default:
                             break;
                     }
@@ -223,5 +219,12 @@ public class GameNetwork : MonoBehaviour
         }
 
         return PlayerType.Gunner;
+    }
+
+    public void GameOver_ReturnToLobby()
+    {
+        Application.Quit();
+        //PhotonNetwork.Disconnect();
+        //SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 }

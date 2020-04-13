@@ -97,6 +97,16 @@ public class TimingButtonController : Singleton<TimingButtonController>
                 AudioManager.Instance.PlaySound(RadarScanSoundEffectName);
                 TechnicianController.Instance.TimingButton_BackPress();
             }
+            else
+            {
+                AudioManager.Instance.PlaySound("Technician_Error");
+                TechnicianController.Instance.TakeDamage(0.5f);
+            }
+        }
+        else
+        {
+            AudioManager.Instance.PlaySound("Technician_Error");
+            TechnicianController.Instance.TakeDamage(0.5f);
         }
 
         

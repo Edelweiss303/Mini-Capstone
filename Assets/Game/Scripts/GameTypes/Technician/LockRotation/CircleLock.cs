@@ -14,13 +14,13 @@ public class CircleLock : MonoBehaviour
 
     public enum KeyColour
     {
-        red_main, red_shade, red_tone, red_tint, blue_main, blue_shade, blue_tone, blue_tint, green_main, green_shade, green_tone, green_tint
+        brightred, darkred, brightblue, darkblue, brightgreen, darkgreen, brightyellow, darkyellow, brightorange, darkorange, brightpurple, darkpurple
     }
     List<KeyColour> colTemplate = new List<KeyColour>()
     {
-        KeyColour.red_main, KeyColour.red_shade, KeyColour.red_tone, KeyColour.red_tint,
-        KeyColour.blue_main, KeyColour.blue_shade, KeyColour.blue_tone, KeyColour.blue_tint,
-        KeyColour.green_main, KeyColour.green_shade, KeyColour.green_tone, KeyColour.green_tint
+        KeyColour.brightred, KeyColour.darkred, KeyColour.brightblue, KeyColour.darkblue,
+        KeyColour.brightgreen, KeyColour.darkgreen, KeyColour.brightyellow, KeyColour.darkyellow,
+        KeyColour.brightorange, KeyColour.darkorange, KeyColour.brightpurple, KeyColour.darkpurple
     };
 
     private Dictionary<KeyColour, Sprite> keyBoxImages = new Dictionary<KeyColour, Sprite>();
@@ -43,42 +43,27 @@ public class CircleLock : MonoBehaviour
         if (Active)
         {
             float rotationAmount = 0;
+
             if (Input.GetKey(KeyCode.LeftArrow))
             {
+                AudioManager.Instance.PlaySound("Technician_Click");
                 rotationAmount += RotationSpeed;
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
+                AudioManager.Instance.PlaySound("Technician_Click");
                 rotationAmount -= RotationSpeed;
             }
             transform.Rotate(new Vector3(0, 0, rotationAmount));
 
-            //if (Input.GetMouseButton(0))
-            //{
-            //    changeInPosition = Input.mousePosition - previousPosition;
-                
-            //    transform.Rotate(transform.forward, -Vector3.Dot(changeInPosition, transform.right));
-            //}
-            //previousPosition = Input.mousePosition;
+            if (rotationAmount == 0)
+            {
+                AudioManager.Instance.StopSound("Technician_Click");
+            }
         }
     }
 
-    private float angleBetweenPoints(Vector2 v2Position1, Vector2 v2Position2)
-    {
-        Vector2 v2FromLine = v2Position2 - v2Position1;
-        Vector2 v2ToLine = new Vector2(1, 0);
 
-        float fltAngle = Vector2.Angle(v2FromLine, v2ToLine);
-
-        // If rotation is more than 180
-        Vector3 v3Cross = Vector3.Cross(v2FromLine, v2ToLine);
-        if (v3Cross.z > 0)
-        {
-            fltAngle = 360f - fltAngle;
-        }
-
-        return fltAngle;
-    }
 
     public void resetAngles()
     {

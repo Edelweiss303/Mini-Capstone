@@ -7,15 +7,6 @@ using static EnemyBase;
 
 public class GunnerController : Singleton<GunnerController>
 {
-    public enum PlayerType
-    {
-        Friend, Game
-    }
-
-    public PlayerType playerType = PlayerType.Game;
-
-    public bool GameStatus = true;
-    public GameObject PauseMenu;
     public Vector2 ScreenSize;
     public Text InputTest;
     public LayerMask PlayerProjectileMask, EnemyLayerMask;
@@ -27,70 +18,17 @@ public class GunnerController : Singleton<GunnerController>
     public List<Transform> FactoryMarkers = new List<Transform>();
     public GameObject ProjectilesCollection, EffectsContainer;
     public GameObject PlayerObject;
+    public GameObject GameOverPanel;
 
     private PlayerShootingBehaviour shootingBehaviour;
     private bool isMoving = false;
 
-    public void QuitGame()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    public void Pause()
-    {
-        GameStatus = false;
-    }
-
     public void Start()
     {
         isMoving = false;
-        switch (playerType)
-        {
-            case PlayerType.Friend:
-                PlayerObject = FindObjectOfType<FriendController>().gameObject;
-                
-                break;
-            case PlayerType.Game:
-                PlayerObject = FindObjectOfType<PlayerBehaviour>().gameObject;
-                shootingBehaviour = PlayerObject.GetComponent<PlayerBehaviour>().shootBehaviour;
-                break;
-        }
-    }
 
-    public void Update()
-    {
-        GameUpdate();
-    }
-
-    void GameUpdate()
-    {
-        if (PauseMenu)
-        {
-            if (InputManager.Instance.Escape)
-            {
-                if (GameStatus)
-                {
-                    Time.timeScale = 0.0f;
-                    GameStatus = false;
-                    PauseMenu.SetActive(true);
-                }
-                else
-                {
-                    QuitGame();
-                }
-            }
-            else if (GameStatus)
-            {
-                PauseMenu.SetActive(false);
-                Time.timeScale = 1.0f;
-            }
-        }
-
-        if (InputTest)
-        {
-            //InputTest.text = "Rotation Rate: " + (int)InputManager.Instance.CursorMovement.x + ", " + (int)InputManager.Instance.CursorMovement.y + ", " + (int)InputManager.Instance.CursorMovement.z;
-        }
-
+        PlayerObject = FindObjectOfType<PlayerBehaviour>().gameObject;
+        shootingBehaviour = PlayerObject.GetComponent<PlayerBehaviour>().shootBehaviour;
     }
 
     public void UpdatePlayer(string[] messageSegments)
@@ -99,7 +37,6 @@ public class GunnerController : Singleton<GunnerController>
         float rotation = float.Parse(messageSegments[5]);
         Vector3 newPosition = new Vector3(x, y, z);
 
-        Debug.Log((newPosition - PlayerObject.transform.position).magnitude);
         if((newPosition - PlayerObject.transform.position).magnitude > 0.25f && !isMoving)
         {
             isMoving = true;
@@ -192,4 +129,11 @@ public class GunnerController : Singleton<GunnerController>
         shootingBehaviour.SetPowerup(powerupColour, 2);
     }
 
+    public void GameOver()
+    {
+        //Time.timeScale = 0.0f;
+        GameOverPanel.SetActive(true);
+        AudioManager.Instance.StopAll();
+        GameNetwork.Instance.BroadcastQueue.Add("GunnerGameOver");
+    }
 }

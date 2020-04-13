@@ -63,4 +63,13 @@ public class AudioManager : Singleton<AudioManager>
             sound.source.volume = newVolume * sound.volume;
         }
     }
+
+    public void StopAll()
+    {
+
+        foreach(Sound sound in Sounds)
+        {
+            sound.source.Stop();
+        }
+    }
 }

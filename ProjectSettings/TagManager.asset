@@ -16,8 +16,8 @@ TagManager:
   - PlayerProjectile
   - Player
   - Enemy
-  - 
-  - 
+  - Level
+  - LevelBounds
   - 
   - 
   - 

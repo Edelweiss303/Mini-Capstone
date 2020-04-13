@@ -21,33 +21,39 @@ public class SpawnerBehaviour : MonoBehaviour
 
     private void SpawningUpdate()
     {
-        if (SpawnPrefabs.Count > 0)
+        if (WavesManager.Instance.CurrentlyActive)
         {
-            if(timeSinceLastSpawn > SpawnRate && spawns.Count < SpawnLimit)
+            if (SpawnPrefabs.Count > 0)
             {
-                Vector3 spawnPoint = new Vector3(
-                    Random.Range(-SpawnWidthOffsetRange, SpawnWidthOffsetRange), 
-                    Random.Range(-SpawnHeightOffsetRange, SpawnHeightOffsetRange), 
-                    Random.Range(-SpawnDepthOffsetRange, SpawnDepthOffsetRange)
-                );
-                int spawnIndex = Random.Range(0, SpawnPrefabs.Count);
-                GameObject newSpawn = Instantiate(SpawnPrefabs[spawnIndex], spawnPoint + transform.position, Quaternion.identity);
-                //EnemiesManager.Instance.addEnemy(newSpawn);
-                spawns.Add(newSpawn);
-                
-                timeSinceLastSpawn = 0.0f;
+                if (timeSinceLastSpawn > SpawnRate && spawns.Count < SpawnLimit)
+                {
+                    Vector3 spawnPoint = new Vector3(
+                        Random.Range(-SpawnWidthOffsetRange, SpawnWidthOffsetRange),
+                        Random.Range(-SpawnHeightOffsetRange, SpawnHeightOffsetRange),
+                        Random.Range(-SpawnDepthOffsetRange, SpawnDepthOffsetRange)
+                    );
+                    int spawnIndex = Random.Range(0, SpawnPrefabs.Count);
+                    GameObject newSpawn = Instantiate(SpawnPrefabs[spawnIndex], spawnPoint + transform.position, Quaternion.identity);
+                    //EnemiesManager.Instance.addEnemy(newSpawn);
+                    WavesManager.Instance.CurrentAmountSpawnedInWave++;
+                    spawns.Add(newSpawn);
+
+                    timeSinceLastSpawn = 0.0f;
+                }
+
+                timeSinceLastSpawn += Time.deltaTime;
             }
 
-            timeSinceLastSpawn += Time.deltaTime;
-        }
-
-        for(int i = spawns.Count - 1; i >=0; i--)
-        {
-            if (!spawns[i])
+            for (int i = spawns.Count - 1; i >= 0; i--)
             {
-                spawns.RemoveAt(i);
+                if (!spawns[i])
+                {
+                    spawns.RemoveAt(i);
+                    //WavesManager.Instance.CurrentAmountAlive--;
+                }
             }
         }
+
         
     }
 }

@@ -9,7 +9,7 @@ public abstract class EnemyBase : MonoBehaviour
 {
     public enum EnemyType
     {
-        none, chaser, sentry, droid, factory, spawn, bigchaser
+        none, chaser, sentry, droid, factory, spawn, bigchaser, skulker
     }
     public enum EnemyColour
     {
@@ -94,12 +94,20 @@ public abstract class EnemyBase : MonoBehaviour
         if (!eRenderer)
         {
             eRenderer = GetComponent<Renderer>();
-            originalColor = eRenderer.material.color;
-            damagedColor = new Color(originalColor.r * 0.2f, originalColor.g * 0.2f, originalColor.b * 0.2f, originalColor.a * 0.2f);
+            if (eRenderer != null)
+            {
+                originalColor = eRenderer.material.color;
+                damagedColor = new Color(originalColor.r * 0.2f, originalColor.g * 0.2f, originalColor.b * 0.2f, originalColor.a * 0.2f);
+            }
+
         }
-       
-        eRenderer.material.color = damagedColor;
-        timeDamaged = 0.0f;
+
+        if (eRenderer != null)
+        {
+            eRenderer.material.color = damagedColor;
+            timeDamaged = 0.0f;
+        }
+
     }
 
     protected void ResetDamageEffect() 
@@ -107,11 +115,19 @@ public abstract class EnemyBase : MonoBehaviour
         if (!eRenderer)
         {
             eRenderer = GetComponent<Renderer>();
-            originalColor = eRenderer.material.color;
-            damagedColor = new Color(originalColor.r * 0.2f, originalColor.g * 0.2f, originalColor.b * 0.2f, originalColor.a * 0.2f);
+            if (eRenderer != null)
+            {
+                originalColor = eRenderer.material.color;
+                damagedColor = new Color(originalColor.r * 0.2f, originalColor.g * 0.2f, originalColor.b * 0.2f, originalColor.a * 0.2f);
+            }
+
         }
 
-        eRenderer.material.color = originalColor;
+        if (eRenderer != null)
+        {
+            eRenderer.material.color = originalColor;
+        }
+        
     }
 }
 

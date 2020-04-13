@@ -22,10 +22,13 @@ public class MainSpawner : EnemyBase
     public GameObject BigChaserPrefab;
     public int BigChaserSpawnWeight;
     public float BigChaserSpawnRate;
-
+    public GameObject SkulkerPrefab;
+    public int SkulkerSpawnWeight;
+    public float SkulkerSpawnRate;
+    public List<GameObject> SpawnedEnemies = new List<GameObject>();
     public string SpawnerPowerDownSoundEffectName;
 
-    private List<GameObject> spawnObjects = new List<GameObject>();
+    public List<GameObject> SpawnObjects = new List<GameObject>();
     private Dictionary<GameObject, float> spawnRateMap = new Dictionary<GameObject, float>();
     private float currentSpawnFrequency = 4.5f;
     private float timeSinceLastSpawn = 0.0f;
@@ -43,19 +46,24 @@ public class MainSpawner : EnemyBase
     {
         for(int i = 0; i < ChaserSpawnWeight; i++)
         {
-            spawnObjects.Add(ChaserPrefab);
+            SpawnObjects.Add(ChaserPrefab);
         }
         for(int i = 0; i < SentrySpawnWeight; i++)
         {
-            spawnObjects.Add(SentryPrefab);
+            SpawnObjects.Add(SentryPrefab);
         }
         for(int i = 0; i < BigChaserSpawnWeight; i++)
         {
-            spawnObjects.Add(BigChaserPrefab);
+            SpawnObjects.Add(BigChaserPrefab);
+        }
+        for(int i = 0; i < SkulkerSpawnWeight; i++)
+        {
+            SpawnObjects.Add(SkulkerPrefab);
         }
         spawnRateMap.Add(ChaserPrefab, ChaserSpawnRate);
         spawnRateMap.Add(SentryPrefab, SentrySpawnRate);
         spawnRateMap.Add(BigChaserPrefab, BigChaserSpawnRate);
+        spawnRateMap.Add(SkulkerPrefab, SkulkerSpawnRate);
 
         spawnerRenderer = GetComponent<MeshRenderer>();
         nodeRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
@@ -74,14 +82,17 @@ public class MainSpawner : EnemyBase
     // Update is called once per frame
     void Update()
     {
-        if (isActive)
+        if (WavesManager.Instance.CurrentlyActive)
         {
-            MoveUpdate();
-            SpawnUpdate();
-        }
-        else
-        {
-            RespawnUpdate();
+            if (isActive)
+            {
+                MoveUpdate();
+                SpawnUpdate();
+            }
+            else
+            {
+                RespawnUpdate();
+            }
         }
     }
 
@@ -102,13 +113,30 @@ public class MainSpawner : EnemyBase
             setSpawnColour();
             setSpawnType();
             timeSinceLastSpawn = 0.0f;
+            SpawnedEnemies.Add(newEnemy);
+            WavesManager.Instance.WaveSpawn.Add(newEnemy);
+            WavesManager.Instance.CurrentAmountSpawnedInWave++;
         }
 
+
+        for(int i = SpawnedEnemies.Count -1; i >= 0; i--)
+        {
+            if(SpawnedEnemies[i] == null)
+            {
+                if (WavesManager.Instance.WaveSpawn.Contains(SpawnedEnemies[i]))
+                {
+                    WavesManager.Instance.WaveSpawn.Remove(SpawnedEnemies[i]);
+                }
+                SpawnedEnemies.RemoveAt(i);
+                
+                
+            }
+        }
     }
 
     private void setSpawnType()
     {
-        currentSpawnType = spawnObjects[UnityEngine.Random.Range(0, spawnObjects.Count)];
+        currentSpawnType = SpawnObjects[UnityEngine.Random.Range(0, SpawnObjects.Count)];
         currentSpawnFrequency = spawnRateMap[currentSpawnType];
     }
 

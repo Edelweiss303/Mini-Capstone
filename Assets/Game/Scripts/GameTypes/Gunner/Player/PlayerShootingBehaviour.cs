@@ -7,24 +7,27 @@ public class PlayerShootingBehaviour : MonoBehaviour
 {
     public GameObject Crosshairs;
     public float Range = 100.0f;
-    public float AutoAimRange = 25.0f;
     public Camera GameCamera;
 
     public AmmoBarBehaviour ammoBarBehaviour;
     public int MaxAmmo = 24;
-    public float ReloadingTime = 1.5f;
+
     public GameObject BulletImpactEffectPrefab;
     public string ShootingSoundEffectName = "Player_Shoot", PlayerPowerupSoundEffectName;
     public int BaseDamage = 1;
     public float DeadZone = 0.1f;
-    public float AutoAimWeight = 0.75f;
     public float CrosshairSpeed = 500.0f;
-    public float MaximumAutoAimAdjustment = 3.0f;
     public float ShootHeatGeneration = 0.25f;
+    public float BeamFiringTimeLimit = 8.0f;
     public bool IsOverheated = false;
     public float PowerupTime = 45.0f;
     public Slider PowerupSlider;
     public Image PowerupFill;
+    public int NumberOfEnemiesToKillForPowerBeam = 5;
+    public LineRenderer PowerBeamLine;
+    public GameObject PowerBeamImpactEffectPrefab;
+
+    public Text RedProgressText, GreenProgressText, BlueProgressText;
 
     private Vector3 originalCrosshairPositionReference;
     private Vector3 totalAutoAimMovement;
@@ -37,12 +40,16 @@ public class PlayerShootingBehaviour : MonoBehaviour
                                                         { EnemyBase.EnemyColour.A, EnemyBase.EnemyColour.B, EnemyBase.EnemyColour.C };
     private Dictionary<EnemyBase.EnemyColour, int> ammoDamage = new Dictionary<EnemyBase.EnemyColour, int>();
 
+    private Dictionary<EnemyBase.EnemyColour, int> powerBeamProgress = new Dictionary<EnemyBase.EnemyColour, int>() { { EnemyBase.EnemyColour.A, 0 }, { EnemyBase.EnemyColour.B, 0 }, { EnemyBase.EnemyColour.C, 0 } };
+
     private EnemyBase.EnemyColour powerupColour;
     private int currentEnemyIndex;
-    private float reloadingTimer;
-    private bool isReloading = false;
-    private LineRenderer currentAimTrajectory;
+    private bool isPowerBeamActive = false, playerHasPowerBeam = true;
     private float currentPowerupTimeRemaining = 0.0f;
+    private Vector3 beamOrigin;
+    private float beamOscillationTimeThreshold = 0.05f;
+    private float timeSinceLastBeamOscillation = 0.0f;
+    private float timeBeamHasBeenActive = 0.0f;
 
     public void Start()
     {
@@ -59,7 +66,6 @@ public class PlayerShootingBehaviour : MonoBehaviour
         ammoDamage.Add(EnemyBase.EnemyColour.B, BaseDamage);
         ammoDamage.Add(EnemyBase.EnemyColour.C, BaseDamage);
 
-        currentAimTrajectory = GetComponent<LineRenderer>();
         originalCrosshairPositionReference = Crosshairs.transform.position;
         totalAutoAimMovement = originalCrosshairPositionReference;
         ammoBarBehaviour.ChangeAmmoType(currentEnemyColour);
@@ -85,27 +91,109 @@ public class PlayerShootingBehaviour : MonoBehaviour
     {
         if (Crosshairs)
         {
-            Shoot();
-            if (InputManager.Instance.DoubleCenterTap)
+            if (isPowerBeamActive)
             {
-                Crosshairs.transform.position = originalCrosshairPositionReference;
+                AimBeam();
             }
-            if (InputManager.Instance.Swiping)
+            else
             {
-                currentEnemyIndex++;
-                if(currentEnemyIndex >= enemyColours.Count)
+                Shoot();
+                if (InputManager.Instance.DoubleCenterTap)
                 {
-                    currentEnemyIndex = 0;
+                    Crosshairs.transform.position = originalCrosshairPositionReference;
                 }
-                currentEnemyColour = enemyColours[currentEnemyIndex];
-                ammoBarBehaviour.ChangeAmmoType(currentEnemyColour);
-                ammoBarBehaviour.SetAmmo(ammoAmounts[currentEnemyColour]);
+                if (InputManager.Instance.Swiping)
+                {
+                    currentEnemyIndex++;
+                    if (currentEnemyIndex >= enemyColours.Count)
+                    {
+                        currentEnemyIndex = 0;
+                    }
+                    currentEnemyColour = enemyColours[currentEnemyIndex];
+                    ammoBarBehaviour.ChangeAmmoType(currentEnemyColour);
+                    ammoBarBehaviour.SetAmmo(ammoAmounts[currentEnemyColour]);
+                }
+                
+
+                if (currentPowerupTimeRemaining > 0.0f)
+                {
+                    PowerupUpdate();
+                }
+
+                if(InputManager.Instance.FireHeldSeconds > 2.5f && playerHasPowerBeam)
+                {
+                    PowerBeamLine.gameObject.SetActive(true);
+                    isPowerBeamActive = true;
+                    playerHasPowerBeam = false;
+                }
             }
             MoveCursor();
 
-            if(currentPowerupTimeRemaining > 0.0f)
+
+        }
+    }
+
+    private void AimBeam()
+    {
+        RaycastHit hit;
+        Ray rayFromCursor = GameCamera.ScreenPointToRay(Crosshairs.transform.position);
+        if (Physics.Raycast(rayFromCursor, out hit, Range))
+        {
+            EnemyBase hitEnemy;
+
+            //GameObject effect = Instantiate(BulletImpactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+            //effect.GetComponent<Renderer>().material = ColourManager.Instance.EnemyMaterialMap[currentEnemyColour];
+            //if (effectsContainer)
+            //{
+            //    effect.transform.parent = effectsContainer.transform;
+            //}
+
+            hitEnemy = hit.collider.GetComponent<EnemyBase>();
+
+            if (hitEnemy != null && hitEnemy.IsAlive())
             {
-                PowerupUpdate();
+                hitEnemy.TakeDamage(ammoDamage[currentEnemyColour]);
+                return;
+            }
+            else if(hitEnemy == null)
+            {
+                hitEnemy = hit.collider.GetComponentInParent<EnemyBase>();
+                if (hitEnemy != null && hitEnemy.IsAlive())
+                {
+                    hitEnemy.TakeDamage(ammoDamage[currentEnemyColour]);
+                    return;
+                }
+            }
+
+            timeSinceLastBeamOscillation += Time.deltaTime;
+            if (timeSinceLastBeamOscillation > beamOscillationTimeThreshold)
+            {
+                beamOrigin = rayFromCursor.origin + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
+                timeSinceLastBeamOscillation = 0.0f;
+                Instantiate(PowerBeamImpactEffectPrefab, hit.point, Quaternion.identity, effectsContainer.transform);
+                AudioManager.Instance.PlaySound("Beam");
+            }
+
+            PowerBeamLine.SetPosition(0, beamOrigin);
+            PowerBeamLine.SetPosition(1, Vector3.Lerp(beamOrigin, hit.point, 0.3f));
+            PowerBeamLine.SetPosition(2, Vector3.Lerp(beamOrigin, hit.point, 0.6f));
+            PowerBeamLine.SetPosition(3, hit.point);
+
+            timeBeamHasBeenActive += Time.deltaTime;
+            if(timeBeamHasBeenActive > BeamFiringTimeLimit)
+            {
+                timeBeamHasBeenActive = 0.0f;
+                isPowerBeamActive = false;
+                PowerBeamLine.gameObject.SetActive(false);
+                AudioManager.Instance.StopSound("Beam");
+
+                foreach(EnemyBase.EnemyColour enemyColour in enemyColours)
+                {
+                    powerBeamProgress[enemyColour] = 0;
+                }
+                RedProgressText.text = "0";
+                BlueProgressText.text = "0";
+                GreenProgressText.text = "0";
             }
         }
     }
@@ -114,7 +202,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
     {
         RaycastHit hit;
         Ray rayFromCursor = GameCamera.ScreenPointToRay(Crosshairs.transform.position);
-
+        EnemyBase.EnemyColour hitEnemyColour;
         if (InputManager.Instance.FireInput && !IsOverheated)
         {
             if (ammoAmounts[currentEnemyColour] > 0)
@@ -141,9 +229,34 @@ public class PlayerShootingBehaviour : MonoBehaviour
 
                     hitEnemy = hit.collider.GetComponent<EnemyBase>();
 
+                    if(hitEnemy == null)
+                    {
+                        hitEnemy = hit.collider.GetComponentInParent<EnemyBase>();
+                    }
+
                     if (hitEnemy != null && hitEnemy.IsAlive() && currentEnemyColour == hitEnemy.Colour)
                     {
+                        hitEnemyColour = hitEnemy.Colour;
                         hitEnemy.TakeDamage(ammoDamage[currentEnemyColour]);
+
+                        if(hitEnemy == null || !hitEnemy.IsAlive())
+                        {
+                            powerBeamProgress[hitEnemyColour]++;
+                            switch (hitEnemyColour)
+                            {
+                                case EnemyBase.EnemyColour.A:
+                                    RedProgressText.text = powerBeamProgress[hitEnemyColour].ToString();
+                                    break;
+                                case EnemyBase.EnemyColour.B:
+                                    BlueProgressText.text = powerBeamProgress[hitEnemyColour].ToString();
+                                    break;
+                                case EnemyBase.EnemyColour.C:
+                                    GreenProgressText.text = powerBeamProgress[hitEnemyColour].ToString();
+                                    break;
+                            }
+
+                            isPowerBeamActive = checkForPowerBeam();
+                        }
                         return;
                     }
                 }
@@ -205,5 +318,17 @@ public class PlayerShootingBehaviour : MonoBehaviour
             currentPowerupTimeRemaining = 0.0f;
             ammoDamage[powerupColour] = BaseDamage;
         }
+    }
+
+    private bool checkForPowerBeam()
+    {
+        foreach(KeyValuePair<EnemyBase.EnemyColour,int> enemyTypeKilled in powerBeamProgress)
+        {
+            if(enemyTypeKilled.Value < NumberOfEnemiesToKillForPowerBeam)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

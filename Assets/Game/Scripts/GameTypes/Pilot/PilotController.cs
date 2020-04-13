@@ -18,6 +18,8 @@ public class PilotController : Singleton<PilotController>
     public RawImage RadarRecording;
     public string RadioScanSoundEffectName;
     public HealthBarBehaviour HealthBarBehaviour;
+    public GameObject GameOverPanel;
+    public PlayerScreen PlayerViewScreen;
 
     private float timeSinceLastPickupSpawn = 0.0f;
 
@@ -92,5 +94,12 @@ public class PilotController : Singleton<PilotController>
     public void SetHealth(float newHealth)
     {
         HealthBarBehaviour.Health = newHealth/15.0f;
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0.0f;
+        GameOverPanel.SetActive(true);
+        AudioManager.Instance.StopAll();
     }
 }

@@ -31,40 +31,40 @@ TextureImporter:
     second: circle
   - first:
       213: -7740885511988095314
-    second: red_main
+    second: brightred
   - first:
       213: 3158813897272577515
-    second: red_shade
+    second: darkred
   - first:
       213: -5191485754560559691
-    second: green_main
+    second: brightgreen
   - first:
       213: -5382729079094898936
-    second: green_shade
+    second: darkgreen
   - first:
       213: -8284369661590253447
-    second: blue_main
+    second: brightblue
   - first:
       213: -6781836078250285264
-    second: blue_shade
+    second: darkblue
   - first:
       213: 6163195538924204485
-    second: red_tone
+    second: brightorange
   - first:
       213: -1370661682523340017
-    second: red_tint
+    second: darkorange
   - first:
       213: -6789749554771551278
-    second: green_tone
+    second: brightyellow
   - first:
       213: -5906973516983679737
-    second: green_tint
+    second: darkyellow
   - first:
       213: 5777552420452043588
-    second: blue_tint
+    second: darkpurple
   - first:
       213: 1269540525142108225
-    second: blue_tone
+    second: brightpurple
   - first:
       213: 8020143640844766479
     second: lock_selection
@@ -197,7 +197,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: red_main
+      name: brightred
       rect:
         serializedVersion: 2
         x: 0
@@ -218,7 +218,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: red_shade
+      name: darkred
       rect:
         serializedVersion: 2
         x: 43
@@ -239,7 +239,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: green_main
+      name: brightgreen
       rect:
         serializedVersion: 2
         x: 0
@@ -260,7 +260,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: green_shade
+      name: darkgreen
       rect:
         serializedVersion: 2
         x: 43
@@ -281,7 +281,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_main
+      name: brightblue
       rect:
         serializedVersion: 2
         x: 0
@@ -302,7 +302,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_shade
+      name: darkblue
       rect:
         serializedVersion: 2
         x: 43
@@ -323,7 +323,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: red_tone
+      name: brightorange
       rect:
         serializedVersion: 2
         x: 0
@@ -344,7 +344,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: red_tint
+      name: darkorange
       rect:
         serializedVersion: 2
         x: 43
@@ -365,7 +365,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: green_tone
+      name: brightyellow
       rect:
         serializedVersion: 2
         x: 0
@@ -386,7 +386,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: green_tint
+      name: darkyellow
       rect:
         serializedVersion: 2
         x: 43
@@ -407,7 +407,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_tint
+      name: darkpurple
       rect:
         serializedVersion: 2
         x: 129
@@ -428,7 +428,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_tone
+      name: brightpurple
       rect:
         serializedVersion: 2
         x: 86
@@ -457,7 +457,7 @@ TextureImporter:
         width: 6
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

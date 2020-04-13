@@ -159,6 +159,11 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
                             AudioManager.Instance.PlaySound(PowerupSoundEffectName);
                             TechnicianController.Instance.ImageMatch_BackPress();
                         }
+                        else
+                        {
+                            AudioManager.Instance.PlaySound("Technician_Error");
+                            TechnicianController.Instance.TakeDamage(0.5f);
+                        }
                     }
                 }
             }
@@ -184,10 +189,7 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
 
 
         usedIcons = new List<string>();
-
-        ImageValue currentValue;
         Sprite tempSprite;
-        
 
         //Create a randomized and unique set of icons
         foreach(IconBehaviour icon in IconGrid)

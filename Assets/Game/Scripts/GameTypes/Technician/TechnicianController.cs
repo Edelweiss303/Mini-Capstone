@@ -7,11 +7,13 @@ using static ImageMatchGameController;
 public class TechnicianController : Singleton<TechnicianController>
 {
     public GameObject ImageMatchControllerObject, LockRotationControllerObject, FrontPageObject, TimingButtonControllerObject, SelectPowerupColourObject;
+    public GameObject GameOverPanel;
     public Slider HeatSlider;
     public float MaxHeat = 100.0f;
     public float CurrentHeat = 0.0f;
     public string ReleaseHeatSoundEffectName, OverheatedSoundEffectName;
     public HealthBarBehaviour HealthBar;
+    public PlayerScreen PlayerViewScreen;
 
     private ImageMatchGameController imageGameController;
     private LockRotationGameController lockGameController;
@@ -144,4 +146,16 @@ public class TechnicianController : Singleton<TechnicianController>
         HealthBar.Health = newHealth / 15.0f;
     }
 
+    public void TakeDamage(float damage)
+    {
+        GameNetwork.Instance.ToPlayerQueue.Add("g:TechnicianTakeDamage:" + damage);
+    }
+
+
+    public void GameOver()
+    {
+        AudioManager.Instance.StopAll();
+        Time.timeScale = 0.0f;
+        GameOverPanel.SetActive(true);
+    }
 }

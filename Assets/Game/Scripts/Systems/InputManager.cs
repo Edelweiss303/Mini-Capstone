@@ -34,6 +34,7 @@ class InputManager : Singleton<InputManager>
     public float CenterTapDistanceThreshold = 5.0f;
     public float NewTouchThreshold = 0.05f;
     public float SwipingThreshold = 10.0f;
+    public float FireHeldSeconds = 0.0f;
 
     private float timeSinceLastCenterTap = 0.0f;
     private Vector3 lastCursorPosition = Vector3.zero;
@@ -73,6 +74,15 @@ class InputManager : Singleton<InputManager>
         {
             #region PC
             FireInput = Input.GetMouseButtonDown(0);
+            if (Input.GetMouseButton(0))
+            {
+                FireHeldSeconds += Time.deltaTime;
+            }
+            else
+            {
+                FireHeldSeconds = 0.0f;
+            }
+
             CursorMovement = Input.mousePosition - lastCursorPosition;
 
             lastCursorPosition = Input.mousePosition;
@@ -108,7 +118,6 @@ class InputManager : Singleton<InputManager>
             DirectionalInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             float lookDirection = Input.GetAxis("LookX");
 
-            Debug.Log(lookDirection);
             if (!joystickIsHeld)
             {
                 if (lookDirection < -0.05f)

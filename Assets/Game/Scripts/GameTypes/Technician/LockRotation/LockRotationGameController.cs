@@ -47,10 +47,19 @@ public class LockRotationGameController : Singleton<LockRotationGameController>
                 TechnicianController.Instance.ResetHeat();
                 return;
             }
+            else
+            {
+                AudioManager.Instance.PlaySound("Technician_Success");
+            }
 
             ActiveLock = Locks[currentActiveLockIndex];
             ActiveLock.Active = true;
             setInvalids();
+        }
+        else if(CurrentCheckingKey != null)
+        {
+            TechnicianController.Instance.TakeDamage(0.5f);
+            AudioManager.Instance.PlaySound("Technician_Error");
         }
     }
 

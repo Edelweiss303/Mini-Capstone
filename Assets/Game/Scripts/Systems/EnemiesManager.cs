@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemiesManager : Singleton<EnemiesManager>
 {
-    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, FactoryShellPrefab, SpawnerShellPrefab, BigChaserShellPrefab;
+    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, FactoryShellPrefab, SpawnerShellPrefab, BigChaserShellPrefab, SkulkerShellPrefab;
     public float NetworkingUpdateThreshold = 0.1f;
 
     private List<EnemyBase> aimableTargets = new List<EnemyBase>();
@@ -276,6 +276,12 @@ public class EnemiesManager : Singleton<EnemiesManager>
                 case "bigchaser":
                     currentObject = Instantiate(BigChaserShellPrefab);
                     addEnemy(objectID, currentObject, EnemyBase.EnemyType.bigchaser, colour);
+                    sBehaviour = currentObject.GetComponent<Shell>();
+                    sBehaviour.ChangeColour(colour);
+                    break;
+                case "skulker":
+                    currentObject = Instantiate(SkulkerShellPrefab);
+                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.skulker, colour);
                     sBehaviour = currentObject.GetComponent<Shell>();
                     sBehaviour.ChangeColour(colour);
                     break;

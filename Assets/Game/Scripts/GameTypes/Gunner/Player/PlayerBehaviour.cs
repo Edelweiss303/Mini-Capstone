@@ -6,15 +6,13 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public PlayerShootingBehaviour shootBehaviour;
-    public GameObject DamageVisionPanel;
+    public PlayerScreen PlayerViewScreen;
     public float MaxHealth = 100.0f;
-    public float DamageVisionEffectTime = 1.0f;
     public float RotationRate = 0.01f;
     public bool Alive = true;
-    public string TakeDamageSoundEffectName;
+    
     public HealthBarBehaviour healthBarBehaviour;
 
-    private float damageVisionEffectTimer = 0.0f;
 
     [SerializeField]
     private float currentHealth;
@@ -45,19 +43,6 @@ public class PlayerBehaviour : MonoBehaviour
             shootBehaviour.ShootUpdate();
         }
 
-        if(damageVisionEffectTimer != 0)
-        {
-            if(damageVisionEffectTimer > DamageVisionEffectTime)
-            {
-                damageVisionEffectTimer = 0.0f;
-                DamageVisionPanel.SetActive(false);
-            }
-            else
-            {
-                damageVisionEffectTimer += Time.deltaTime;
-            }
-        }
-
         if (healthBarBehaviour)
         {
             healthBarBehaviour.Health = currentHealth / MaxHealth;
@@ -73,15 +58,9 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        PlayerViewScreen.SetDamageScreen();
 
-        if (DamageVisionPanel)
-        {
-            damageVisionEffectTimer = Time.deltaTime;
-            DamageVisionPanel.SetActive(true);
-        }
-
-        AudioManager.Instance.PlaySound(TakeDamageSoundEffectName);
-        GameNetwork.Instance.BroadcastQueue.Add("GunnerHealth:" + currentHealth);
+        GameNetwork.Instance.BroadcastQueue.Add("GunnerTakeDamage:" + currentHealth);
 
         if(currentHealth <= 0)
         {
@@ -92,6 +71,6 @@ public class PlayerBehaviour : MonoBehaviour
     public void Die()
     {
         Alive = false;
-        GunnerController.Instance.QuitGame();
+        GunnerController.Instance.GameOver();
     }
 }
