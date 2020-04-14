@@ -115,6 +115,7 @@ public class ChaserBehaviour : EnemyBase
         {
             Instantiate(ExplosionPrefab, this.transform.position, Quaternion.identity);
         }
+        GunnerController.Instance.IncreaseScore(Score);
     }
 
     //public void OnTriggerEnter(Collider collider)

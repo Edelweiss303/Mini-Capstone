@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using static EnemyBase;
 using static GunnerController;
 
 public class PilotController : Singleton<PilotController>
@@ -20,6 +21,7 @@ public class PilotController : Singleton<PilotController>
     public HealthBarBehaviour HealthBarBehaviour;
     public GameObject GameOverPanel;
     public PlayerScreen PlayerViewScreen;
+    public Text ScoreText;
 
     private float timeSinceLastPickupSpawn = 0.0f;
 
@@ -102,4 +104,10 @@ public class PilotController : Singleton<PilotController>
         GameOverPanel.SetActive(true);
         AudioManager.Instance.StopAll();
     }
+
+    public void SetScore(int scoreValue)
+    {
+        ScoreText.text = "SCORE: " + scoreValue;
+    }
+
 }

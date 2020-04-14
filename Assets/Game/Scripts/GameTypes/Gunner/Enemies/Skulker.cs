@@ -105,12 +105,6 @@ public class Skulker : EnemyBase
             //Return to spawner
             SkulkState = State.retreat;
         }
-        if (GunnerController.Instance.PlayerProjectileMask == (GunnerController.Instance.PlayerProjectileMask | (1 << other.gameObject.layer)))
-        {
-            TakeDamage(1);
-            Destroy(other.gameObject);
-            return;
-        }
 
         PlayerBehaviour pBehaviour = other.gameObject.GetComponent<PlayerBehaviour>();
         if (pBehaviour)
@@ -147,13 +141,12 @@ public class Skulker : EnemyBase
         }
 
         EnemiesManager.Instance.removeEnemy(gameID);
-
-        //Create a death explosion effect and sound
         AudioManager.Instance.PlaySound(DeathAudioClipName);
 
         if (ExplosionPrefab)
         {
             Instantiate(ExplosionPrefab, this.transform.position, Quaternion.identity);
         }
+        GunnerController.Instance.IncreaseScore(Score);
     }
 }

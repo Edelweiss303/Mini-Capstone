@@ -19,6 +19,7 @@ public class GameNetwork : MonoBehaviour
     private const byte GAME_BROADCAST_EVENT = 4;
     private const byte GAME_TOPLAYER_EVENT = 5;
     private const byte GAME_ENEMYUPDATE_EVENT = 6;
+    private const byte GAME_PROJECTILEUPDATE_EVENT = 7;
 
     public List<string> ToPlayerQueue = new List<string>();
     public List<string> BroadcastQueue = new List<string>();
@@ -77,7 +78,14 @@ public class GameNetwork : MonoBehaviour
 
     }
 
-
+    public void UpdateProjectiles(string message)
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            object newMessage = message;
+            PhotonNetwork.RaiseEvent(GAME_PROJECTILEUPDATE_EVENT, newMessage, RaiseEventOptions.Default, SendOptions.SendReliable);
+        }
+    }
 
     private void NetworkingClient_EventReceived(EventData obj)
     {
@@ -125,6 +133,17 @@ public class GameNetwork : MonoBehaviour
                         else if (Type == PlayerType.Technician)
                         {
                             TechnicianController.Instance.GameOver();
+                        }
+                        break;
+                    case "GunnerSetScore":
+                        if(Type == PlayerType.Pilot)
+                        {
+                            PilotController.Instance.SetScore(int.Parse(messageSegments[1]));
+                            
+                        }
+                        else if(Type == PlayerType.Technician)
+                        {
+                            TechnicianController.Instance.SetScore(int.Parse(messageSegments[1]));
                         }
                         break;
                     default:
@@ -186,6 +205,14 @@ public class GameNetwork : MonoBehaviour
                 {
                     datas = obj.CustomData;
                     EnemiesManager.Instance.UpdateEnemies(datas.ToString());
+                }
+
+                break;
+            case GAME_PROJECTILEUPDATE_EVENT:
+                if (Type == PlayerType.Pilot)
+                {
+                    datas = obj.CustomData;
+                    ProjectilesManager.Instance.UpdateProjectiles(datas.ToString());
                 }
 
                 break;

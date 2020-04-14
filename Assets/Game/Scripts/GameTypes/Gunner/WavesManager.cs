@@ -13,6 +13,7 @@ public class WavesManager : Singleton<WavesManager>
     public int BigChaserSpawnIncreaseRoundFrequency = 3;
     public int SmallChaserSpawnRateIncreaseRoundFrequency = 4;
     public int SmallChaserSpawnIncreaseRoundFrequency = 2;
+    public int SentrySpawnIncreaseRoundFrequency = 5;
     public int MinimumSpawnRateFrequency = 3;
 
     public float TimeBetweenWaves = 30.0f;
@@ -82,6 +83,11 @@ public class WavesManager : Singleton<WavesManager>
                     if(CurrentWave % BigChaserSpawnIncreaseRoundFrequency == 0)
                     {
                         spawner.SpawnObjects.Add(spawner.BigChaserPrefab);
+                    }
+
+                    if (CurrentWave % SentrySpawnIncreaseRoundFrequency == 0)
+                    {
+                        spawner.SpawnObjects.Add(spawner.SentryPrefab);
                     }
 
                     spawner.SpawnedEnemies.Clear();

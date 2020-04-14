@@ -20,11 +20,12 @@ public class SentryDrone : EnemyBase
     public float Health = 3.0f;
 
     public float DeathTime = 4.0f;
-    public GameObject ComponentHolder;
+    public GameObject ComponentHolder, CannonObject;
+    public GameObject ExplosionPrefab;
 
     public float AggroRange = 28.0f;
     public string DeathAudioClipName;
-    public GameObject ExplosionPrefab;
+
     public float initialHeight = 0.0f;
 
     private SentryShooting sentryShooting;
@@ -55,7 +56,9 @@ public class SentryDrone : EnemyBase
             selectedDrone.Select(Colour, EnemyMaterial);
         }
         
-        sState = SentryState.Idle;   
+        sState = SentryState.Idle;
+        gameID = gameObject.GetInstanceID();
+        EnemiesManager.Instance.addEnemy(gameID, gameObject, Type, Colour);
     }
 
     // Update is called once per frame
@@ -104,27 +107,31 @@ public class SentryDrone : EnemyBase
 
     private void SetSentryState()
     {
-        float distanceFromPlayer = (pTransform.position - transform.position).magnitude;
+        if(pTransform != null)
+        {
+            float distanceFromPlayer = (pTransform.position - transform.position).magnitude;
 
-        if (distanceFromPlayer > AggroRange)
-        {
-            sState = SentryState.Idle;
-        }
-        else if (!sentryShooting.IsInRange(distanceFromPlayer))
-        {
-            sState = SentryState.Approach;
-        }
-        else
-        {
-            if(!sentryShooting.IsRecharged)
+            if (distanceFromPlayer > AggroRange)
             {
-                sState = SentryState.Strafe;
+                sState = SentryState.Idle;
+            }
+            else if (!sentryShooting.IsInRange(distanceFromPlayer))
+            {
+                sState = SentryState.Approach;
             }
             else
             {
-                sState = SentryState.Charge;
+                if (!sentryShooting.IsRecharged)
+                {
+                    sState = SentryState.Strafe;
+                }
+                else
+                {
+                    sState = SentryState.Charge;
+                }
             }
         }
+
     }
 
     private void Strafe()
@@ -149,12 +156,12 @@ public class SentryDrone : EnemyBase
     public override void Die()
     {
         isAlive = false;
-
+        chaseSteeringBehaviour.enabled = false;
         foreach (GameObject component in DroneComponents)
         {
             component.SetActive(false);
         }
-
+        CannonObject.SetActive(false);
         //Create a death explosion effect and sound
         AudioManager.Instance.PlaySound(DeathAudioClipName);
 
@@ -162,6 +169,7 @@ public class SentryDrone : EnemyBase
         {
             Instantiate(ExplosionPrefab, this.transform.position, Quaternion.identity);
         }
+        GunnerController.Instance.IncreaseScore(Score);
     }
 
 

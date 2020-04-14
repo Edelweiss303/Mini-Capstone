@@ -24,9 +24,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624467293414018681}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.644782, y: 2.79, z: -45.775063}
-  m_LocalScale: {x: 0.70693, y: 0.70693, z: 0.70693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3704383617352839431}
   - {fileID: 3704383616988130821}
@@ -96,7 +96,6 @@ MonoBehaviour:
   weight: 1
   target: {x: 0, y: 0, z: 0}
   steeringAgent: {fileID: 0}
-  targetType: 1
   RepathingCooldown: 0.05
   SetNewPathTargetDistance: 0.2
 --- !u!1 &3704383616573116092
@@ -144,11 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RechargeTime: 6
   ChargingTime: 3
-  LaserLifespan: 0.05
-  LaserMaterial: {fileID: 2100000, guid: 0096f6f01d46bc4498e5ce3e18b8da84, type: 2}
   ShootRange: 5
   Damage: 1
   CannonObject: {fileID: 3704383617250944028}
+  ProjectilePrefab: {fileID: 0}
   Shoot_Sound: Sentinel_Shoot
 --- !u!1 &3704383616988130822
 GameObject:
@@ -416,14 +414,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 5
@@ -533,14 +530,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 5
@@ -650,14 +646,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 5
@@ -767,14 +762,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
-  Type: 0
+  Colour: 0
   EnemyMaterial: {fileID: 0}
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
+  Type: 0
   Selected: 0
   SelectionMaterial: {fileID: 2100000, guid: bda2868b979444d448a0de827724ee82, type: 2}
   Health: 5

@@ -6,71 +6,62 @@ public class SentryShooting : MonoBehaviour
 {
     public float RechargeTime = 4.0f;
     public float ChargingTime = 1.0f;
-    public float LaserLifespan = 0.05f;
-    public Material LaserMaterial;
     public float ShootRange = 25.0f;
     public float Damage = 1.0f;
-    public GameObject CannonObject;
+
+    public GameObject CannonObject, ProjectilePrefab;
     public string Shoot_Sound;
     private PlayerBehaviour pBehaviour;
+    private SentryDrone sDrone;
+
     public bool IsRecharged
     {
         get { return totalRechargeTime == 0.0f; }
     }
 
-    private LineRenderer laser;
-    private float totalRechargeTime = 0.0f;
+    private float totalRechargeTime = 5.0f;
     private float totalChargingTime = 0.0f;
 
     private void Start()
     {
-        pBehaviour = GunnerController.Instance.PlayerObject.GetComponent<PlayerBehaviour>();
+        sDrone = GetComponentInParent<SentryDrone>();
+        
+
     }
 
     public void Charge(Transform target)
     {
         totalChargingTime += Time.deltaTime;
 
-        if (ChargingTime + LaserLifespan < totalChargingTime)
+        if(totalChargingTime > ChargingTime)
         {
-            if (laser)
-            {
-                Destroy(laser);
-                totalChargingTime = 0.0f;
-                totalRechargeTime += Time.deltaTime;
-            }
-        }
-        else if (ChargingTime <= totalChargingTime)
-        {
+            totalChargingTime = 0.0f;
             Shoot(target);
         }
     }
 
     private void Shoot(Transform target)
     {
-        if (!laser)
+        if (!pBehaviour)
         {
-            laser = gameObject.AddComponent<LineRenderer>();
-
-            if (laser)
-            {
-                float xOffset = Random.Range(-1.0f, 1.0f);
-                float yOffset = Random.Range(-1.0f, 1.0f);
-                laser.material = LaserMaterial;
-                laser.SetPositions(
-                    new Vector3[] 
-                    {
-                        CannonObject.transform.position,
-                        new Vector3(target.position.x + xOffset, target.position.y + yOffset, target.position.z)
-                    }
-                );
-                laser.startWidth = 0.08f;
-                laser.endWidth = 1.0f;
-                AudioManager.Instance.PlaySound(Shoot_Sound);
-            }
-
-            pBehaviour.TakeDamage(Damage);
+            pBehaviour = GunnerController.Instance.PlayerObject.GetComponent<PlayerBehaviour>();
         }
+
+        if (ProjectilePrefab)
+        {
+            AudioManager.Instance.PlaySound(Shoot_Sound);
+            //Instantiate the projectile and send it in the direction of the player
+
+            GameObject spawnedProjectile = Instantiate(ProjectilePrefab, CannonObject.transform.position, Quaternion.identity, GunnerController.Instance.ProjectilesCollection.transform);
+            spawnedProjectile.transform.LookAt(pBehaviour.gameObject.transform.position);
+        
+            //Assign the colour and the velocity
+            EnemyProjectile eProjectile = spawnedProjectile.GetComponent<EnemyProjectile>();
+            eProjectile.SetColour(ColourManager.Instance.ProjectileMaterialMap[sDrone.Colour], sDrone.Colour);
+        }
+
+            
+        
     }
 
     public void Recharge()

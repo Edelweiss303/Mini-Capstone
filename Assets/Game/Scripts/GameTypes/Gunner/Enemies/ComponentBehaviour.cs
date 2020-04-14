@@ -13,18 +13,11 @@ public class ComponentBehaviour : EnemyBase
     public float Health = 5.0f;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void Awake()
     {
-        sdBehaviour = transform.parent.GetComponent<SentryDrone>();
+        sdBehaviour = transform.parent.GetComponentInParent<SentryDrone>();
         bBehaviour = transform.GetComponentInParent<FactoryMachine>();
         sdcRenderer = GetComponent<MeshRenderer>();
-        AutoAimable = false;
     }
 
     // Update is called once per frame
@@ -79,8 +72,7 @@ public class ComponentBehaviour : EnemyBase
         EnemyMaterial = inEnemyMaterial;
 
         Selected = true;
-        AutoAimable = true;
-        EnemiesManager.Instance.addToAimables(this);
+
         if (sdcRenderer)
         {
             sdcRenderer.material = EnemyMaterial;

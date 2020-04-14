@@ -7,12 +7,14 @@ using static ImageMatchGameController;
 public class TechnicianController : Singleton<TechnicianController>
 {
     public GameObject ImageMatchControllerObject, LockRotationControllerObject, FrontPageObject, TimingButtonControllerObject, SelectPowerupColourObject;
+    public GameObject ImageMatchInstructionsObject, LockRotationInstructionsObject, TimingButtonInstructionsObject;
     public GameObject GameOverPanel;
     public Slider HeatSlider;
     public float MaxHeat = 100.0f;
     public float CurrentHeat = 0.0f;
     public string ReleaseHeatSoundEffectName, OverheatedSoundEffectName;
     public HealthBarBehaviour HealthBar;
+    public Text ScoreText;
     public PlayerScreen PlayerViewScreen;
 
     private ImageMatchGameController imageGameController;
@@ -157,5 +159,25 @@ public class TechnicianController : Singleton<TechnicianController>
         AudioManager.Instance.StopAll();
         Time.timeScale = 0.0f;
         GameOverPanel.SetActive(true);
+    }
+
+    public void SetScore(int scoreValue)
+    {
+        ScoreText.text = "SCORE: " + scoreValue;
+    }
+
+    public void ImageMatch_Help()
+    {
+        ImageMatchInstructionsObject.SetActive(true);
+    }
+
+    public void LockRotation_Help()
+    {
+        LockRotationInstructionsObject.SetActive(true);
+    }
+
+    public void TimingButton_Help()
+    {
+        TimingButtonInstructionsObject.SetActive(true);
     }
 }

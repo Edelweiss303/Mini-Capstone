@@ -239,12 +239,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec748af4cb25280468329fa3821fdaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 1
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 5
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 1

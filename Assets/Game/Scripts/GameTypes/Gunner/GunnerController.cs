@@ -8,12 +8,13 @@ using static EnemyBase;
 public class GunnerController : Singleton<GunnerController>
 {
     public Vector2 ScreenSize;
-    public Text InputTest;
+    public Text InputTest, ScoreText;
     public LayerMask PlayerProjectileMask, EnemyLayerMask;
     public List<EnemyColour> AllEnemyColours = new List<EnemyColour>() { EnemyColour.A, EnemyColour.B, EnemyColour.C };
     public GameObject PickupsShellPrefab;
     public Dictionary<float, GameObject> PickupsMap = new Dictionary<float, GameObject>();
     public string PlayerMovementSoundEffectName, PlayerRotationSoundEffectName, PickupSoundEffectName;
+    public int PlayerScore = 0;
 
     public List<Transform> FactoryMarkers = new List<Transform>();
     public GameObject ProjectilesCollection, EffectsContainer;
@@ -135,5 +136,12 @@ public class GunnerController : Singleton<GunnerController>
         GameOverPanel.SetActive(true);
         AudioManager.Instance.StopAll();
         GameNetwork.Instance.BroadcastQueue.Add("GunnerGameOver");
+    }
+
+    public void IncreaseScore(int inScoreIncrement)
+    {
+        PlayerScore += inScoreIncrement;
+        GameNetwork.Instance.BroadcastQueue.Add("GunnerSetScore:" + PlayerScore);
+        ScoreText.text = "SCORE: " + PlayerScore;
     }
 }

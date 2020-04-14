@@ -19,12 +19,11 @@ public abstract class EnemyBase : MonoBehaviour
     abstract public void TakeDamage(float damage);
     abstract public bool IsAlive();
     public abstract void Die();
-    public bool AutoAimable = true;
     public bool DieOnCollision = true;
     public float Damage;
-    public int ProtectionPriority;
     public EnemyColour Colour;
     public Material EnemyMaterial;
+    public int Score;
 
     public float DamageTransparencyRatio = 0.75f;
     public float TimeDamaged = 0.3f;
@@ -42,15 +41,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GunnerController.Instance.PlayerProjectileMask == (GunnerController.Instance.PlayerProjectileMask | (1 << other.gameObject.layer)))
-        {
-            TakeDamage(1);
-            Destroy(other.gameObject);
-            return;
-        }
-
         PlayerBehaviour pBehaviour = other.gameObject.GetComponent<PlayerBehaviour>();
-        if (pBehaviour)
+        if (pBehaviour && IsAlive())
         {
             pBehaviour.TakeDamage(Damage);
             Die();

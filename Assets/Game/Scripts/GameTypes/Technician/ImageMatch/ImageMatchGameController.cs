@@ -27,6 +27,7 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
     private List<string> usedIcons;
     private bool imagesInitialized = false;
     private ImageHue selectedPowerupColour;
+    public GameObject IconsContainer;
 
     public string PowerupSoundEffectName;
 
@@ -121,7 +122,7 @@ public class ImageMatchGameController : Singleton<ImageMatchGameController>
             for(int r = 0; r < rows; r++)
             {
                 currentOffset = new Vector3(transform.position.x + r * IconSize, transform.position.y + -c * IconSize);
-                temp = Instantiate(IconPrefab, currentOffset, Quaternion.identity, transform);
+                temp = Instantiate(IconPrefab, currentOffset, Quaternion.identity, IconsContainer.transform);
                 IconGrid.Add(temp.GetComponent<IconBehaviour>());
             }
         }

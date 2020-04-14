@@ -8,10 +8,13 @@ public class ColourManager : Singleton<ColourManager>
 {
     public Material EnemyTypeAMaterial, EnemyTypeBMaterial, EnemyTypeCMaterial;
     public Material ShieldTypeAMaterial, ShieldTypeBMaterial, ShieldTypeCMaterial;
+    public Material ProjectileTypeAMaterial, ProjectileTypeBMaterial, ProjectileTypeCMaterial;
 
     public Color AmmoColorA, AmmoColorB, AmmoColorC;
     public Dictionary<EnemyColour, Material> EnemyMaterialMap = new Dictionary<EnemyColour, Material>();
     public Dictionary<EnemyColour, Material> ShieldMaterialMap = new Dictionary<EnemyColour, Material>();
+    public Dictionary<EnemyColour, Material> ProjectileMaterialMap = new Dictionary<EnemyColour, Material>();
+
     public Dictionary<EnemyColour, Color> AmmoColorMap = new Dictionary<EnemyColour, Color>();
     public List<EnemyColour> AllEnemyTypes = new List<EnemyColour>() { EnemyColour.A, EnemyColour.B, EnemyColour.C };
 
@@ -24,6 +27,10 @@ public class ColourManager : Singleton<ColourManager>
         ShieldMaterialMap.Add(EnemyColour.A, ShieldTypeAMaterial);
         ShieldMaterialMap.Add(EnemyColour.B, ShieldTypeBMaterial);
         ShieldMaterialMap.Add(EnemyColour.C, ShieldTypeCMaterial);
+
+        ProjectileMaterialMap.Add(EnemyColour.A, ProjectileTypeAMaterial);
+        ProjectileMaterialMap.Add(EnemyColour.B, ProjectileTypeBMaterial);
+        ProjectileMaterialMap.Add(EnemyColour.C, ProjectileTypeCMaterial);
 
         AmmoColorMap.Add(EnemyColour.A, AmmoColorA);
         AmmoColorMap.Add(EnemyColour.B, AmmoColorB);

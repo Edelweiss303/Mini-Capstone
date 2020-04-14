@@ -45,12 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71168f51cdf6e346ab46306a3c2ac19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 1
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 2
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 7
@@ -195,7 +194,6 @@ GameObject:
   - component: {fileID: 3361300319908319382}
   - component: {fileID: 3361300319908319379}
   - component: {fileID: 3361300319908319376}
-  - component: {fileID: 3361300319908319377}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -264,16 +262,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3361300319908319377
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3361300319908319383}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
