@@ -13,6 +13,7 @@ public class CircleLock : MonoBehaviour
     List<string> charTemplate = new List<string>() { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
     List<string> numTemplate = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+    private float rotationAmount = 0;
     public enum KeyColour
     {
         brightred, darkred, brightblue, darkblue, brightgreen, darkgreen, brightyellow, darkyellow, brightorange, darkorange, brightpurple, darkpurple
@@ -43,35 +44,44 @@ public class CircleLock : MonoBehaviour
     {
         if (Active)
         {
-            float rotationAmount = TouchRotate();
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                Debug.Log("LEFT ARROW");
+                AudioManager.Instance.PlaySound("Technician_Click");
+                rotationAmount += RotationSpeed;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                Debug.Log("RIGHT ARROW");
+                AudioManager.Instance.PlaySound("Technician_Click");
+                rotationAmount -= RotationSpeed;
+            }
+            transform.Rotate(new Vector3(0, 0, rotationAmount));
 
             if (rotationAmount == 0)
             {
                 AudioManager.Instance.StopSound("Technician_Click");
             }
+            rotationAmount = 0;
         }
     }
 
-    private void OnMouseDrag()
+    public void LeftArrowButton()
     {
-        float xRotation = Input.GetAxis("Mouse X") * RotationSpeed * Mathf.Deg2Rad;
-        float yRotation = Input.GetAxis("Mouse Y") * RotationSpeed * Mathf.Deg2Rad;
-        Debug.Log("ROTATING");
-        transform.Rotate(Vector3.forward, xRotation);
-    }
-    private float TouchRotate()
-    {
-        float angle = 0;
-
-        if (Input.touches.Length > 0)
+        if (Active)
         {
-            Touch touch = Input.touches[0];
-
+            AudioManager.Instance.PlaySound("Technician_Click");
+            rotationAmount += RotationSpeed;
         }
-
-        return angle;
     }
-
+    public void RightArrowButton()
+    {
+        if (Active)
+        {
+            AudioManager.Instance.PlaySound("Technician_Click");
+            rotationAmount -= RotationSpeed;
+        }
+    }
 
     public void resetAngles()
     {
