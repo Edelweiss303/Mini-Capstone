@@ -102,7 +102,8 @@ public class TechnicianController : Singleton<TechnicianController>
     {
         FrontPageObject.SetActive(false);
         background.SetActive(false);
-        Camera.main.GetComponent<GyroCamera>().enabled = true;
+        Camera.main.GetComponent<GyroCamera>().enabled = true; 
+        Camera.main.GetComponent<TouchInput>().enabled = true;
         ArmourRepairControllerObject.SetActive(true);
         GameNetwork.Instance.BroadcastMessage("TechnicianMessengerReset");
     }
@@ -134,6 +135,7 @@ public class TechnicianController : Singleton<TechnicianController>
         FrontPageObject.SetActive(true);
         background.SetActive(true);
         Camera.main.GetComponent<GyroCamera>().enabled = false;
+        Camera.main.GetComponent<TouchInput>().enabled = false;
         ArmourRepairControllerObject.SetActive(false);
         GameNetwork.Instance.BroadcastMessage("TechnicianMessengerReset");
     }

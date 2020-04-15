@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TouchInput : MonoBehaviour
 {
+    public float touchDistanceThreshold = 0.1f;
+    public float repairAmount = 10.0f;
+
     private Camera camera;
     void Awake()
     {
@@ -30,20 +34,34 @@ public class TouchInput : MonoBehaviour
 
                     if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
                     {
-                        GameObject obj = hit.collider.gameObject;
-                        Material material = hit.collider.gameObject.GetComponent<Renderer>().sharedMaterial;
-                        Vector4 tiling = material.GetVector("Polygon_Tiling");
-                        Vector4 offset = material.GetVector("Polygon_Offset");
-                        Vector2 vec2Offset = new Vector2(offset.x + 0.5f, offset.y + 0.5f);
-                        Vector2 texCoord = new Vector2(
-                            Mathf.Round(hit.textureCoord.x * 10) / 10,
-                            Mathf.Round(hit.textureCoord.y * 10) / 10
+                        Renderer renderer = hit.collider.gameObject.GetComponent<Renderer>();
+                        Material sharedMaterial = renderer.sharedMaterial;
+
+                        Vector2 offset = (sharedMaterial.GetVector("Polygon_Offset")) * -1;
+                        
+                        Vector2 hitCoord = new Vector2(
+                            (Mathf.Round(hit.textureCoord.x * 10) / 10) - 0.5f,
+                            (Mathf.Round(hit.textureCoord.y * 10) / 10) - 0.5f
                             );
 
-                        if(texCoord == vec2Offset)
+                        if (Vector2.Distance(hitCoord, offset) <= touchDistanceThreshold)
                         {
-                            material.SetVector("Polygon_Tiling", Vector4.zero);
+                            sharedMaterial.SetVector("Polygon_Tiling", Vector2.zero);
                         }
+
+                        int index = Array.IndexOf(HullManager.Instance.armourRenderers, renderer);
+
+                        if (!HullManager.Instance.armourIndexes.Contains(index))
+                        {
+                            HullManager.Instance.armourIndexes.Add(index);
+                        }
+
+                        HullManager.Instance.health = HullManager.Instance.damageThresholds[HullManager.Instance.damageIndex] + repairAmount;
+                        if(HullManager.Instance.damageIndex > 0)
+                        {
+                            HullManager.Instance.damageIndex--;
+                        }
+                        
                     }
 
                 }
