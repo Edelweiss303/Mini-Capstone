@@ -6,9 +6,10 @@ using static ImageMatchGameController;
 
 public class TechnicianController : Singleton<TechnicianController>
 {
-    public GameObject ImageMatchControllerObject, LockRotationControllerObject, FrontPageObject, TimingButtonControllerObject, SelectPowerupColourObject;
+    public GameObject ImageMatchControllerObject, LockRotationControllerObject, ArmourRepairControllerObject, FrontPageObject, TimingButtonControllerObject, SelectPowerupColourObject;
     public GameObject ImageMatchInstructionsObject, LockRotationInstructionsObject, TimingButtonInstructionsObject;
     public GameObject GameOverPanel;
+    public GameObject background;
     public Slider HeatSlider;
     public float MaxHeat = 100.0f;
     public float CurrentHeat = 0.0f;
@@ -96,6 +97,16 @@ public class TechnicianController : Singleton<TechnicianController>
         GameNetwork.Instance.BroadcastMessage("TechnicianMessengerReset");
     }
 
+
+    public void FrontPage_PatchArmourButtonPress()
+    {
+        FrontPageObject.SetActive(false);
+        background.SetActive(false);
+        Camera.main.GetComponent<GyroCamera>().enabled = true;
+        ArmourRepairControllerObject.SetActive(true);
+        GameNetwork.Instance.BroadcastMessage("TechnicianMessengerReset");
+    }
+
     public void ImageMatch_BackPress()
     {
         FrontPageObject.SetActive(true);
@@ -115,6 +126,15 @@ public class TechnicianController : Singleton<TechnicianController>
     {
         FrontPageObject.SetActive(true);
         TimingButtonControllerObject.SetActive(false);
+        GameNetwork.Instance.BroadcastMessage("TechnicianMessengerReset");
+    }
+
+    public void ArmourRepair_BackPress()
+    {
+        FrontPageObject.SetActive(true);
+        background.SetActive(true);
+        Camera.main.GetComponent<GyroCamera>().enabled = false;
+        ArmourRepairControllerObject.SetActive(false);
         GameNetwork.Instance.BroadcastMessage("TechnicianMessengerReset");
     }
 
