@@ -30,8 +30,6 @@ public class TouchInput : MonoBehaviour
                 Ray ray = camera.ScreenPointToRay(touch.position);
                 if (Physics.Raycast(ray, out hit))
                 {
-                    //Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 3.0f);
-
                     if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
                     {
                         Renderer renderer = hit.collider.gameObject.GetComponent<Renderer>();
@@ -56,6 +54,7 @@ public class TouchInput : MonoBehaviour
                             HullManager.Instance.armourIndexes.Add(index);
                         }
 
+                        //This health value needs to be replaced with whatever the networked one is
                         HullManager.Instance.health = HullManager.Instance.damageThresholds[HullManager.Instance.damageIndex] + repairAmount;
                         if(HullManager.Instance.damageIndex > 0)
                         {

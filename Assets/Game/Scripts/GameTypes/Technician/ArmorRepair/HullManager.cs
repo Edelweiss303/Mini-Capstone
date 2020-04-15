@@ -6,7 +6,7 @@ using UnityEngine;
 public class HullManager : Singleton<HullManager>
 {
 
-    public float health = 100.0f; //Replace all instances of this float and it *should* work okay
+    public float health = 100.0f; //This health value needs to be replaced with whatever the networked one is. Replace all instances of this.
     public float holeOffsetLimit = 0.3f;
     public int shapeTwoRotationRange = 6;
 
@@ -28,7 +28,6 @@ public class HullManager : Singleton<HullManager>
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(health <= damageThresholds[damageIndex] )
@@ -40,10 +39,6 @@ public class HullManager : Singleton<HullManager>
                 damageIndex++;
             }
         }
-    }
-
-    private void CheckForDamage()
-    {
     }
 
     public void GenerateHole()
