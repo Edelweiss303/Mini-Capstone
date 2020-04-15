@@ -6,8 +6,8 @@ using UnityEngine;
 public class FactoryCore : EnemyBase
 {
     public float Health = 15.0f;
-    public FactoryMachine mainBehaviour;
-
+    public Collector mainBehaviour;
+    public MeshRenderer meshRenderer;
     public override bool IsAlive()
     {
         return Health > 0;
@@ -25,7 +25,7 @@ public class FactoryCore : EnemyBase
     // Start is called before the first frame update
     override protected void Start()
     {
-        
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame

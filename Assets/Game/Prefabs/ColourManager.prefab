@@ -55,6 +55,9 @@ MonoBehaviour:
     type: 2}
   ProjectileTypeCMaterial: {fileID: 2100000, guid: 137962be26131d941acf40e57e55d11e,
     type: 2}
+  PickupTypeAMaterial: {fileID: 2100000, guid: b222558ce6e7c6e4db9028ca23a3e70c, type: 2}
+  PickupTypeBMaterial: {fileID: 2100000, guid: 2c6f4f0596831c6478777ae4e2645c97, type: 2}
+  PickupTypeCMaterial: {fileID: 2100000, guid: 7abafe393c4fc554dbdca3999877fee7, type: 2}
   AmmoColorA: {r: 1, g: 0, b: 0, a: 1}
   AmmoColorB: {r: 0, g: 0.08237839, b: 1, a: 1}
   AmmoColorC: {r: 0, g: 1, b: 0.13595366, a: 1}

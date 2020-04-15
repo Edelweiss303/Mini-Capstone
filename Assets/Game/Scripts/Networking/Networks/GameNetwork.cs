@@ -195,6 +195,9 @@ public class GameNetwork : MonoBehaviour
                         case "TechnicianTakeDamage":
                             GunnerController.Instance.PlayerObject.GetComponent<PlayerBehaviour>().TakeDamage(float.Parse(messageSegments[2]));
                             break;
+                        case "PilotCollectorDestroyPickup":
+                            PilotController.Instance.DestroyPickup(int.Parse(messageSegments[2]));
+                            break;
                         default:
                             break;
                     }

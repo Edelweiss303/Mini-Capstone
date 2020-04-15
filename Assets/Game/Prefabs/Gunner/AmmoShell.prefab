@@ -205,14 +205,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f45acb891a9b3468da1ad13058b43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialObjects:
+  materialObjects: []
+  shieldMaterialObjects: []
+  projectileMaterialObjects: []
+  pickupMaterialObjects:
   - {fileID: 6095330422336790405}
   - {fileID: 6095330423620121621}
   - {fileID: 6095330422666213685}
   - {fileID: 6095330424301958853}
-  shieldMaterialObjects: []
   material: {fileID: 0}
   shieldMaterial: {fileID: 0}
+  projectileMaterial: {fileID: 0}
+  pickupMaterial: {fileID: 0}
 --- !u!1 &6095330423620121622
 GameObject:
   m_ObjectHideFlags: 0

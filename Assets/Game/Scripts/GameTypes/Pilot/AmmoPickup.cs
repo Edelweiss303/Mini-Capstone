@@ -26,6 +26,7 @@ public class AmmoPickup : MonoBehaviour
 
         ChangeEnemyType(ColourManager.Instance.AllEnemyTypes[Random.Range(0, ColourManager.Instance.AllEnemyTypes.Count)]);
         gameID = gameObject.GetInstanceID();
+        PilotController.Instance.PickupMap.Add(gameID, this);
         GameNetwork.Instance.ToPlayerQueue.Add("g:GunnerCreateAmmo:" + EnemyColour.ToString() + ":" + gameID + ":" + transform.position.x  + ":" + transform.position.y + ":" + transform.position.z);
     }
 
@@ -36,7 +37,7 @@ public class AmmoPickup : MonoBehaviour
         LightColor = ColourManager.Instance.AmmoColorMap[inEnemyColour];
         ammoLight.color = LightColor;
 
-        AmmoMaterial = ColourManager.Instance.EnemyMaterialMap[inEnemyColour];
+        AmmoMaterial = ColourManager.Instance.PickupMaterialMap[inEnemyColour];
         foreach(MeshRenderer canisterRenderer in canisterRenderers)
         {
             canisterRenderer.material = AmmoMaterial;

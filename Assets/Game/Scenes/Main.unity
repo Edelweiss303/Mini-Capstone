@@ -2432,7 +2432,7 @@ MonoBehaviour:
   GunnerPlayerText: {fileID: 1287911893}
   TechnicianPlayerText: {fileID: 358323652}
   PilotPlayerText: {fileID: 666764762}
-  AIDemoBtn: {fileID: 0}
+  AIDemoBtn: {fileID: 256382210}
   CreateGameBtn: {fileID: 2135501651}
   LobbyBackBtn: {fileID: 1155599506}
   SettingsBackBtn: {fileID: 603976017}
@@ -5447,6 +5447,7 @@ MonoBehaviour:
   CenterTapDistanceThreshold: 5
   NewTouchThreshold: 0.05
   SwipingThreshold: 10
+  FireHeldSeconds: 0
 --- !u!4 &1727950509
 Transform:
   m_ObjectHideFlags: 0

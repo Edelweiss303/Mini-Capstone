@@ -106,12 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -224,12 +223,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -342,12 +340,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -460,12 +457,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -578,12 +574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -696,12 +691,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -814,12 +808,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -932,12 +925,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1050,12 +1042,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1168,12 +1159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1286,12 +1276,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1404,12 +1393,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1522,12 +1510,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1640,12 +1627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1758,12 +1744,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1876,12 +1861,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851874416d458e48aedb72a7aee586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
@@ -1932,87 +1916,7 @@ Transform:
   - {fileID: 322276673827678434}
   - {fileID: 322276673995575166}
   m_Father: {fileID: 8532918803183256970}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8463622460221817895
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8463622460221817894}
-  - component: {fileID: 8463622460221817893}
-  m_Layer: 10
-  m_Name: SeekSteeringBehaviour
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8463622460221817894
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8463622460221817895}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8463622460393371387}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8463622460221817893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8463622460221817895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4112df4750fdba429e86f19ad5460e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 1
-  target: {x: 0, y: 0, z: 0}
-  steeringAgent: {fileID: 0}
-  EndGoal: {x: 0, y: 0, z: 0}
-  RepathingCooldown: 2
-  SetNewPathTargetDistance: 0.1
---- !u!1 &8463622460393371364
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8463622460393371387}
-  m_Layer: 10
-  m_Name: SteeringBehaviours
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8463622460393371387
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8463622460393371364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 8463622460221817894}
-  m_Father: {fileID: 8532918803183256970}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8532918803183256973
 GameObject:
@@ -2024,11 +1928,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8532918803183256970}
   - component: {fileID: 8532918803183256971}
-  - component: {fileID: 8532918803183256972}
-  - component: {fileID: 8532918803183256962}
-  - component: {fileID: 8532918803183256963}
   m_Layer: 10
-  m_Name: FactoryMachine
+  m_Name: Collector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2041,14 +1942,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8532918803183256973}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 20.520378, y: 2.5938838, z: -15.756294}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 8532918804084666606}
-  - {fileID: 8532918803310205590}
   - {fileID: 8463622460198071293}
-  - {fileID: 8463622460393371387}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2064,134 +1963,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5918892e28e99e428647aff75f628ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 0
   DieOnCollision: 0
   Damage: 0
-  ProtectionPriority: 4
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 4
-  State: 0
+  CurrentState: 0
+  InitialHeight: 10
   Shields: []
-  ChangeDestinationFrequency: 3
+  CollectionTimeRequired: 3
+  CheckCurrentGoalFrequency: 1
   RotationRate: 1
---- !u!54 &8532918803183256972
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532918803183256973}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
---- !u!114 &8532918803183256962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532918803183256973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65601da78f8a1024ba6aea27aa03683f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  summingMethod: 0
-  mass: 1
-  maxSpeed: 3
-  maxForce: 10
-  velocity: {x: 0, y: 0, z: 0}
-  angularDampeningTime: 5
-  deadZone: 10
-  reachedGoal: 0
---- !u!136 &8532918803183256963
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532918803183256973}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.87
-  m_Height: 1.52
-  m_Direction: 1
-  m_Center: {x: -0.84, y: -0.14, z: -0.48}
---- !u!1 &8532918803310205577
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8532918803310205590}
-  - component: {fileID: 8532918803310205591}
-  - component: {fileID: 8532918803310205588}
-  m_Layer: 10
-  m_Name: spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8532918803310205590
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532918803310205577}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.26, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8532918803183256970}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8532918803310205591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532918803310205577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d08849736556f4c88a913bd2c0b3c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnPrefabs:
-  - {fileID: 4320029912051234385, guid: 067825e623b8bc649a6385233d665f8d, type: 3}
-  SpawnRate: 1000
-  SpawnContainer: {fileID: 8532918803310205590}
-  SpawnHeightOffsetRange: 0
-  SpawnWidthOffsetRange: 0
-  SpawnDepthOffsetRange: 0
-  SpawnLimit: 10
---- !u!65 &8532918803310205588
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532918803310205577}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  Target: {x: 0, y: 0, z: 0}
+  MoveSpeed: 1.5
 --- !u!1 &8532918804084666597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,14 +2147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e723bbf0cf2d877479c6160ef28ff233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoAimable: 1
   DieOnCollision: 1
   Damage: 0
-  ProtectionPriority: 0
   Colour: 0
   EnemyMaterial: {fileID: 0}
+  Score: 0
   DamageTransparencyRatio: 0.75
   TimeDamaged: 0.3
   Type: 0
-  Health: 15
-  mainBehaviour: {fileID: 0}
+  Health: 3
+  mainBehaviour: {fileID: 8532918803183256971}
+  meshRenderer: {fileID: 0}

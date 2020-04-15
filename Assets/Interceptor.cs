@@ -1,42 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class ChaserBehaviour : EnemyBase
+public class Interceptor : EnemyBase
 {
+    public enum State
+    {
+        chasing, intercepting
+    }
+    public State CurrentState;
+
     public float Speed = 1.0f;
     public float Health = 3.0f;
     public float DeathTime = 4.0f;
-    public float RetreatingTime = 1.5f;
     public bool Alive = true;
-
     public GameObject ExplosionPrefab;
     public string DeathAudioClipName;
+    public float InterceptDistance = 5.0f;
+    public float ChasingTimeLimit = 5.0f;
 
-    private float timeRetreating = 0.0f;
+    private float currentTimeChasing = 0.0f;
     private float totalDyingTime = 0.0f;
     private MeshRenderer enemyRenderer;
     private BoxCollider enemyCollider;
+    private MoveToSteeringBehaviour moveToSteeringBehaviour;
     private ChaseSteeringBehaviour chaseSteeringBehaviour;
-    private RetreatSteeringBehaviour retreatSteeringBehaviour;
     private SteeringAgent agent;
 
     protected override void Start()
     {
-
-        timeRetreating = 0.0f;
         agent = GetComponent<SteeringAgent>();
         enemyRenderer = GetComponent<MeshRenderer>();
         enemyCollider = GetComponent<BoxCollider>();
+        moveToSteeringBehaviour = GetComponentInChildren<MoveToSteeringBehaviour>();
         chaseSteeringBehaviour = GetComponentInChildren<ChaseSteeringBehaviour>();
-        retreatSteeringBehaviour = GetComponentInChildren<RetreatSteeringBehaviour>();
-        retreatSteeringBehaviour.enabled = false;
-        chaseSteeringBehaviour.enabled = true;
-
+        moveToSteeringBehaviour.enabled = true;
+        chaseSteeringBehaviour.enabled = false;
+        moveToSteeringBehaviour.intercept(InterceptDistance);
+        CurrentState = State.intercepting;
+        if (moveToSteeringBehaviour.Complete)
+        {
+            moveToSteeringBehaviour.chase();
+            CurrentState = State.chasing;
+        }
+        
 
         SetEnemyType();
-        enemyRenderer.material = EnemyMaterial;
+        enemyRenderer.material = ColourManager.Instance.ProjectileMaterialMap[Colour];
         gameID = gameObject.GetInstanceID();
         EnemiesManager.Instance.addEnemy(gameID, gameObject, Type, Colour);
     }
@@ -44,24 +54,42 @@ public class ChaserBehaviour : EnemyBase
     void Update()
     {
         EnemyUpdate();
+        
     }
 
     private void EnemyUpdate()
     {
         if (Alive)
         {
-            if(timeRetreating > 0.0f)
+            DamageEffectLoop(false);
+
+            if(CurrentState == State.intercepting)
             {
-                timeRetreating += Time.deltaTime;
-                if(timeRetreating > RetreatingTime)
+                if (moveToSteeringBehaviour.Complete)
                 {
-                    timeRetreating = 0.0f;
-                    retreatSteeringBehaviour.enabled = false;
+                    moveToSteeringBehaviour.enabled = false;
                     chaseSteeringBehaviour.enabled = true;
+                    CurrentState = State.chasing;
                 }
             }
-
-            DamageEffectLoop(false);
+            else
+            {
+                currentTimeChasing += Time.deltaTime;
+                if(currentTimeChasing > ChasingTimeLimit)
+                {
+                    currentTimeChasing = 0.0f;
+                    moveToSteeringBehaviour.enabled = true;
+                    chaseSteeringBehaviour.enabled = false;
+                    moveToSteeringBehaviour.intercept(InterceptDistance);
+                    CurrentState = State.intercepting;
+                    if (moveToSteeringBehaviour.Complete)
+                    {
+                        moveToSteeringBehaviour.enabled = false;
+                        chaseSteeringBehaviour.enabled = true;
+                        CurrentState = State.chasing;
+                    }
+                }
+            }
         }
         else
         {
@@ -79,14 +107,7 @@ public class ChaserBehaviour : EnemyBase
     {
         ShowDamageEffect();
         Health -= damage;
-        retreatSteeringBehaviour.enabled = true;
-        retreatSteeringBehaviour.target = chaseSteeringBehaviour.target;
-        agent.velocity = Vector3.zero;
-        retreatSteeringBehaviour.CalculatePath();
-        chaseSteeringBehaviour.enabled = false;
-        timeRetreating = 0.0f;
-        timeRetreating += Time.deltaTime;
-        
+
         if (Health <= 0)
         {
             Die();

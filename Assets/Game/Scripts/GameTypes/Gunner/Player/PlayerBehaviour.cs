@@ -10,7 +10,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float MaxHealth = 100.0f;
     public float RotationRate = 0.01f;
     public bool Alive = true;
-    
+    public Vector3 Velocity;
     public HealthBarBehaviour healthBarBehaviour;
 
 

@@ -25,6 +25,12 @@ public class MainSpawner : EnemyBase
     public GameObject SkulkerPrefab;
     public int SkulkerSpawnWeight;
     public float SkulkerSpawnRate;
+    public GameObject InterceptorPrefab;
+    public int InterceptorSpawnWeight;
+    public float InterceptorSpawnRate;
+    public GameObject CollectorPrefab;
+    public int CollectorSpawnWeight;
+    public float CollectorSpawnRate;
     public List<GameObject> SpawnedEnemies = new List<GameObject>();
     public string SpawnerPowerDownSoundEffectName;
 
@@ -60,10 +66,20 @@ public class MainSpawner : EnemyBase
         {
             SpawnObjects.Add(SkulkerPrefab);
         }
+        for (int i = 0; i < InterceptorSpawnWeight; i++)
+        {
+            SpawnObjects.Add(InterceptorPrefab);
+        }
+        for(int i = 0; i < CollectorSpawnWeight; i++)
+        {
+            SpawnObjects.Add(CollectorPrefab);
+        }
         spawnRateMap.Add(ChaserPrefab, ChaserSpawnRate);
         spawnRateMap.Add(SentryPrefab, SentrySpawnRate);
         spawnRateMap.Add(BigChaserPrefab, BigChaserSpawnRate);
         spawnRateMap.Add(SkulkerPrefab, SkulkerSpawnRate);
+        spawnRateMap.Add(InterceptorPrefab, InterceptorSpawnRate);
+        spawnRateMap.Add(CollectorPrefab, CollectorSpawnRate);
 
         spawnerRenderer = GetComponent<MeshRenderer>();
         nodeRenderers = GetComponentsInChildren<MeshRenderer>().ToList();

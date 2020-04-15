@@ -26,6 +26,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
     public int NumberOfEnemiesToKillForPowerBeam = 5;
     public LineRenderer PowerBeamLine;
     public GameObject PowerBeamImpactEffectPrefab;
+    public float SwipingCooldownTime = 0.1f;
 
     public Text RedProgressText, GreenProgressText, BlueProgressText;
 
@@ -50,7 +51,8 @@ public class PlayerShootingBehaviour : MonoBehaviour
     private float beamOscillationTimeThreshold = 0.05f;
     private float timeSinceLastBeamOscillation = 0.0f;
     private float timeBeamHasBeenActive = 0.0f;
-
+    private bool isNewSwipe = true;
+    private float timeSinceLastSwipe = 0.0f;
     public void Start()
     {
         PowerupSlider.maxValue = 45.0f;
@@ -100,10 +102,12 @@ public class PlayerShootingBehaviour : MonoBehaviour
                 Shoot();
                 if (InputManager.Instance.DoubleCenterTap)
                 {
-                    Crosshairs.transform.position = originalCrosshairPositionReference;
+                    //Crosshairs.transform.position = originalCrosshairPositionReference;
                 }
-                if (InputManager.Instance.Swiping)
+
+                if (InputManager.Instance.Swiping && (isNewSwipe || InputManager.InputMode.KeyAndMouse == InputManager.Instance.inputMode))
                 {
+                    isNewSwipe = false;
                     currentEnemyIndex++;
                     if (currentEnemyIndex >= enemyColours.Count)
                     {
@@ -113,6 +117,16 @@ public class PlayerShootingBehaviour : MonoBehaviour
                     ammoBarBehaviour.ChangeAmmoType(currentEnemyColour);
                     ammoBarBehaviour.SetAmmo(ammoAmounts[currentEnemyColour]);
                 }
+                else if(Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Ended)
+                {
+                    timeSinceLastSwipe = 0.0f;
+                }
+                else if (timeSinceLastSwipe > SwipingCooldownTime)
+                {
+                    isNewSwipe = true;
+                }
+                timeSinceLastSwipe += Time.deltaTime;
+
                 
 
                 if (currentPowerupTimeRemaining > 0.0f)

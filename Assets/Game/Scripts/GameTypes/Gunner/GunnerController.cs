@@ -19,7 +19,9 @@ public class GunnerController : Singleton<GunnerController>
     public List<Transform> FactoryMarkers = new List<Transform>();
     public GameObject ProjectilesCollection, EffectsContainer;
     public GameObject PlayerObject;
+    public PlayerBehaviour PBehaviour;
     public GameObject GameOverPanel;
+    
 
     private PlayerShootingBehaviour shootingBehaviour;
     private bool isMoving = false;
@@ -27,8 +29,8 @@ public class GunnerController : Singleton<GunnerController>
     public void Start()
     {
         isMoving = false;
-
-        PlayerObject = FindObjectOfType<PlayerBehaviour>().gameObject;
+        PBehaviour = FindObjectOfType<PlayerBehaviour>();
+        PlayerObject = PBehaviour.gameObject;
         shootingBehaviour = PlayerObject.GetComponent<PlayerBehaviour>().shootBehaviour;
     }
 
@@ -37,8 +39,8 @@ public class GunnerController : Singleton<GunnerController>
         float x = float.Parse(messageSegments[2]), y = float.Parse(messageSegments[3]), z = float.Parse(messageSegments[4]);
         float rotation = float.Parse(messageSegments[5]);
         Vector3 newPosition = new Vector3(x, y, z);
-
-        if((newPosition - PlayerObject.transform.position).magnitude > 0.25f && !isMoving)
+        PBehaviour.Velocity = newPosition - PlayerObject.transform.position;
+        if ((newPosition - PlayerObject.transform.position).magnitude > 0.25f && !isMoving)
         {
             isMoving = true;
             AudioManager.Instance.PlaySound(PlayerMovementSoundEffectName);

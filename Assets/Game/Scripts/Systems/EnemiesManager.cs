@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemiesManager : Singleton<EnemiesManager>
 {
-    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, FactoryShellPrefab, SpawnerShellPrefab, BigChaserShellPrefab, SkulkerShellPrefab;
+    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, CollectorShellPrefab, SpawnerShellPrefab, BigChaserShellPrefab, SkulkerShellPrefab, InterceptorShellPrefab;
     public float NetworkingUpdateThreshold = 0.1f;
     private Dictionary<int,GameObject> allEnemyObjects = new Dictionary<int,GameObject>();
 
@@ -134,9 +134,9 @@ public class EnemiesManager : Singleton<EnemiesManager>
                     currentObject = Instantiate(DroidShellPrefab);
                     addEnemy(objectID, currentObject, EnemyBase.EnemyType.droid, colour);
                     break;
-                case "factory":
-                    currentObject = Instantiate(FactoryShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.factory, colour);
+                case "collector":
+                    currentObject = Instantiate(CollectorShellPrefab);
+                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.collector, colour);
                     break;
                 case "spawn":
                     currentObject = Instantiate(SpawnerShellPrefab);
@@ -153,6 +153,12 @@ public class EnemiesManager : Singleton<EnemiesManager>
                 case "skulker":
                     currentObject = Instantiate(SkulkerShellPrefab);
                     addEnemy(objectID, currentObject, EnemyBase.EnemyType.skulker, colour);
+                    sBehaviour = currentObject.GetComponent<Shell>();
+                    sBehaviour.ChangeColour(colour);
+                    break;
+                case "interceptor":
+                    currentObject = Instantiate(InterceptorShellPrefab);
+                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.interceptor, colour);
                     sBehaviour = currentObject.GetComponent<Shell>();
                     sBehaviour.ChangeColour(colour);
                     break;

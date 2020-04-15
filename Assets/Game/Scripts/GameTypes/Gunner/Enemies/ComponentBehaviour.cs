@@ -6,7 +6,7 @@ using UnityEngine;
 public class ComponentBehaviour : EnemyBase
 {
     private SentryDrone sdBehaviour;
-    private FactoryMachine bBehaviour;
+    private Collector bBehaviour;
     private MeshRenderer sdcRenderer;
     public bool Selected;
     public Material SelectionMaterial;
@@ -16,7 +16,7 @@ public class ComponentBehaviour : EnemyBase
     private void Awake()
     {
         sdBehaviour = transform.parent.GetComponentInParent<SentryDrone>();
-        bBehaviour = transform.GetComponentInParent<FactoryMachine>();
+        bBehaviour = transform.GetComponentInParent<Collector>();
         sdcRenderer = GetComponent<MeshRenderer>();
     }
 

@@ -7,8 +7,9 @@ public class Shell : MonoBehaviour
     public List<Renderer> materialObjects = new List<Renderer>();
     public List<Renderer> shieldMaterialObjects = new List<Renderer>();
     public List<Renderer> projectileMaterialObjects = new List<Renderer>();
+    public List<Renderer> pickupMaterialObjects = new List<Renderer>();
 
-    public Material material, shieldMaterial, projectileMaterial;
+    public Material material, shieldMaterial, projectileMaterial, pickupMaterial;
 
 
     public void ChangeColour(EnemyBase.EnemyColour inEnemyColour)
@@ -16,6 +17,7 @@ public class Shell : MonoBehaviour
         material = ColourManager.Instance.EnemyMaterialMap[inEnemyColour];
         shieldMaterial = ColourManager.Instance.ShieldMaterialMap[inEnemyColour];
         projectileMaterial = ColourManager.Instance.ProjectileMaterialMap[inEnemyColour];
+        pickupMaterial = ColourManager.Instance.PickupMaterialMap[inEnemyColour];
 
         foreach(Renderer materialObject in materialObjects)
         {
@@ -30,6 +32,11 @@ public class Shell : MonoBehaviour
         foreach(Renderer projectileMaterialObject in projectileMaterialObjects)
         {
             projectileMaterialObject.material = projectileMaterial;
+        }
+
+        foreach(Renderer pickupMaterialObject in pickupMaterialObjects)
+        {
+            pickupMaterialObject.material = pickupMaterial;
         }
     }
 }

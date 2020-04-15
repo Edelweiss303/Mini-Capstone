@@ -9,7 +9,7 @@ public abstract class EnemyBase : MonoBehaviour
 {
     public enum EnemyType
     {
-        none, chaser, sentry, droid, factory, spawn, bigchaser, skulker
+        none, chaser, sentry, droid, collector, spawn, bigchaser, skulker, interceptor
     }
     public enum EnemyColour
     {

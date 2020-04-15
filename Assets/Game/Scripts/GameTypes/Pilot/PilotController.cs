@@ -13,6 +13,7 @@ public class PilotController : Singleton<PilotController>
     public List<GameObject> PickupSpawnLocations;
     public GameObject PickupPrefab;
     public Transform PickupsContainerTransform;
+    public Dictionary<float, AmmoPickup> PickupMap = new Dictionary<float, AmmoPickup>();
     public PilotPlayerController PlayerController;
     public Camera RadarCamera;
     public Image RadarImage;
@@ -108,6 +109,12 @@ public class PilotController : Singleton<PilotController>
     public void SetScore(int scoreValue)
     {
         ScoreText.text = "SCORE: " + scoreValue;
+    }
+
+    public void DestroyPickup(float pickupID)
+    {
+        Destroy(PickupMap[pickupID]);
+        PickupMap.Remove(pickupID);
     }
 
 }
