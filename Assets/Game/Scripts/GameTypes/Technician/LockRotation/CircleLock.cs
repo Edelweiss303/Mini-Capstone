@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CircleLock : MonoBehaviour
 {
@@ -42,19 +43,7 @@ public class CircleLock : MonoBehaviour
     {
         if (Active)
         {
-            float rotationAmount = 0;
-
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                AudioManager.Instance.PlaySound("Technician_Click");
-                rotationAmount += RotationSpeed;
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                AudioManager.Instance.PlaySound("Technician_Click");
-                rotationAmount -= RotationSpeed;
-            }
-            transform.Rotate(new Vector3(0, 0, rotationAmount));
+            float rotationAmount = TouchRotate();
 
             if (rotationAmount == 0)
             {
@@ -63,6 +52,25 @@ public class CircleLock : MonoBehaviour
         }
     }
 
+    private void OnMouseDrag()
+    {
+        float xRotation = Input.GetAxis("Mouse X") * RotationSpeed * Mathf.Deg2Rad;
+        float yRotation = Input.GetAxis("Mouse Y") * RotationSpeed * Mathf.Deg2Rad;
+        Debug.Log("ROTATING");
+        transform.Rotate(Vector3.forward, xRotation);
+    }
+    private float TouchRotate()
+    {
+        float angle = 0;
+
+        if (Input.touches.Length > 0)
+        {
+            Touch touch = Input.touches[0];
+
+        }
+
+        return angle;
+    }
 
 
     public void resetAngles()
