@@ -58,7 +58,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Shape_1_Rotation: 0.6
-    - Shape_2_Rotation: 0.65157354
+    - Shape_2_Rotation: 0.71226543
     - Vector1_372BF28F: 0
     - Vector1_408C1185: 250
     - Vector1_D0BBBC99: -0.6
@@ -85,7 +85,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_7FC6A2FB: {r: 1, g: 0.2024566, b: 0, a: 0}
-    - Polygon_Offset: {r: -0.3, g: 0.1, b: 0, a: 0}
+    - Polygon_Offset: {r: 0.1, g: -0, b: 0, a: 0}
     - Polygon_Tiling: {r: 0, g: 1, b: 0, a: 0}
     - Vector2_3E357733: {r: 1, g: 1, b: 0, a: 0}
     - Vector2_A818AC77: {r: 0, g: 0, b: 0, a: 0}

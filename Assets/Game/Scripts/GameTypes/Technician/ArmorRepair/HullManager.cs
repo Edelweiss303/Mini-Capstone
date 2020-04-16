@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class HullManager : Singleton<HullManager>
 {
-
-    public float health = 100.0f; //This health value needs to be replaced with whatever the networked one is. Replace all instances of this.
     public float holeOffsetLimit = 0.3f;
     public int shapeTwoRotationRange = 6;
 
-    public float[] damageThresholds = { 92.0f, 84.0f, 76.0f, 68.0f, 60.0f, 52.0f, 44.0f, 36.0f, 28.0f, 20.0f, 12.0f, 4.0f };
+    public float[] damageThresholds = { 0.92f, 0.84f, 0.76f, 0.68f, 0.60f, 0.52f, 0.44f, 0.36f, 0.28f, 0.20f, 0.12f, 0.4f };
     public int damageIndex = 0;
 
     public Renderer[] armourRenderers;
@@ -30,7 +28,7 @@ public class HullManager : Singleton<HullManager>
 
     void Update()
     {
-        if(health <= damageThresholds[damageIndex] )
+        if(TechnicianController.Instance.HealthBar.Health <= damageThresholds[damageIndex] )
         {
             GenerateHole();
 

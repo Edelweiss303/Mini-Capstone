@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class TouchInput : MonoBehaviour
 {
     public float touchDistanceThreshold = 0.1f;
-    public float repairAmount = 10.0f;
+    public float repairAmount = 0.1f;
 
     private Camera camera;
     void Awake()
@@ -55,7 +55,7 @@ public class TouchInput : MonoBehaviour
                         }
 
                         //This health value needs to be replaced with whatever the networked one is
-                        HullManager.Instance.health = HullManager.Instance.damageThresholds[HullManager.Instance.damageIndex] + repairAmount;
+                        TechnicianController.Instance.HealthBar.Health = HullManager.Instance.damageThresholds[HullManager.Instance.damageIndex] + repairAmount;
                         if(HullManager.Instance.damageIndex > 0)
                         {
                             HullManager.Instance.damageIndex--;
