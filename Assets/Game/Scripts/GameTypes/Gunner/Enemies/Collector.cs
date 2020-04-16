@@ -36,7 +36,7 @@ public class Collector : EnemyBase
         SetEnemyType();
         core.Colour = Colour;
         core.GetComponent<MeshRenderer>().material = EnemyMaterial;
-        InitialHeight = transform.position.y;
+        //InitialHeight = transform.position.y;
 
         gameID = gameObject.GetInstanceID();
         EnemiesManager.Instance.addEnemy(gameID, gameObject, Type, Colour);
