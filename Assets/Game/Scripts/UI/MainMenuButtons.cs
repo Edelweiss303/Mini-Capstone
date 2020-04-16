@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class MainMenuButtons : MonoBehaviour
 {
@@ -12,16 +13,25 @@ public class MainMenuButtons : MonoBehaviour
     public GameObject InputDetectionPopupObject;
     public static MainMenuButtons Instance;
 
+    public Text CreateRoomNameText, MultiplayerIssueLoggerText;
     public Text GunnerPlayerText, TechnicianPlayerText, PilotPlayerText;
     public GameObject AIDemoBtn, CreateGameBtn, LobbyBackBtn, SettingsBackBtn;
     public GameObject GunnerPlayerTextBG, TechnicianPlayerTextBG, PilotPlayerTextBG;
     public GameObject LobbyStartGameBtn;
+
+    public GameObject RoomListingPrefab;
+    public Transform RoomListingsParent;
+
     public PlayerLayoutGroup PlayerListings;
     public bool IsRoleSelected = false;
-
+    public float TimeForIssueLogging = 4.0f;
     public Dictionary<string, string> PlayerRoleMapping = new Dictionary<string, string>() { { "Gunner", "" }, { "Pilot", "" }, { "Technician", "" } };
 
+    private List<RoomListing> activeRoomListings = new List<RoomListing>();
     public Text DebugText;
+
+    private RoomListing selectedRoomListing;
+    private float currentTimeLogging = 0.0f;
 
     private void Start()
     {
@@ -33,8 +43,27 @@ public class MainMenuButtons : MonoBehaviour
 
     private void Update()
     {
-        DebugText.text = "# of Rooms: "  + PhotonNetwork.CountOfRooms + System.Environment.NewLine;
-        DebugText.text += "Currently in a lobby: " + PhotonNetwork.InLobby.ToString();
+        //DebugText.text = "# of Rooms: "  + PhotonNetwork.CountOfRooms + System.Environment.NewLine;
+        //DebugText.text += "Currently in a lobby: " + PhotonNetwork.InLobby.ToString();
+
+        if(currentTimeLogging > 0.0f)
+        {
+            currentTimeLogging += Time.deltaTime;
+            if(currentTimeLogging > TimeForIssueLogging)
+            {
+                currentTimeLogging = 0.0f;
+                MultiplayerIssueLoggerText.text = "";
+            }
+        }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            DebugText.text = "Master.";
+        }
+        else
+        {
+            DebugText.text = "Not master.";
+        }
     }
 
 
@@ -96,6 +125,12 @@ public class MainMenuButtons : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(LobbyBackBtn);
     }
 
+    public void FailedToCreateRoom(string message)
+    {
+        MultiplayerIssueLoggerText.text = "Could not create room - " + message;
+        currentTimeLogging += Time.deltaTime;
+    }
+
     public void LeftLobby()
     {
         FrontPageObject.SetActive(true);
@@ -104,6 +139,48 @@ public class MainMenuButtons : MonoBehaviour
     public void LeftRoom()
     {
         MultiplayerPageObject.SetActive(true);
+
+        for(int i = activeRoomListings.Count -1; i >= 0; i--)
+        {
+            if (activeRoomListings[i])
+            {
+                Destroy(activeRoomListings[i].gameObject);
+                activeRoomListings.RemoveAt(i);
+            }
+
+        }
+    }
+
+    public void UpdateRoomListings(Dictionary<string, bool> rooms)
+    {
+        GameObject newRoomListing;
+        RoomListing rListingBehaviour;
+
+        foreach (KeyValuePair<string, bool> room in rooms)
+        {
+            if (room.Value)
+            {
+                newRoomListing = Instantiate(RoomListingPrefab, RoomListingsParent);
+                rListingBehaviour = newRoomListing.GetComponent<RoomListing>();
+                if (rListingBehaviour)
+                {
+                    rListingBehaviour.RoomNameText.text = room.Key;
+                    activeRoomListings.Add(rListingBehaviour);
+                }
+            }
+            else
+            {
+                if(activeRoomListings.Where(rl => rl.name == room.Key).Count() == 1)
+                {
+                    rListingBehaviour = activeRoomListings.Single(rl => rl.name == room.Key);
+                    activeRoomListings.Remove(rListingBehaviour);
+                }
+
+            }
+
+
+
+        }
     }
 
     #endregion
@@ -111,13 +188,23 @@ public class MainMenuButtons : MonoBehaviour
     #region Multiplayer Page
     public void MultiplayerPage_CreateGameOnClick()
     {
-        LobbyNetwork.Instance.CreateRoom("0");
-        MultiplayerPageObject.SetActive(false);
+        if (!LobbyNetwork.Instance.CreateRoom(CreateRoomNameText.text))
+        {
+            MultiplayerIssueLoggerText.text = "Could not create room. Check if it already exists.";
+            currentTimeLogging += Time.deltaTime;
+        }
     }
 
     public void MultiplayerPage_JoinGameOnClick()
     {
-        LobbyNetwork.Instance.JoinRoom("0");
+        if(selectedRoomListing == null)
+        {
+            MultiplayerIssueLoggerText.text = "No room is currently selected.";
+            currentTimeLogging += Time.deltaTime;
+            return;
+        }
+        
+        LobbyNetwork.Instance.JoinRoom(selectedRoomListing.RoomNameText.text);
     }
 
     public void MultiplayerPage_BackClick()
@@ -125,6 +212,12 @@ public class MainMenuButtons : MonoBehaviour
         FrontPageObject.SetActive(true);
         MultiplayerPageObject.SetActive(false);
         EventSystem.current.SetSelectedGameObject(AIDemoBtn);
+    }
+
+    public void SelectRoomListing(RoomListing roomListing)
+    {
+        Debug.Log("Selected.");
+        selectedRoomListing = roomListing;
     }
     #endregion
 
@@ -349,6 +442,9 @@ public class MainMenuButtons : MonoBehaviour
                 LobbyNetwork.Instance.BroadcastQueue.Add("DeselectPlayerRole:Pilot");
             }
         }
+        PlayerRoleMapping["Gunner"] = "";
+        PlayerRoleMapping["Pilot"] = "";
+        PlayerRoleMapping["Technician"] = "";
         IsRoleSelected = false;
         LobbyNetwork.Instance.SendEvents();
         LobbyPageObject.SetActive(false);

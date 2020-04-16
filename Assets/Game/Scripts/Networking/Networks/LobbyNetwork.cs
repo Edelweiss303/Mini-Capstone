@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,7 +28,8 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        if(Instance == null)
+        Screen.fullScreen = false;
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -116,6 +118,11 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
         return true;
     }
 
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        MainMenuButtons.Instance.FailedToCreateRoom(message);
+    }
+
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         MainMenuButtons.Instance.PlayerListings.PlayerJoinedRoom(newPlayer);
@@ -129,6 +136,18 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
                                                         "P:" + MainMenuButtons.Instance.PlayerRoleMapping["Pilot"]);
         }
     }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        Dictionary<string, bool> rooms = new Dictionary<string, bool>();
+
+        foreach(RoomInfo room in roomList)
+        {
+            rooms.Add(room.Name,!room.RemovedFromList);
+        }
+
+        MainMenuButtons.Instance.UpdateRoomListings(rooms);
+    }
     #endregion
 
     #region Leave Callbacks
@@ -140,13 +159,20 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
+        
         PhotonNetwork.LeaveRoom();
-        MainMenuButtons.Instance.LeftRoom();
     }
 
     public override void OnLeftRoom()
     {
+        MainMenuButtons.Instance.LeftRoom();
         print("Left room.");
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        print("Disconnected from room.");
+       // MainMenuButtons.Instance.LobbyPage_DisconnectClick();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)

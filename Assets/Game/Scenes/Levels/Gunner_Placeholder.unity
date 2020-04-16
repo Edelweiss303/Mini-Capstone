@@ -28427,7 +28427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2794a3a0ddb26084e884106a2e1b8848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputMode: 2
+  inputMode: 0
   CursorMovement: {x: 0, y: 0, z: 0}
   DirectionalInput: {x: 0, y: 0, z: 0}
   FireInput: 0
