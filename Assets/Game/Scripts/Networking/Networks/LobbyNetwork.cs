@@ -139,13 +139,16 @@ public class LobbyNetwork : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Dictionary<string, bool> rooms = new Dictionary<string, bool>();
+        Dictionary<RoomInfo, bool> rooms = new Dictionary<RoomInfo, bool>();
 
+       // string test = "";
         foreach(RoomInfo room in roomList)
         {
-            rooms.Add(room.Name,!room.RemovedFromList);
-        }
+            rooms.Add(room,!room.RemovedFromList && room.IsOpen && room.IsVisible);
+            //test += room.Name + "-" + (room.RemovedFromList ? "R" : "E") + "-" + (room.IsOpen ? "O" : "C") + "-" + (room.IsVisible ? "V" : "I") + ", ";
 
+        }
+       // MainMenuButtons.Instance.MultiplayerIssueLoggerText.text = test;
         MainMenuButtons.Instance.UpdateRoomListings(rooms);
     }
     #endregion

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
+using Photon.Realtime;
 
 public class MainMenuButtons : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class MainMenuButtons : MonoBehaviour
     public Dictionary<string, string> PlayerRoleMapping = new Dictionary<string, string>() { { "Gunner", "" }, { "Pilot", "" }, { "Technician", "" } };
 
     private List<RoomListing> activeRoomListings = new List<RoomListing>();
+    private List<RoomInfo> activeRoomInfo = new List<RoomInfo>();
     public Text DebugText;
 
     private RoomListing selectedRoomListing;
@@ -55,17 +57,30 @@ public class MainMenuButtons : MonoBehaviour
                 MultiplayerIssueLoggerText.text = "";
             }
         }
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            DebugText.text = "Master.";
-        }
-        else
-        {
-            DebugText.text = "Not master.";
-        }
+        ClearEmptyRooms();
     }
 
+    private void ClearEmptyRooms()
+    {
+        RoomListing rListingBehaviour;
+        for (int i = activeRoomInfo.Count - 1; i >= 0; i--)
+        {
+            if (activeRoomInfo[i] == null ||
+                activeRoomInfo[i].RemovedFromList ||
+                !activeRoomInfo[i].IsVisible ||
+                !activeRoomInfo[i].IsOpen ||
+                activeRoomInfo[i].PlayerCount == 0)
+            {
+                if (activeRoomListings.Where(rl => rl.name == activeRoomInfo[i].Name).Count() == 1)
+                {
+                    rListingBehaviour = activeRoomListings.Single(rl => rl.name == activeRoomInfo[i].Name);
+                    Destroy(rListingBehaviour.gameObject);
+                    activeRoomListings.Remove(rListingBehaviour);
+                    activeRoomInfo.Remove(activeRoomInfo[i]);
+                }
+            }
+        }
+    }
 
     public void InputTypeAccepted()
     {
@@ -122,6 +137,13 @@ public class MainMenuButtons : MonoBehaviour
     {
         LobbyPageObject.SetActive(true);
         MultiplayerPageObject.SetActive(false);
+
+        for(int i = activeRoomListings.Count - 1; i >= 0; i--)
+        {
+            Destroy(activeRoomListings[i].gameObject);
+        }
+        activeRoomListings.Clear();
+        activeRoomInfo.Clear();
         EventSystem.current.SetSelectedGameObject(LobbyBackBtn);
     }
 
@@ -139,47 +161,40 @@ public class MainMenuButtons : MonoBehaviour
     public void LeftRoom()
     {
         MultiplayerPageObject.SetActive(true);
-
-        for(int i = activeRoomListings.Count -1; i >= 0; i--)
-        {
-            if (activeRoomListings[i])
-            {
-                Destroy(activeRoomListings[i].gameObject);
-                activeRoomListings.RemoveAt(i);
-            }
-
-        }
     }
 
-    public void UpdateRoomListings(Dictionary<string, bool> rooms)
+    public void UpdateRoomListings(Dictionary<RoomInfo, bool> rooms)
     {
         GameObject newRoomListing;
         RoomListing rListingBehaviour;
 
-        foreach (KeyValuePair<string, bool> room in rooms)
+        foreach (KeyValuePair<RoomInfo, bool> room in rooms)
         {
             if (room.Value)
             {
-                newRoomListing = Instantiate(RoomListingPrefab, RoomListingsParent);
-                rListingBehaviour = newRoomListing.GetComponent<RoomListing>();
-                if (rListingBehaviour)
+                if(!activeRoomListings.Any(rl => rl.RoomNameText.text == room.Key.Name))
                 {
-                    rListingBehaviour.RoomNameText.text = room.Key;
-                    activeRoomListings.Add(rListingBehaviour);
+                    newRoomListing = Instantiate(RoomListingPrefab, RoomListingsParent);
+                    rListingBehaviour = newRoomListing.GetComponent<RoomListing>();
+                    if (rListingBehaviour)
+                    {
+                        rListingBehaviour.RoomNameText.text = room.Key.Name;
+                        activeRoomListings.Add(rListingBehaviour);
+                        activeRoomInfo.Add(room.Key);
+                    }
                 }
+
             }
             else
             {
-                if(activeRoomListings.Where(rl => rl.name == room.Key).Count() == 1)
+                List<RoomListing> roomListingsToRemove = activeRoomListings.Where(rl => rl.RoomNameText.text == room.Key.Name).ToList();
+                foreach(RoomListing roomListingToRemove in roomListingsToRemove)
                 {
-                    rListingBehaviour = activeRoomListings.Single(rl => rl.name == room.Key);
-                    activeRoomListings.Remove(rListingBehaviour);
+                    Destroy(roomListingToRemove.gameObject);
+                    activeRoomListings.Remove(roomListingToRemove);
                 }
 
             }
-
-
-
         }
     }
 
@@ -445,6 +460,9 @@ public class MainMenuButtons : MonoBehaviour
         PlayerRoleMapping["Gunner"] = "";
         PlayerRoleMapping["Pilot"] = "";
         PlayerRoleMapping["Technician"] = "";
+        GunnerPlayerText.text = "";
+        PilotPlayerText.text = "";
+        TechnicianPlayerText.text = "";
         IsRoleSelected = false;
         LobbyNetwork.Instance.SendEvents();
         LobbyPageObject.SetActive(false);
