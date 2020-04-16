@@ -27,6 +27,27 @@ public class GyroCamera : MonoBehaviour
     void Update()
     {
         GyroInput();
+        if(InputManager.Instance.inputMode == InputManager.InputMode.KeyAndMouse)
+        {
+            float vY = 0, vX = 0;
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                vY++;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                vY--;
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                vX++;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                vX--;
+            }
+            transform.Rotate(vY, vX, 0);
+        }
     }
 
     private void GyroInput()

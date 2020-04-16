@@ -149,7 +149,15 @@ public class GunnerController : Singleton<GunnerController>
 
     public void RepairDamage(int damageToRepair)
     {
-        PBehaviour.CurrentHealth += damageToRepair;
+        if((PBehaviour.CurrentHealth + damageToRepair) > PBehaviour.MaxHealth)
+        {
+            PBehaviour.CurrentHealth = PBehaviour.MaxHealth;
+        }
+        else
+        {
+            PBehaviour.CurrentHealth += damageToRepair;
+        }
+
         PBehaviour.healthBarBehaviour.Health = PBehaviour.CurrentHealth / 15;
         AudioManager.Instance.PlaySound("Player_Repair");
         GameNetwork.Instance.BroadcastQueue.Add("GunnerRepairDamage:" + PBehaviour.CurrentHealth);

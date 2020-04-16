@@ -168,6 +168,7 @@ public class TechnicianController : Singleton<TechnicianController>
     public void SetHealth(float newHealth)
     {
         HealthBar.Health = newHealth / 15.0f;
+        HullManager.Instance.health = (newHealth / 15.0f) * 100;
     }
 
     public void TakeDamage(float damage)
