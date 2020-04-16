@@ -216,10 +216,6 @@ public class TechnicianMessenger : MonoBehaviour
         switch (GameNetwork.Instance.Type)
         {
             case GameNetwork.PlayerType.Gunner:
-                if(shootBehaviour == null)
-                {
-                    Debug.Log("This is broken.. :(");
-                }
                 if (shootBehaviour.IsOverheated && newHeat == 0)
                 {
                     AudioManager.Instance.PlaySound(ReleaseHeatSoundEffectName);

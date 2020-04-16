@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CircleLock : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class CircleLock : MonoBehaviour
     List<string> charTemplate = new List<string>() { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
     List<string> numTemplate = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+    private float rotationAmount = 0;
     public enum KeyColour
     {
         brightred, darkred, brightblue, darkblue, brightgreen, darkgreen, brightyellow, darkyellow, brightorange, darkorange, brightpurple, darkpurple
@@ -42,15 +44,15 @@ public class CircleLock : MonoBehaviour
     {
         if (Active)
         {
-            float rotationAmount = 0;
-
             if (Input.GetKey(KeyCode.LeftArrow))
             {
+                Debug.Log("LEFT ARROW");
                 AudioManager.Instance.PlaySound("Technician_Click");
                 rotationAmount += RotationSpeed;
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
+                Debug.Log("RIGHT ARROW");
                 AudioManager.Instance.PlaySound("Technician_Click");
                 rotationAmount -= RotationSpeed;
             }
@@ -60,10 +62,26 @@ public class CircleLock : MonoBehaviour
             {
                 AudioManager.Instance.StopSound("Technician_Click");
             }
+            rotationAmount = 0;
         }
     }
 
-
+    public void LeftArrowButton()
+    {
+        if (Active)
+        {
+            AudioManager.Instance.PlaySound("Technician_Click");
+            rotationAmount += RotationSpeed;
+        }
+    }
+    public void RightArrowButton()
+    {
+        if (Active)
+        {
+            AudioManager.Instance.PlaySound("Technician_Click");
+            rotationAmount -= RotationSpeed;
+        }
+    }
 
     public void resetAngles()
     {

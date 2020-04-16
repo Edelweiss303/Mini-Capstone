@@ -146,4 +146,12 @@ public class GunnerController : Singleton<GunnerController>
         GameNetwork.Instance.BroadcastQueue.Add("GunnerSetScore:" + PlayerScore);
         ScoreText.text = "SCORE: " + PlayerScore;
     }
+
+    public void RepairDamage(int damageToRepair)
+    {
+        PBehaviour.CurrentHealth += damageToRepair;
+        PBehaviour.healthBarBehaviour.Health = PBehaviour.CurrentHealth / 15;
+        AudioManager.Instance.PlaySound("Player_Repair");
+        GameNetwork.Instance.BroadcastQueue.Add("GunnerRepairDamage:" + PBehaviour.CurrentHealth);
+    }
 }

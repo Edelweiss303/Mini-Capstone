@@ -146,6 +146,16 @@ public class GameNetwork : MonoBehaviour
                             TechnicianController.Instance.SetScore(int.Parse(messageSegments[1]));
                         }
                         break;
+                    case "GunnerRepairDamage":
+                        if(Type == PlayerType.Pilot)
+                        {
+                            PilotController.Instance.RepairDamage(int.Parse(messageSegments[1]));
+                        }
+                        else if(Type == PlayerType.Technician)
+                        {
+                            TechnicianController.Instance.RepairDamage(int.Parse(messageSegments[1]));
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -197,6 +207,9 @@ public class GameNetwork : MonoBehaviour
                             break;
                         case "PilotCollectorDestroyPickup":
                             PilotController.Instance.DestroyPickup(int.Parse(messageSegments[2]));
+                            break;
+                        case "TechnicianRepairHealth":
+                            GunnerController.Instance.RepairDamage(int.Parse(messageSegments[2]));
                             break;
                         default:
                             break;

@@ -117,4 +117,10 @@ public class PilotController : Singleton<PilotController>
         PickupMap.Remove(pickupID);
     }
 
+    public void RepairDamage(int newHealth)
+    {
+        HealthBarBehaviour.Health = newHealth / 15.0f;
+        AudioManager.Instance.PlaySound("Player_Repair");
+    }
+
 }

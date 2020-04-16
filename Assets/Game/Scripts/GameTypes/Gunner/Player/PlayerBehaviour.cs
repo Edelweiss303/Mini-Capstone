@@ -13,16 +13,14 @@ public class PlayerBehaviour : MonoBehaviour
     public Vector3 Velocity;
     public HealthBarBehaviour healthBarBehaviour;
 
-
-    [SerializeField]
-    private float currentHealth;
+    public float CurrentHealth;
     private Vector3 currentRotation;
 
     void Start()
     {
         healthBarBehaviour = FindObjectOfType<HealthBarBehaviour>();
         
-        currentHealth = MaxHealth;
+        CurrentHealth = MaxHealth;
         
         currentRotation = new Vector3(0, 0, 0);
     }
@@ -45,7 +43,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (healthBarBehaviour)
         {
-            healthBarBehaviour.Health = currentHealth / MaxHealth;
+            healthBarBehaviour.Health = CurrentHealth / MaxHealth;
         }
     }
 
@@ -57,12 +55,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        CurrentHealth -= damage;
         PlayerViewScreen.SetDamageScreen();
 
-        GameNetwork.Instance.BroadcastQueue.Add("GunnerTakeDamage:" + currentHealth);
+        GameNetwork.Instance.BroadcastQueue.Add("GunnerTakeDamage:" + CurrentHealth);
 
-        if(currentHealth <= 0)
+        if(CurrentHealth <= 0)
         {
             Die();
         }
