@@ -30,7 +30,6 @@ public class MainMenuButtons : MonoBehaviour
 
     private List<RoomListing> activeRoomListings = new List<RoomListing>();
     private List<RoomInfo> activeRoomInfo = new List<RoomInfo>();
-    public Text DebugText;
 
     private RoomListing selectedRoomListing;
     private float currentTimeLogging = 0.0f;
@@ -85,7 +84,6 @@ public class MainMenuButtons : MonoBehaviour
     public void InputTypeAccepted()
     {
         InputDetectionPopupObject.SetActive(false);
-        DebugText.text = InputManager.Instance.inputMode.ToString();
         PhotonNetwork.NickName = InputManager.Instance.inputMode.ToString() + "_" + Random.Range(0, 1000);
         FrontPageObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(AIDemoBtn);

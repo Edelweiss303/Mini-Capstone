@@ -8,7 +8,7 @@ using static EnemyBase;
 public class GunnerController : Singleton<GunnerController>
 {
     public Vector2 ScreenSize;
-    public Text InputTest, ScoreText;
+    public Text ScoreText;
     public LayerMask PlayerProjectileMask, EnemyLayerMask;
     public List<EnemyColour> AllEnemyColours = new List<EnemyColour>() { EnemyColour.A, EnemyColour.B, EnemyColour.C };
     public GameObject PickupsShellPrefab;

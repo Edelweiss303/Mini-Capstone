@@ -164,11 +164,8 @@ class InputManager : Singleton<InputManager>
 
             if(Input.touches.Count() == 1)
             {
-                GunnerController.Instance.InputTest.text = "";
                 Swiping = Input.touches[0].deltaPosition.magnitude > SwipingThreshold;
                 Vector2 currentTouchPosition = Input.touches[0].position;
-                GunnerController.Instance.InputTest.text += "TouchSpeed: " + Input.touches[0].deltaPosition.magnitude + System.Environment.NewLine;
-                GunnerController.Instance.InputTest.text += "CurrentTouchPosition: " + currentTouchPosition.x + ", " + currentTouchPosition.y + System.Environment.NewLine;
 
                 bool isNewTouch = timeSinceLastCenterTap > NewTouchThreshold;
                 bool hasBeenTooLongSinceLastTouch = timeSinceLastCenterTap > CenterTapTimingThreshold;
