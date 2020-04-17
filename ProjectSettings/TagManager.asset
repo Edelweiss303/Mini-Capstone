@@ -13,11 +13,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerProjectile
+  - Player
+  - Enemy
+  - Level
+  - LevelBounds
   - 
   - 
   - 
