@@ -107,9 +107,15 @@ public class GunnerController : Singleton<GunnerController>
         }
 
         Vector3 pickupPosition = new Vector3(float.Parse(messageSegments[4]), float.Parse(messageSegments[5]), float.Parse(messageSegments[6]));
-        GameObject newPickupShell = Instantiate(PickupsShellPrefab, pickupPosition, Quaternion.identity);
-        newPickupShell.GetComponent<Shell>().ChangeColour(ammoColour);
-        PickupsMap.Add(float.Parse(messageSegments[3]), newPickupShell);
+        SpawnedAsset spawnDetails = new SpawnedAsset(pickupPosition, Quaternion.identity, null);
+        spawnDetails.Tag = AddressablesManager.Addressable_Tag.ammo_pickup_shell;
+        spawnDetails.Colour = ammoColour;
+        spawnDetails.GameID = int.Parse(messageSegments[3]);
+        AddressablesManager.Instance.Spawn(spawnDetails);
+
+        //GameObject newPickupShell = Instantiate(PickupsShellPrefab, pickupPosition, Quaternion.identity);
+        //newPickupShell.GetComponent<Shell>().ChangeColour(ammoColour);
+        //PickupsMap.Add(float.Parse(messageSegments[3]), newPickupShell);
     }
 
     public void SetPowerup(string[] messageSegments)

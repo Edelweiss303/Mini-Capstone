@@ -117,7 +117,7 @@ public class PlayerShootingBehaviour : MonoBehaviour
                     ammoBarBehaviour.ChangeAmmoType(currentEnemyColour);
                     ammoBarBehaviour.SetAmmo(ammoAmounts[currentEnemyColour]);
                 }
-                else if(Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Ended)
+                else if((Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Ended) || Input.touches.Length == 0)
                 {
                     timeSinceLastSwipe = 0.0f;
                 }
@@ -155,13 +155,6 @@ public class PlayerShootingBehaviour : MonoBehaviour
         {
             EnemyBase hitEnemy;
 
-            //GameObject effect = Instantiate(BulletImpactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-            //effect.GetComponent<Renderer>().material = ColourManager.Instance.EnemyMaterialMap[currentEnemyColour];
-            //if (effectsContainer)
-            //{
-            //    effect.transform.parent = effectsContainer.transform;
-            //}
-
             hitEnemy = hit.collider.GetComponent<EnemyBase>();
 
             if (hitEnemy != null && hitEnemy.IsAlive())
@@ -184,7 +177,10 @@ public class PlayerShootingBehaviour : MonoBehaviour
             {
                 beamOrigin = rayFromCursor.origin + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
                 timeSinceLastBeamOscillation = 0.0f;
-                Instantiate(PowerBeamImpactEffectPrefab, hit.point, Quaternion.identity, effectsContainer.transform);
+                SpawnedAsset spawnDetails = new SpawnedAsset(hit.point, Quaternion.identity, effectsContainer.transform);
+                spawnDetails.Tag = AddressablesManager.Addressable_Tag.beam_impact_effect;
+                AddressablesManager.Instance.Spawn(spawnDetails);
+                //Instantiate(PowerBeamImpactEffectPrefab, hit.point, Quaternion.identity, effectsContainer.transform);
                 AudioManager.Instance.PlaySound("Beam");
             }
 
@@ -233,13 +229,17 @@ public class PlayerShootingBehaviour : MonoBehaviour
                 {
 
                     EnemyBase hitEnemy;
-                    
-                    GameObject effect = Instantiate(BulletImpactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-                    effect.GetComponent<Renderer>().material = ColourManager.Instance.EnemyMaterialMap[currentEnemyColour];
-                    if (effectsContainer)
-                    {
-                        effect.transform.parent = effectsContainer.transform;
-                    }
+
+                    SpawnedAsset spawnDetails = new SpawnedAsset(hit.point, Quaternion.LookRotation(hit.normal), effectsContainer.transform);
+                    spawnDetails.Tag = AddressablesManager.Addressable_Tag.default_hit_effect;
+                    spawnDetails.Colour = currentEnemyColour;
+                    AddressablesManager.Instance.Spawn(spawnDetails);
+                    //GameObject effect = Instantiate(BulletImpactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+                    //effect.GetComponent<Renderer>().material = ColourManager.Instance.EnemyMaterialMap[currentEnemyColour];
+                    //if (effectsContainer)
+                    //{
+                    //    effect.transform.parent = effectsContainer.transform;
+                    //}
 
                     hitEnemy = hit.collider.GetComponent<EnemyBase>();
 

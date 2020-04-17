@@ -247,11 +247,11 @@ public class MainMenuButtons : MonoBehaviour
             {
                 if (GunnerPlayerText.text == PhotonNetwork.NickName)
                 {
-                    loadingLevel = "Gunner_Placeholder";
+                    loadingLevel = "Gunner";
                 }
                 else
                 {
-                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Gunner_Placeholder:" + GunnerPlayerText.text);
+                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Gunner:" + GunnerPlayerText.text);
                 }
             }
 
@@ -259,11 +259,11 @@ public class MainMenuButtons : MonoBehaviour
             {
                 if (PilotPlayerText.text == PhotonNetwork.NickName)
                 {
-                    loadingLevel = "Pilot_Placeholder";
+                    loadingLevel = "Pilot";
                 }
                 else
                 {
-                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Pilot_Placeholder:" + PilotPlayerText.text);
+                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Pilot:" + PilotPlayerText.text);
                 }
             }
 
@@ -271,11 +271,11 @@ public class MainMenuButtons : MonoBehaviour
             {
                 if (TechnicianPlayerText.text == PhotonNetwork.NickName)
                 {
-                    loadingLevel = "Technician_Placeholder";
+                    loadingLevel = "Technician";
                 }
                 else
                 {
-                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Technician_Placeholder:" + TechnicianPlayerText.text);
+                    LobbyNetwork.Instance.BroadcastQueue.Add("TryPlayerLoadLevel:Technician:" + TechnicianPlayerText.text);
                 }
             }
 

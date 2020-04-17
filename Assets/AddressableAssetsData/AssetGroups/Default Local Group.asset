@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c8cb2cd08a9ab2a45b368fe267e04993
+  m_SerializeEntries:
+  - m_GUID: 04cfa8138c9b069488bdc385994017a2
+    m_Address: Default_Hit_Effect.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0cd80dbdcd1470f47977da8251dd9c34
+    m_Address: AmmoShell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 143c3ef8dbc52dc44acfbaa26b22ab97
+    m_Address: Skulker.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 160b21e5f4fb8384b9a6bf45d89577fd
+    m_Address: BigChaser.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 30b860e43bba3bc40bebc26c57eb9fd9
+    m_Address: SentryDrone.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5124803e0b9af6f4d808761ca1cb7539
+    m_Address: Beam_Impact_Effect.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 65deb92141890094b85a2aa171d6c336
+    m_Address: Component.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 75123010a0cfdee4e801e3fd61878ad2
+    m_Address: BigChaser_Shell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7f7ba25dcae07254cbeb6905d1d209e3
+    m_Address: EnemyProjectileShell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 860b79acc25b2c044a8e7c936474143e
+    m_Address: Ammo.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 86e5da4dfa8d25b4588e32a9cad2b4d7
+    m_Address: CollectorShell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8dfcfde33f2513a4bb30e52861e69c5d
+    m_Address: MainSpawnerShell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9c9cabe2883573c4d9466ebdbb5774ce
+    m_Address: Explosion.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a3534298d15cfdf4f81aef69d301c41e
+    m_Address: Interceptor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a977efcc1e6204641a2b01238ab27ba6
+    m_Address: Sentry_shell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b20d7912afac3b149a67d1f423168fdd
+    m_Address: DroneComponent.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b698eaac3b20b1f44acbe7cbdcf5a9cc
+    m_Address: Chaser.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b822f4bfcd489a24a8897fe5bd6b5fe0
+    m_Address: Interceptor_Shell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c18ebc3a11e379940b9cf67afdf6595e
+    m_Address: Collector.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d313d8dfa68297d4398d63893c52c473
+    m_Address: Chaser_shell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d6591899674b2584a9f8d6d83e3e9b33
+    m_Address: SkulkerShell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dd8933edba6d9624ca2b51866ce90bf1
+    m_Address: MainSpawner.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f1ec9f5a168f26245acc6c8be0078a13
+    m_Address: EnemyProjectile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: c26ff1de24bb5a54e9b9239973355faf, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 50b8681e7ff901a4cb30650f099dd07e, type: 2}
+    - {fileID: 11400000, guid: 26955464b3e187c44a8e6ead0e42cf3b, type: 2}

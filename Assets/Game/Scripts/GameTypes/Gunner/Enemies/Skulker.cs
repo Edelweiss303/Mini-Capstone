@@ -30,11 +30,9 @@ public class Skulker : EnemyBase
 
     private Vector3 partOriginPosition;
     private List<MeshRenderer> enemyRenderers;
-
-
-
     private float timeSinceLastPartOscillation = 0.0f;
     private float timeSinceLastDirectionChange = 0.0f;
+    private bool isInitialized = false;
 
     protected override void Start()
     {
@@ -51,12 +49,22 @@ public class Skulker : EnemyBase
 
         gameID = gameObject.GetInstanceID();
         EnemiesManager.Instance.addEnemy(gameID, gameObject, Type, Colour);
+    }
+
+    private void initialize()
+    {
         Spawner = WavesManager.Instance.GameSpawners.Single(s => s.SpawnedEnemies.Contains(gameObject)).SpawnLocation.gameObject;
+        isInitialized = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isInitialized)
+        {
+            initialize();
+        }
+
         timeSinceLastPartOscillation += Time.deltaTime;
         if (timeSinceLastPartOscillation > PartOscillationFrequency)
         {

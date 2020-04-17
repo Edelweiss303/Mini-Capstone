@@ -20746,14 +20746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77619689613c53e4590748bdab9f8e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChaserShellPrefab: {fileID: 0}
-  SentryShellPrefab: {fileID: 0}
-  DroidShellPrefab: {fileID: 0}
-  CollectorShellPrefab: {fileID: 0}
-  SpawnerShellPrefab: {fileID: 0}
-  BigChaserShellPrefab: {fileID: 0}
-  SkulkerShellPrefab: {fileID: 0}
-  InterceptorShellPrefab: {fileID: 0}
   NetworkingUpdateThreshold: 0.1
 --- !u!43 &836603154
 Mesh:
@@ -28427,7 +28419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2794a3a0ddb26084e884106a2e1b8848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputMode: 0
+  inputMode: 2
   CursorMovement: {x: 0, y: 0, z: 0}
   DirectionalInput: {x: 0, y: 0, z: 0}
   FireInput: 0
@@ -28438,7 +28430,7 @@ MonoBehaviour:
   DoubleCenterTap: 0
   CenterTapTimingThreshold: 0.2
   CenterTapDistanceThreshold: 5
-  NewTouchThreshold: 0.05
+  NewTouchThreshold: 0.15
   SwipingThreshold: 80
   FireHeldSeconds: 0
 --- !u!4 &1189918332
@@ -38831,33 +38823,21 @@ MonoBehaviour:
   RespawnThreshold: 60
   Health: 10
   SpawnLocation: {fileID: 1585714859}
-  ChaserPrefab: {fileID: 5401679602862512748, guid: b698eaac3b20b1f44acbe7cbdcf5a9cc,
-    type: 3}
   ChaserSpawnWeight: 0
   ChaserSpawnRate: 10
-  SentryPrefab: {fileID: 1719698742031730686, guid: 30b860e43bba3bc40bebc26c57eb9fd9,
-    type: 3}
   SentrySpawnWeight: 0
   SentrySpawnRate: 12
-  BigChaserPrefab: {fileID: 2636443521703566201, guid: 160b21e5f4fb8384b9a6bf45d89577fd,
-    type: 3}
   BigChaserSpawnWeight: 0
   BigChaserSpawnRate: 15
-  SkulkerPrefab: {fileID: 3361300318044654262, guid: 143c3ef8dbc52dc44acfbaa26b22ab97,
-    type: 3}
   SkulkerSpawnWeight: 1
   SkulkerSpawnRate: 5
-  InterceptorPrefab: {fileID: 386022298031141379, guid: a3534298d15cfdf4f81aef69d301c41e,
-    type: 3}
   InterceptorSpawnWeight: 0
   InterceptorSpawnRate: 7
-  CollectorPrefab: {fileID: 8532918803183256973, guid: c18ebc3a11e379940b9cf67afdf6595e,
-    type: 3}
   CollectorSpawnWeight: 0
   CollectorSpawnRate: 0
   SpawnedEnemies: []
   SpawnerPowerDownSoundEffectName: Spawner_PowerDown
-  SpawnObjects: []
+  SpawnableObjects: 
 --- !u!65 &1521142974
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42347,6 +42327,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716697000}
   m_CullTransparentMesh: 0
+--- !u!4 &1716805766 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 6830797233540454181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1724423927
 GameObject:
   m_ObjectHideFlags: 0
@@ -49044,6 +49030,7 @@ Transform:
   - {fileID: 284328626}
   - {fileID: 1979447824}
   - {fileID: 476612284}
+  - {fileID: 1716805766}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53004,33 +52991,21 @@ MonoBehaviour:
   RespawnThreshold: 60
   Health: 10
   SpawnLocation: {fileID: 5409556731996566399}
-  ChaserPrefab: {fileID: 5401679602862512748, guid: b698eaac3b20b1f44acbe7cbdcf5a9cc,
-    type: 3}
   ChaserSpawnWeight: 0
   ChaserSpawnRate: 10
-  SentryPrefab: {fileID: 1719698742031730686, guid: 30b860e43bba3bc40bebc26c57eb9fd9,
-    type: 3}
   SentrySpawnWeight: 0
   SentrySpawnRate: 12
-  BigChaserPrefab: {fileID: 2636443521703566201, guid: 160b21e5f4fb8384b9a6bf45d89577fd,
-    type: 3}
   BigChaserSpawnWeight: 0
   BigChaserSpawnRate: 15
-  SkulkerPrefab: {fileID: 3361300318044654262, guid: 143c3ef8dbc52dc44acfbaa26b22ab97,
-    type: 3}
   SkulkerSpawnWeight: 1
   SkulkerSpawnRate: 5
-  InterceptorPrefab: {fileID: 386022298031141379, guid: a3534298d15cfdf4f81aef69d301c41e,
-    type: 3}
   InterceptorSpawnWeight: 0
   InterceptorSpawnRate: 7
-  CollectorPrefab: {fileID: 8532918803183256973, guid: c18ebc3a11e379940b9cf67afdf6595e,
-    type: 3}
   CollectorSpawnWeight: 0
   CollectorSpawnRate: 12
   SpawnedEnemies: []
   SpawnerPowerDownSoundEffectName: Spawner_PowerDown
-  SpawnObjects: []
+  SpawnableObjects: 
 --- !u!65 &5409556732061198698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53593,33 +53568,21 @@ MonoBehaviour:
   RespawnThreshold: 60
   Health: 10
   SpawnLocation: {fileID: 5409556732879903163}
-  ChaserPrefab: {fileID: 5401679602862512748, guid: b698eaac3b20b1f44acbe7cbdcf5a9cc,
-    type: 3}
   ChaserSpawnWeight: 0
   ChaserSpawnRate: 10
-  SentryPrefab: {fileID: 1719698742031730686, guid: 30b860e43bba3bc40bebc26c57eb9fd9,
-    type: 3}
   SentrySpawnWeight: 0
   SentrySpawnRate: 12
-  BigChaserPrefab: {fileID: 2636443521703566201, guid: 160b21e5f4fb8384b9a6bf45d89577fd,
-    type: 3}
   BigChaserSpawnWeight: 0
   BigChaserSpawnRate: 15
-  SkulkerPrefab: {fileID: 3361300318044654262, guid: 143c3ef8dbc52dc44acfbaa26b22ab97,
-    type: 3}
   SkulkerSpawnWeight: 1
   SkulkerSpawnRate: 5
-  InterceptorPrefab: {fileID: 386022298031141379, guid: a3534298d15cfdf4f81aef69d301c41e,
-    type: 3}
   InterceptorSpawnWeight: 0
   InterceptorSpawnRate: 7
-  CollectorPrefab: {fileID: 8532918803183256973, guid: c18ebc3a11e379940b9cf67afdf6595e,
-    type: 3}
   CollectorSpawnWeight: 0
   CollectorSpawnRate: 0
   SpawnedEnemies: []
   SpawnerPowerDownSoundEffectName: Spawner_PowerDown
-  SpawnObjects: []
+  SpawnableObjects: 
 --- !u!65 &5409556732811658158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53849,6 +53812,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42ffbc14eced53441a5a79581f202136, type: 3}
+--- !u!1001 &6830797233540454181
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1951443227}
+    m_Modifications:
+    - target: {fileID: 6830797235114096544, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_Name
+      value: AddressablesManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69913729098c7a5489003dbf9111e081, type: 3}
 --- !u!114 &7700543020824969584
 MonoBehaviour:
   m_ObjectHideFlags: 0

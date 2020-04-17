@@ -78,27 +78,27 @@ public class WavesManager : Singleton<WavesManager>
 
                     if(CurrentWave % SmallChaserSpawnIncreaseRoundFrequency == 0)
                     {
-                        spawner.SpawnObjects.Add(spawner.ChaserPrefab);
-                        spawner.SpawnObjects.Add(spawner.ChaserPrefab);
+                        spawner.SpawnableObjects.Add(AddressablesManager.Addressable_Tag.chaser);
+                        spawner.SpawnableObjects.Add(AddressablesManager.Addressable_Tag.chaser);
                     }
 
                     if(CurrentWave % BigChaserSpawnIncreaseRoundFrequency == 0)
                     {
-                        spawner.SpawnObjects.Add(spawner.BigChaserPrefab);
+                        spawner.SpawnableObjects.Add(AddressablesManager.Addressable_Tag.bigchaser);
                     }
 
                     if (CurrentWave % SentrySpawnIncreaseRoundFrequency == 0)
                     {
-                        spawner.SpawnObjects.Add(spawner.SentryPrefab);
+                        spawner.SpawnableObjects.Add(AddressablesManager.Addressable_Tag.sentry);
                     }
 
                     if(CurrentWave % InterceptorSpawnIncreaseRoundFrequency == 0)
                     {
-                        spawner.SpawnObjects.Add(spawner.InterceptorPrefab);
+                        spawner.SpawnableObjects.Add(AddressablesManager.Addressable_Tag.interceptor);
                     }
                     if(CurrentWave % CollectorSpawnIncreaseRoundFrequency == 0)
                     {
-                        spawner.SpawnObjects.Add(spawner.CollectorPrefab);
+                        spawner.SpawnableObjects.Add(AddressablesManager.Addressable_Tag.collector);
                     }
 
                     spawner.SpawnedEnemies.Clear();

@@ -25169,6 +25169,7 @@ Transform:
   - {fileID: 1195867214}
   - {fileID: 7062387570715177847}
   - {fileID: 941699483}
+  - {fileID: 1522847741}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34465,6 +34466,81 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521547847}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1522847740
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1047966816}
+    m_Modifications:
+    - target: {fileID: 6830797235114096544, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_Name
+      value: AddressablesManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69913729098c7a5489003dbf9111e081, type: 3}
+--- !u!4 &1522847741 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6830797235114096547, guid: 69913729098c7a5489003dbf9111e081,
+    type: 3}
+  m_PrefabInstance: {fileID: 1522847740}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1524021320
 GameObject:
   m_ObjectHideFlags: 0
@@ -40024,22 +40100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77619689613c53e4590748bdab9f8e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChaserShellPrefab: {fileID: 2894226955708077130, guid: d313d8dfa68297d4398d63893c52c473,
-    type: 3}
-  SentryShellPrefab: {fileID: 1624467293414018681, guid: a977efcc1e6204641a2b01238ab27ba6,
-    type: 3}
-  DroidShellPrefab: {fileID: 6501478552151426217, guid: 2db8d293a723681478557e9041621426,
-    type: 3}
-  CollectorShellPrefab: {fileID: 9005700908036850716, guid: 86e5da4dfa8d25b4588e32a9cad2b4d7,
-    type: 3}
-  SpawnerShellPrefab: {fileID: 252093746014486869, guid: 8dfcfde33f2513a4bb30e52861e69c5d,
-    type: 3}
-  BigChaserShellPrefab: {fileID: 6282514189983194418, guid: 75123010a0cfdee4e801e3fd61878ad2,
-    type: 3}
-  SkulkerShellPrefab: {fileID: 5332600774768504226, guid: d6591899674b2584a9f8d6d83e3e9b33,
-    type: 3}
-  InterceptorShellPrefab: {fileID: 8019777188357364742, guid: b822f4bfcd489a24a8897fe5bd6b5fe0,
-    type: 3}
   NetworkingUpdateThreshold: 0.05
 --- !u!4 &1824396593
 Transform:
@@ -45753,7 +45813,7 @@ PrefabInstance:
     - target: {fileID: 1767132499286045225, guid: efe952098e6b8e247899b00a7a7845de,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -12.799927
+      value: -12.799957
       objectReference: {fileID: 0}
     - target: {fileID: 1767132499286045225, guid: efe952098e6b8e247899b00a7a7845de,
         type: 3}

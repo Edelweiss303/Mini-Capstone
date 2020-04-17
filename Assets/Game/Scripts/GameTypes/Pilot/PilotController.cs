@@ -54,7 +54,10 @@ public class PilotController : Singleton<PilotController>
             point = new Vector3(UnityEngine.Random.Range(-PickupSpawnRange, PickupSpawnRange), 0, UnityEngine.Random.Range(-PickupSpawnRange, PickupSpawnRange)) + spawnPointPosition;
 
             //Spawn pickup
-            Instantiate(PickupPrefab, point, Quaternion.identity, PickupsContainerTransform);
+            SpawnedAsset spawnDetails = new SpawnedAsset(point, Quaternion.identity, PickupsContainerTransform);
+            spawnDetails.Tag = AddressablesManager.Addressable_Tag.ammo_pickup;
+            AddressablesManager.Instance.Spawn(spawnDetails);
+            //Instantiate(PickupPrefab, point, Quaternion.identity, PickupsContainerTransform);
 
             timeSinceLastPickupSpawn = 0.0f;
         }

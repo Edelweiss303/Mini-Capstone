@@ -13,34 +13,34 @@ public class MainSpawner : EnemyBase
     public float Health = 10.0f;
     public Transform SpawnLocation;
 
-    public GameObject ChaserPrefab;
+    //public GameObject ChaserPrefab;
     public int ChaserSpawnWeight;
     public float ChaserSpawnRate;
-    public GameObject SentryPrefab;
+    //public GameObject SentryPrefab;
     public int SentrySpawnWeight;
     public float SentrySpawnRate;
-    public GameObject BigChaserPrefab;
+    //public GameObject BigChaserPrefab;
     public int BigChaserSpawnWeight;
     public float BigChaserSpawnRate;
-    public GameObject SkulkerPrefab;
+    //public GameObject SkulkerPrefab;
     public int SkulkerSpawnWeight;
     public float SkulkerSpawnRate;
-    public GameObject InterceptorPrefab;
+    //public GameObject InterceptorPrefab;
     public int InterceptorSpawnWeight;
     public float InterceptorSpawnRate;
-    public GameObject CollectorPrefab;
+    //public GameObject CollectorPrefab;
     public int CollectorSpawnWeight;
     public float CollectorSpawnRate;
     public List<GameObject> SpawnedEnemies = new List<GameObject>();
     public string SpawnerPowerDownSoundEffectName;
 
-    public List<GameObject> SpawnObjects = new List<GameObject>();
-    private Dictionary<GameObject, float> spawnRateMap = new Dictionary<GameObject, float>();
+    public List<AddressablesManager.Addressable_Tag> SpawnableObjects = new List<AddressablesManager.Addressable_Tag>();
+    private Dictionary<AddressablesManager.Addressable_Tag, float> spawnRateMap = new Dictionary<AddressablesManager.Addressable_Tag, float>();
     private float currentSpawnFrequency = 4.5f;
     private float timeSinceLastSpawn = 0.0f;
     private float timeRespawning = 0.0f;
     private EnemyBase.EnemyColour currentSpawnColour;
-    private GameObject currentSpawnType;
+    private AddressablesManager.Addressable_Tag currentSpawnType;
 
     private bool isActive = true;
     private MeshRenderer spawnerRenderer;
@@ -52,34 +52,34 @@ public class MainSpawner : EnemyBase
     {
         for(int i = 0; i < ChaserSpawnWeight; i++)
         {
-            SpawnObjects.Add(ChaserPrefab);
+            SpawnableObjects.Add(AddressablesManager.Addressable_Tag.chaser);
         }
         for(int i = 0; i < SentrySpawnWeight; i++)
         {
-            SpawnObjects.Add(SentryPrefab);
+            SpawnableObjects.Add(AddressablesManager.Addressable_Tag.sentry);
         }
         for(int i = 0; i < BigChaserSpawnWeight; i++)
         {
-            SpawnObjects.Add(BigChaserPrefab);
+            SpawnableObjects.Add(AddressablesManager.Addressable_Tag.bigchaser);
         }
         for(int i = 0; i < SkulkerSpawnWeight; i++)
         {
-            SpawnObjects.Add(SkulkerPrefab);
+            SpawnableObjects.Add(AddressablesManager.Addressable_Tag.skulker);
         }
         for (int i = 0; i < InterceptorSpawnWeight; i++)
         {
-            SpawnObjects.Add(InterceptorPrefab);
+            SpawnableObjects.Add(AddressablesManager.Addressable_Tag.interceptor);
         }
         for(int i = 0; i < CollectorSpawnWeight; i++)
         {
-            SpawnObjects.Add(CollectorPrefab);
+            SpawnableObjects.Add(AddressablesManager.Addressable_Tag.collector);
         }
-        spawnRateMap.Add(ChaserPrefab, ChaserSpawnRate);
-        spawnRateMap.Add(SentryPrefab, SentrySpawnRate);
-        spawnRateMap.Add(BigChaserPrefab, BigChaserSpawnRate);
-        spawnRateMap.Add(SkulkerPrefab, SkulkerSpawnRate);
-        spawnRateMap.Add(InterceptorPrefab, InterceptorSpawnRate);
-        spawnRateMap.Add(CollectorPrefab, CollectorSpawnRate);
+        spawnRateMap.Add(AddressablesManager.Addressable_Tag.chaser, ChaserSpawnRate);
+        spawnRateMap.Add(AddressablesManager.Addressable_Tag.sentry, SentrySpawnRate);
+        spawnRateMap.Add(AddressablesManager.Addressable_Tag.bigchaser, BigChaserSpawnRate);
+        spawnRateMap.Add(AddressablesManager.Addressable_Tag.skulker, SkulkerSpawnRate);
+        spawnRateMap.Add(AddressablesManager.Addressable_Tag.interceptor, InterceptorSpawnRate);
+        spawnRateMap.Add(AddressablesManager.Addressable_Tag.collector, CollectorSpawnRate);
 
         spawnerRenderer = GetComponent<MeshRenderer>();
         nodeRenderers = GetComponentsInChildren<MeshRenderer>().ToList();
@@ -124,14 +124,19 @@ public class MainSpawner : EnemyBase
         if(timeSinceLastSpawn > currentSpawnFrequency)
         {
             //Spawn a new enemy
-            GameObject newEnemy = Instantiate(currentSpawnType, SpawnLocation.position, Quaternion.identity);
-            newEnemy.GetComponent<EnemyBase>().SetEnemyColour(currentSpawnColour);
+            //GameObject newEnemy = Instantiate(currentSpawnType, SpawnLocation.position, Quaternion.identity);
+            SpawnedAsset spawnDetails = new SpawnedAsset(SpawnLocation.position, Quaternion.identity, null);
+            spawnDetails.Tag = currentSpawnType;
+            spawnDetails.Colour = currentSpawnColour;
+            spawnDetails.Spawner = gameObject;
+            AddressablesManager.Instance.Spawn(spawnDetails);
+            //newEnemy.GetComponent<EnemyBase>().SetEnemyColour(currentSpawnColour);
+            //SpawnedEnemies.Add(newEnemy);
+            //WavesManager.Instance.WaveSpawn.Add(newEnemy);
+            //WavesManager.Instance.CurrentAmountSpawnedInWave++;
             setSpawnColour();
             setSpawnType();
             timeSinceLastSpawn = 0.0f;
-            SpawnedEnemies.Add(newEnemy);
-            WavesManager.Instance.WaveSpawn.Add(newEnemy);
-            WavesManager.Instance.CurrentAmountSpawnedInWave++;
         }
 
 
@@ -152,7 +157,7 @@ public class MainSpawner : EnemyBase
 
     private void setSpawnType()
     {
-        currentSpawnType = SpawnObjects[UnityEngine.Random.Range(0, SpawnObjects.Count)];
+        currentSpawnType = SpawnableObjects[UnityEngine.Random.Range(0, SpawnableObjects.Count)];
         currentSpawnFrequency = spawnRateMap[currentSpawnType];
     }
 

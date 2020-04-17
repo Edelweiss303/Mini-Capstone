@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemiesManager : Singleton<EnemiesManager>
 {
-    public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, CollectorShellPrefab, SpawnerShellPrefab, BigChaserShellPrefab, SkulkerShellPrefab, InterceptorShellPrefab;
+    //public GameObject ChaserShellPrefab, SentryShellPrefab, DroidShellPrefab, CollectorShellPrefab, SpawnerShellPrefab, BigChaserShellPrefab, SkulkerShellPrefab, InterceptorShellPrefab;
     public float NetworkingUpdateThreshold = 0.1f;
     private Dictionary<int,GameObject> allEnemyObjects = new Dictionary<int,GameObject>();
 
@@ -100,7 +100,7 @@ public class EnemiesManager : Singleton<EnemiesManager>
         string[] messageSegments = messageSections[0].Split(':');
 
         int objectID;
-        GameObject currentObject;
+        //GameObject currentObject;
         EnemyBase.EnemyColour colour;
         for (int i = 2; i < messageSegments.Length; i += 3)
         {
@@ -117,50 +117,76 @@ public class EnemiesManager : Singleton<EnemiesManager>
                     colour = EnemyBase.EnemyColour.A;
                     break;
             }
-            Shell sBehaviour = null;
+
+            SpawnedAsset spawnAsset = new SpawnedAsset(transform.position, Quaternion.identity, null);
+            spawnAsset.GameID = objectID;
+            spawnAsset.Colour = colour;
             switch (messageSegments[i + 1])
             {
                 case "chaser":
-                    currentObject = Instantiate(ChaserShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.chaser, colour);
-                    sBehaviour = currentObject.GetComponent<Shell>();
-                    sBehaviour.ChangeColour(colour);
+                    spawnAsset.Type = EnemyBase.EnemyType.chaser;
+                    spawnAsset.Tag = AddressablesManager.Addressable_Tag.chaser_shell;
+                    AddressablesManager.Instance.Spawn(spawnAsset);
+                    //currentObject = Instantiate(ChaserShellPrefab);
+                    //addEnemy(objectID, currentObject, EnemyBase.EnemyType.chaser, colour);
+                    //sBehaviour = currentObject.GetComponent<Shell>();
+                    //sBehaviour.ChangeColour(colour);
                     break;
                 case "sentry":
-                    currentObject = Instantiate(SentryShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.sentry, colour);
+                    spawnAsset.Type = EnemyBase.EnemyType.sentry;
+                    spawnAsset.Tag = AddressablesManager.Addressable_Tag.sentry_shell;
+                    AddressablesManager.Instance.Spawn(spawnAsset);
+                    //currentObject = Instantiate(SentryShellPrefab);
+                    //addEnemy(objectID, currentObject, EnemyBase.EnemyType.sentry, colour);
                     break;
                 case "droid":
-                    currentObject = Instantiate(DroidShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.droid, colour);
+                    //AddressablesManager.Instance.SpawnEnemyShell(AddressablesManager.Addressable_Tag.chaser_shell, transform.position, Quaternion.identity, null, objectID, EnemyBase.EnemyType.chaser, colour);
+                    //currentObject = Instantiate(DroidShellPrefab);
+                    //addEnemy(objectID, currentObject, EnemyBase.EnemyType.droid, colour);
                     break;
                 case "collector":
-                    currentObject = Instantiate(CollectorShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.collector, colour);
+                    spawnAsset.Type = EnemyBase.EnemyType.collector;
+                    spawnAsset.Tag = AddressablesManager.Addressable_Tag.collector_shell;
+                    AddressablesManager.Instance.Spawn(spawnAsset);
+                    //currentObject = Instantiate(CollectorShellPrefab);
+                    //addEnemy(objectID, currentObject, EnemyBase.EnemyType.collector, colour);
                     break;
                 case "spawn":
-                    currentObject = Instantiate(SpawnerShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.spawn, colour);
-                    sBehaviour = currentObject.GetComponent<Shell>();
-                    sBehaviour.ChangeColour(colour);
+                    spawnAsset.Type = EnemyBase.EnemyType.spawn;
+                    spawnAsset.Tag = AddressablesManager.Addressable_Tag.main_spawner_shell;
+                    AddressablesManager.Instance.Spawn(spawnAsset);
+                    //AddressablesManager.Instance.SpawnEnemyShell(AddressablesManager.Addressable_Tag.spawn, transform.position, Quaternion.identity, null, objectID, EnemyBase.EnemyType.chaser, colour);
+                    //currentObject = Instantiate(SpawnerShellPrefab);
+                    //addEnemy(objectID, currentObject, EnemyBase.EnemyType.spawn, colour);
+                    //sBehaviour = currentObject.GetComponent<Shell>();
+                    //sBehaviour.ChangeColour(colour);
                     break;
                 case "bigchaser":
-                    currentObject = Instantiate(BigChaserShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.bigchaser, colour);
-                    sBehaviour = currentObject.GetComponent<Shell>();
-                    sBehaviour.ChangeColour(colour);
+                    spawnAsset.Type = EnemyBase.EnemyType.bigchaser;
+                    spawnAsset.Tag = AddressablesManager.Addressable_Tag.bigchaser_shell;
+                    AddressablesManager.Instance.Spawn(spawnAsset);
+                    //currentObject = Instantiate(BigChaserShellPrefab);
+                    //addEnemy(objectID, currentObject, EnemyBase.EnemyType.bigchaser, colour);
+                    //sBehaviour = currentObject.GetComponent<Shell>();
+                    //sBehaviour.ChangeColour(colour);
                     break;
                 case "skulker":
-                    currentObject = Instantiate(SkulkerShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.skulker, colour);
-                    sBehaviour = currentObject.GetComponent<Shell>();
-                    sBehaviour.ChangeColour(colour);
+                    spawnAsset.Type = EnemyBase.EnemyType.skulker;
+                    spawnAsset.Tag = AddressablesManager.Addressable_Tag.skulker_shell;
+                    AddressablesManager.Instance.Spawn(spawnAsset);
+                    //currentObject = Instantiate(SkulkerShellPrefab);
+                    //addEnemy(objectID, currentObject, EnemyBase.EnemyType.skulker, colour);
+                    //sBehaviour = currentObject.GetComponent<Shell>();
+                    //sBehaviour.ChangeColour(colour);
                     break;
                 case "interceptor":
-                    currentObject = Instantiate(InterceptorShellPrefab);
-                    addEnemy(objectID, currentObject, EnemyBase.EnemyType.interceptor, colour);
-                    sBehaviour = currentObject.GetComponent<Shell>();
-                    sBehaviour.ChangeColour(colour);
+                    spawnAsset.Type = EnemyBase.EnemyType.interceptor;
+                    spawnAsset.Tag = AddressablesManager.Addressable_Tag.interceptor_shell;
+                    AddressablesManager.Instance.Spawn(spawnAsset);
+                    //currentObject = Instantiate(InterceptorShellPrefab);
+                    //addEnemy(objectID, currentObject, EnemyBase.EnemyType.interceptor, colour);
+                    //sBehaviour = currentObject.GetComponent<Shell>();
+                    //sBehaviour.ChangeColour(colour);
                     break;
                 default:
                     continue;
